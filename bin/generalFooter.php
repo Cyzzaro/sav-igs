@@ -3,22 +3,26 @@
 
 	if (isset($registros)) {
 		sqlsrv_free_stmt($registros);
+	} else {
+		echo '';
 	}
 	if (isset($conn)) {
 		sqlsrv_close($conn);
+	} else {
+		echo '';
 	}
 ?>
 		<!-- BEGIN FOOTER -->
 		<footer class="page-footer">
 			<div class="container">
 				<div class="row">
-					<div class="col l9 m8 s12">
+					<div class="col l8 m8 s12">
 						<div class="card-panel grey lighten-5 z-depth-1">
 							<div class="row valign-wrapper">
-								<div class="col s2">
+								<div class="col l2 m2 s3">
 									<img src="<?php echo GLOBALPATH; ?>/res/images/cyzzaro.png" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
 								</div>
-								<div class="col s10">
+								<div class="col l10 m10 s9">
 									 <div class="github-commit">
 										<div class="commit left-align">
 											<ul>
@@ -31,7 +35,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col l3 m4 s12">
+					<div class="col l4 m4 s12">
 						<h5 class="white-text">Soporte</h5>
 						<ul>
 							<li class="white-text"><i class="material-icons tiny prefix">phone</i> <?php echo PHONECIA; ?></li>
