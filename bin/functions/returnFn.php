@@ -1,6 +1,28 @@
 
-<?php 
+<?php
+	
+	function getUniqueCountValueFromDB ($sql, $field) {
+		$serverName = COBRANZASRVR;
+		$connParams = array(
+			'Database' => 'tmk',
+			'Uid' => COBRANZAUSER,
+			'PWD' => COBRANZAPWD
+			);
 
+		$conn = sqlsrv_connect($serverName, $connParams);
+		$params = array();
+		$opciones = array( "Scrollable" => SQLSRV_CURSOR_KEYSET);	
+		$registros = sqlsrv_query($conn, $sql, $params, $opciones);
+	
+		if ($registros == FALSE) {
+			die(SQL_SRVR_FormatErrors(sqlsrv_errors()));				
+		} else {
+			$registro = sqlsrv_fetch_array($registros, SQLSRV_FETCH_ASSOC);
+			return number_format($registro[$field]);
+		}
+	}
+
+	
 	/* Nombre de la pagina activa (con extensión) */
 	function pageDir() {
 		return dirname($_SERVER['PHP_SELF']);
