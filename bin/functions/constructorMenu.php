@@ -4,7 +4,7 @@
 	/* Inicio de secciones de menú */
 	function beginMenuSection($icon, $description, $active) {
 		if ($icon) {
-			$icon = '<i class="'.$icon.' prefix small"></i>';
+			$icon = '<i class="material-icons prefix small">'.$icon.'</i>';
 		} else {
 			$icon = '';
 		}
@@ -20,7 +20,7 @@
 	/* Entrada de sección para menú */	
 	function menuSectionEntry($page, $icon, $description, $active) {
 		if ($icon) {
-			$class = '<i class="'.$icon.' prefix small"></i>';
+			$class = '<i class="material-icons prefix small">'.$icon.'</i>';
 		} else {
 			$class = '';
 		}
@@ -32,7 +32,7 @@
 	/* Entrada simple menú */	
 	function menuSimpleEntry($page, $icon, $description, $active) {
 		if ($icon) {
-			$class = '<i class="'.$icon.' prefix medium"></i>';
+			$class = '<i class="material-icons prefix medium">'.$icon.'</i>';
 		} else {
 			$class = '';
 		}

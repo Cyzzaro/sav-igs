@@ -48,10 +48,10 @@
 		<link href="<?php echo GLOBALPATH; ?>/res/css/mediaHacks.css" type="text/css" rel="stylesheet" media="screen,projection">
 		<link href="<?php echo GLOBALPATH; ?>/res/css/colors.css" type="text/css" rel="stylesheet" media="screen,projection">
 		<link href="<?php echo GLOBALPATH; ?>/res/css/font.css" type="text/css" rel="stylesheet" media="screen,projection">
-		<link href="<?php echo GLOBALPATH; ?>/res/css/iconFont.css" type="text/css" rel="stylesheet" media="screen,projection">
 		<link href="<?php echo GLOBALPATH; ?>/res/css/keyframes.css" type="text/css" rel="stylesheet" media="screen,projection">
 		<link href="<?php echo GLOBALPATH; ?>/res/css/gitCommit.css" type="text/css" rel="stylesheet" media="screen,projection">
 		<link href="<?php echo GLOBALPATH; ?>/res/css/dataTables.css" type="text/css" rel="stylesheet" media="screen,projection">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" media="screen,projection">
 		<!-- END CSS ENVIRON -->
 
 		<!-- BEGIN GRAPHS ENVIRON -->
