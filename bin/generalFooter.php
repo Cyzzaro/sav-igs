@@ -12,28 +12,34 @@
 		<footer class="page-footer">
 			<div class="container">
 				<div class="row">
-					<div class="col m8 s12">
-						<h5 class="white-text">Cambios o implementaciones recientes</h5>
-						 <div class="github-commit">
-							<div class="commit white-text">
-								<ul>
-									<li><blockquote class="message"></blockquote></li>
-									<li> 
-										(<span href="" target="new" class="sha"></span>) <span class="date"></span> por <span class="author"></span>
-									</li>
-								</ul>
+					<div class="col l8 m8 s12">
+						<div class="card-panel grey lighten-5 z-depth-1">
+							<div class="row valign-wrapper">
+								<div class="col s2">
+									<img src="<?php echo GLOBALPATH; ?>/res/images/cyzzaro.png" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+								</div>
+								<div class="col s10">
+									 <div class="github-commit">
+										<div class="commit left-align">
+											<ul>
+												<li><span class="message bold"></span></li>
+												<li>(<span href="" target="new" class="sha"></span>) <span class="date"></span></li>
+											</ul>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col m4 s12">
+					<div class="col l4 m4 s12">
 						<h5 class="white-text">Soporte</h5>
 						<ul>
 							<li class="white-text"><i class="i-phone"></i> <?php echo PHONECIA; ?></li>
 							<li><a class="white-text" href="mailto:<?php echo SUPPORTMAIL.'?Subject=Soporte para sitio - '.PAGETITLE; ?>" title="Envia tus comentarios y sugerencias"><i class="i-mail"></i> <?php echo SUPPORTMAIL; ?></a></li>
 						</ul>
 					</div>
-
 				</div>
+				<br>
 			</div>
 			<div class="footer-copyright">
 				<div class="container">
