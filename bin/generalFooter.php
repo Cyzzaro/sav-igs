@@ -23,7 +23,7 @@
 										<div class="commit left-align">
 											<ul>
 												<li><span class="message bold"></span></li>
-												<li>(<span href="" target="new" class="sha"></span>) <span class="date"></span> por <span class="author"></span></li>
+												<li>(<span class="additions green-text bold"></span>, <span class="deletions red-text bold"></span> <span href="" target="new" class="sha"></span>) <span class="date"></span> por <span class="author"></span></li>
 											</ul>
 										</div>
 									</div>
