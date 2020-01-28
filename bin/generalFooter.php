@@ -12,7 +12,7 @@
 		<footer class="page-footer">
 			<div class="container">
 				<div class="row">
-					<div class="col l8 m8 s12">
+					<div class="col l9 m8 s12">
 						<div class="card-panel grey lighten-5 z-depth-1">
 							<div class="row valign-wrapper">
 								<div class="col s2">
@@ -23,7 +23,7 @@
 										<div class="commit left-align">
 											<ul>
 												<li><span class="message bold"></span></li>
-												<li>(<span href="" target="new" class="sha"></span>) <span class="date"></span></li>
+												<li>(<span href="" target="new" class="sha"></span>) <span class="date"></span> por <span class="author"></span></li>
 											</ul>
 										</div>
 									</div>
@@ -31,7 +31,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col l4 m4 s12">
+					<div class="col l3 m4 s12">
 						<h5 class="white-text">Soporte</h5>
 						<ul>
 							<li class="white-text"><i class="i-phone"></i> <?php echo PHONECIA; ?></li>
