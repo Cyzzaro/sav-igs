@@ -2,17 +2,11 @@
 <?php 
 
 	function navHead($titleNav) {
-		$serverName = COBRANZASRVR;
-		$conn = sqlsrv_connect(COBRANZASRVR, array('Database' => 'tmk', 'Uid' => COBRANZAUSER, 'PWD' => COBRANZAPWD));
 
-		if($conn) {
-			echo '<span class="badge green white-text z-depth-1" data-badge-caption="Online">Online</span>';
-		} else {
-			echo '<span class="badge red white-text z-depth-1" data-badge-caption="Online">Offline</span>';
-		}
-		
 		echo '
-			<!-- BEGIN TOP NAV HEAD PAGE -->
+			<!-- BEGIN TOP NAV HEAD PAGE 
+				- Container para el encabezado de pagina
+				- Span para el indicador de conexion con la Base de Datos -->
 			<nav class="top-nav">
 				<div class="container">
 					<div class="nav-wrapper truncate">
@@ -20,7 +14,7 @@
 					</div>
 				</div>
 			</nav>
-			<!-- END TOP NAV HEAD PAGE -->
+
 			';
 	}
 

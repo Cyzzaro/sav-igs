@@ -1,15 +1,20 @@
 
-<?php include 'init.php'; ?>
 <!DOCTYPE html>
+<?php include 'init.php'; ?>
 <html lang="<?php echo LANG; ?>">
 
 	<head>
 
-		<!-- BEGIN PAGE TITLE -->
+		<!-- PAGE TITLE 
+			- Valor de PAGETITLE definido en "init.php" -->
 		<title><?php echo PAGETITLE; ?></title>
-		<!-- END PAGE TITLE -->
 
-		<!-- BEGIN META TAGS -->
+
+		<!-- META TAGS 
+			- Codificacion del documento
+			- Capas de compatibilidad RESPONSIVE
+			- Datos de Autor y CopyRight
+			- Informacion de contacto y soporte -->
 		<meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=no">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,9 +23,12 @@
 		<meta name="CopyRight" content="<?php echo AUTHORNAME; ?>">
 		<meta name="Resource-type" content="Dashboard & Search">
 		<link rev="made" href="mailto:cesarvalencia@live.com.mx">
-		<!-- END META TAGS -->
+
 		
-		<!-- BEGIN FAV ICON AND APP ICON -->
+		<!-- FAV ICON AND APP ICON 
+			- Apple Mobile Devices Compatibility Layer
+			- Microsoft Tiles and EDGE Compatibility Layer
+			- Standart HTML -->
 		<link rel="apple-touch-icon" sizes="57x57" href="<?php echo GLOBALPATH; ?>/res/ico/apple-touch-icon-57x57.png">
 		<link rel="apple-touch-icon" sizes="60x60" href="<?php echo GLOBALPATH; ?>/res/ico/apple-touch-icon-60x60.png">
 		<link rel="apple-touch-icon" sizes="72x72" href="<?php echo GLOBALPATH; ?>/res/ico/apple-touch-icon-72x72.png">
@@ -41,9 +49,14 @@
 		<meta name="msapplication-TileImage" content="<?php echo GLOBALPATH; ?>/res/ico/mstile-144x144.png">
 		<meta name="msapplication-tap-highlight" content="no">
 		<link rel="manifest" href="<?php echo GLOBALPATH; ?>/res/ico/manifest.json">
-		<!-- END FAV ICON AND APP ICON -->
 
-		<!-- BEGIN CSS ENVIRON -->
+
+		<!-- CSS ENVIRON 
+			- Material CSS
+			- Media hacks para diseño RESPONSIVE 
+			- Colors and Fonts
+			- Others
+			- IconFont Material Design -->
 		<link href="<?php echo GLOBALPATH; ?>/res/css/material.css" type="text/css" rel="stylesheet" media="screen,projection">
 		<link href="<?php echo GLOBALPATH; ?>/res/css/mediaHacks.css" type="text/css" rel="stylesheet" media="screen,projection">
 		<link href="<?php echo GLOBALPATH; ?>/res/css/colors.css" type="text/css" rel="stylesheet" media="screen,projection">
@@ -52,17 +65,16 @@
 		<link href="<?php echo GLOBALPATH; ?>/res/css/gitCommit.css" type="text/css" rel="stylesheet" media="screen,projection">
 		<link href="<?php echo GLOBALPATH; ?>/res/css/dataTables.css" type="text/css" rel="stylesheet" media="screen,projection">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" media="screen,projection">
-		<!-- END CSS ENVIRON -->
 
-		<!-- BEGIN GRAPHS ENVIRON -->
+
+		<!-- GRAPHS ENVIRON 
+			- Librerias para Chart.js -->
 		<script type="text/javascript" src="<?php echo GLOBALPATH; ?>/res/js//charts.js"></script>
-		<!-- END GRAPHS ENVIRON -->
 
-		<!-- BEGIN META ROBOTS AND CACHE -->
-		<meta http-equiv="cache-control" content="no-cache">
+		<!-- META ROBOTS AND CACHE -->
 		<meta name="robots" content="noindex,nofollow">
 		<meta name="Revisit-after" content="30 days">
-		<!-- END META ROBOTS AND CACHE -->
+
 
 		<?php 
 			/* AutoRefresh (Opcional, solo si se encuentra definido en init.php) */

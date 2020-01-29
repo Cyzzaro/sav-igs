@@ -1,5 +1,8 @@
 
-	<!-- BEGIN PRELOADER -->
+	<!-- BEGIN PRELOADER 
+		- Dependencias jQuery
+		- Div indeterminate
+		- Listener para el DOM -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<div class="progress" style="position: fixed; top: 0; left: 0; margin: 0; padding: 0; z-index: 1000;">
 		<div class="indeterminate blue"></div>
@@ -9,4 +12,4 @@
 			$(".progress").fadeOut("slow");
 		});
 	</script>
-	<!-- END PRELOADER -->	
+
