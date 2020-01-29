@@ -12,21 +12,24 @@
 		echo '';
 	}
 ?>
-		<!-- BEGIN FOOTER -->
+		<!-- BEGIN FOOTER 
+			- Git repo last commit 
+			- Support and contact
+			- CopyRight -->
 		<footer class="page-footer">
 			<div class="container">
 				<div class="row">
 					<div class="col l8 m8 s12">
 						<div class="card-panel grey lighten-5 z-depth-1">
 							<div class="row valign-wrapper">
-								<div class="col l2 m2 s3">
+								<div class="col l1 m2 s4">
 									<img src="<?php echo GLOBALPATH; ?>/res/images/cyzzaro.png" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
 								</div>
-								<div class="col l10 m10 s9">
+								<div class="col l11 m10 s8">
 									 <div class="github-commit">
 										<div class="commit left-align">
 											<ul>
-												<li><span class="message bold"></span></li>
+												<li><span class="message"></span></li>
 												<li>(<span class="additions green-text bold"></span>, <span class="deletions red-text bold"></span> <span href="" target="new" class="sha"></span>) <span class="date"></span> por <span class="author"></span></li>
 											</ul>
 										</div>
@@ -55,5 +58,5 @@
 				</div>
 			</div>
 		</footer>
-		<!-- END FOOTER -->
+
 		
