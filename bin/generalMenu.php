@@ -1,5 +1,8 @@
 
-			<!-- BEGIN MENU -->
+			<!-- BEGIN MENU 
+				- Toggle menu
+				- Logo de empresa
+				- Secciones y sub-secciones del menu -->
 			<div class="container">
 				<a href="#" data-activates="nav-mobile" class="button-collapse top-nav waves-effect waves-light circle"><i class="material-icons">menu</i></a>
 			</div>
@@ -24,9 +27,10 @@
 						endMenuSection();
 						beginMenuSection('folder_special','Grupo IAMSA', (pageDir() == GLOBALPATH."/pages/toIAMSA" ? "active" : ""));
 						menuSectionEntry(GLOBALPATH.'/pages/toIAMSA/', '', 'Viajes reportados', (pageDir() == GLOBALPATH."/pages/toIAMSA" ? "active" : ""));
+						endMenuSection();
 						//echo pageDir();
 					?>
 					
 				</ul>
 			</ul>
-			<!-- END MENU -->
+
