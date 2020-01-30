@@ -23,7 +23,7 @@
 		echo '
 			<div class="row container">
 				<div class="col l10 offset-l1 m10 offset-m1 s12">
-					<div class="card orange">
+					<div class="card blue-grey">
 						<div class="card-content">
 							<span class="card-title">NO SE ENCUENTRA</span>
 							<p class="white-text">Intente nuevamente.</p>
