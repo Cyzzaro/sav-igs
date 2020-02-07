@@ -6,4 +6,4 @@
 		<script src="<?php echo GLOBALPATH; ?>/res/js/dataTables.js"></script>
 		<script src="<?php echo GLOBALPATH; ?>/res/js/time_ago.js"></script>
 		<script src="<?php echo GLOBALPATH; ?>/res/js/dataTableExport.js"></script>
-		<script src="<?php echo GLOBALPATH; ?>/res/js/jquery.block.js"></script>
+		<!-- <script src="<?php echo GLOBALPATH; ?>/res/js/jquery.block.js"></script> -->
