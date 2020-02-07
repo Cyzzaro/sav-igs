@@ -16,9 +16,8 @@
 					<?php
 
 						beginMenuSection('search', 'Buscar afiliado', (pageDir() == GLOBALPATH."/pages/toSearch" ? "active" : ""));
-						menuSectionEntry(GLOBALPATH.'/pages/toSearch/', '', 'Por nombre', (pageDir() == GLOBALPATH."/pages/toSearch" ? "active" : ""));
-						menuSectionEntry(GLOBALPATH.'/pages/toSearch/', '', 'Por LeadID', (pageDir() == GLOBALPATH."/pages/toSearch" ? "active" : ""));
-						menuSectionEntry(GLOBALPATH.'/pages/toSearch/', '', 'Por Identificador', (pageDir() == GLOBALPATH."/pages/toSearch" ? "active" : ""));
+						menuSectionEntry(GLOBALPATH.'/pages/toSearch/searchByName.php', '', 'Por nombre', (pageDir() == GLOBALPATH."/pages/toSearch" ? "active" : ""));
+						menuSectionEntry(GLOBALPATH.'/pages/toSearch/searchByIdentificador.php', '', 'Por Identificador', (pageDir() == GLOBALPATH."/pages/toSearch" ? "active" : ""));
 						endMenuSection();
 						beginMenuSection('folder_shared','Banorte', (pageDir() == GLOBALPATH."/pages/toBanorte" ? "active" : ""));
 						menuSectionEntry(GLOBALPATH.'/pages/toBanorte/', '', 'Afiliados', (pageDir() == GLOBALPATH."/pages/toBanorte" ? "active" : ""));

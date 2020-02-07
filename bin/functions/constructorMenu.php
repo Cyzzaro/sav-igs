@@ -3,6 +3,7 @@
 
 	/* Inicio de secciones de menú */
 	function beginMenuSection($icon, $description, $active) {
+		
 		if ($icon) {
 			$icon = '<i class="material-icons prefix small">'.$icon.'</i>';
 		} else {
@@ -19,6 +20,7 @@
 
 	/* Entrada de sección para menú */	
 	function menuSectionEntry($page, $icon, $description, $active) {
+		
 		if ($icon) {
 			$class = '<i class="material-icons prefix small">'.$icon.'</i>';
 		} else {
@@ -31,6 +33,7 @@
 	
 	/* Entrada simple menú */	
 	function menuSimpleEntry($page, $icon, $description, $active) {
+		
 		if ($icon) {
 			$class = '<i class="material-icons prefix medium">'.$icon.'</i>';
 		} else {
@@ -45,6 +48,7 @@
 
 	/* Fin de secciones de menú */
 		function endMenuSection() {
+		
 		echo '
 							</ul>
 						</div>
