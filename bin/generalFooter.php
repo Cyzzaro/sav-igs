@@ -6,11 +6,13 @@
 	} else {
 		echo '';
 	}
+	
 	if (isset($conn)) {
 		sqlsrv_close($conn);
 	} else {
 		echo '';
 	}
+	
 ?>
 		<!-- BEGIN FOOTER 
 			- Git repo last commit 

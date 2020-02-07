@@ -8,8 +8,10 @@
 		<div class="indeterminate blue"></div>
 	</div>
 	<script type="text/javascript">
-		$(window).load(function() {
-			$(".progress").fadeOut("slow");
-		});
+		$(window).load(
+			function() {
+				$(".progress").fadeOut("slow");
+			}
+		);
 	</script>
 

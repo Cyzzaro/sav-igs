@@ -16,16 +16,15 @@
 					<div class="row valign-wrapper">
 						<form class="col l10 offset-l1 m10 offset-m1 s12" action="'.$_SERVER['PHP_SELF'].'" method="POST">
 							<div class="input-field col l11 m10 s10">
-								<i class="material-icons prefix">account_circle</i> ';
+								<i class="material-icons prefix">person_pin</i> ';
 
-		if (isset($_POST['dato'])) {
-			$toSearch = $_POST['dato'];		
+		if (isset($_POST['nombre_afiliado'])) {
+			$toSearch = $_POST['nombre_afiliado'];		
 			echo '
-								<input id="nombre_afiliado" type="text" class="validate" autofocus="autofocus" name="dato" value="'.$toSearch.'">';
+								<input id="nombre_afiliado" type="text" class="validate" autofocus="autofocus" name="nombre_afiliado" value="'.$toSearch.'">';
 		} else {
 			echo '
-								<input id="nombre_afiliado" type="text" class="validate" name="dato" value="">';
-
+								<input id="nombre_afiliado" type="text" class="validate" name="nombre_afiliado" value="">';
 		}
 								
 		echo '
@@ -40,187 +39,152 @@
 				</div>
 			</div>
 			';
+				
+		if (isset($_POST['nombre_afiliado'])) {
 			
-	/* Desencadenador de busqueda por auto-invocacion */
-	if (isset($_POST['dato'])) {
-		
-		$toSearch = $_POST['dato'];
-		$toSearchDB = normalizeChars($toSearch);
 
-		$sql = "
-			SELECT 
-				clafiltmk, 
-				nombre_afiliado, 
-				fecha_venta, 
-				dni, 
-				identificador, 
-				estatus, 
-				fecha_estatus, 
-				ultimo_procesado, 
-				fecha_ultimo_procesado 
-			FROM 
-				afiliados 
-			WHERE 
-				nombre_afiliado LIKE '%".$toSearchDB."%'";
-		
-		$conn = sqlsrv_connect(COBRANZASRVR, array('Database' => 'tmk', 'Uid' => COBRANZAUSER, 'PWD' => COBRANZAPWD));
-		$rst = sqlsrv_query($conn, $sql, array(), array( "Scrollable" => SQLSRV_CURSOR_KEYSET));
-	
-		if ($rst == FALSE) {die(SQL_SRVR_FormatErrors(sqlsrv_errors()));}
-	
-		$numRst = sqlsrv_num_rows($rst);
+			$toSearch = strip_tags($_POST['nombre_afiliado'],ENT_QUOTES);
+			$toSearchDB = normalizeChars($toSearch);
 
-		if ($numRst == 0) {
+			$sql = "
+				SELECT 
+					clafiltmk, 
+					nombre_afiliado, 
+					fecha_venta, 
+					dni, 
+					identificador, 
+					estatus, 
+					fecha_estatus, 
+					ultimo_procesado, 
+					fecha_ultimo_procesado 
+				FROM 
+					afiliados 
+				WHERE 
+					nombre_afiliado LIKE '%".$toSearchDB."%'";
 			
-			withNoResults();
-			
-		} elseif ($numRst > 0) 
+			$conn = sqlsrv_connect(COBRANZASRVR, array('Database' => 'tmk', 'Uid' => COBRANZAUSER, 'PWD' => COBRANZAPWD));
+			$rst = sqlsrv_query($conn, $sql, array(), array( "Scrollable" => SQLSRV_CURSOR_KEYSET));
 		
-		{
-			
-		if ($numRst < 10000) {
-			
-		$idTable = str_replace(" ","_",$toSearch."_".$numRst);
-		$idTableDown = "'".$idTable."'";
+			if ($rst == FALSE) {die(SQL_SRVR_FormatErrors(sqlsrv_errors()));}
 		
+			$numRst = sqlsrv_num_rows($rst);
+
+			if ($numRst == 0) {
+				
+				withNoResults();
+				
+			} elseif ($numRst > 0) {
+				
+				if ($numRst < 10000) {
+					
+					$idTable = str_replace(",","",str_replace(" ","_",$toSearch."_".$numRst));
+					$idTableDown = "'".$idTable."'";
+					
+					searchResultsInfo($numRst, $toSearch, $idTableDown);
+					searchResultsHead($idTable);
+					searchResultsRows($rst);
+					searchResultsEnd($idTable);
+					
+				} else {
+
+					withToMuchResults($numRst);
+
+				}
+			}
+		}
+	}
+
+	function formSearchById($toSearch) {
+		
+		/* Formulario de busqueda por identificador */
 		echo '
-			<!-- QUERY.RST -->
+			<!-- BEGIN FORM SEARCH -->
 			<div class="section">
 				<div class="container row center">
-					<h5 class="light header">
-						<i class="material-icons tiny prefix blue-text">dns</i> '.$numRst.' resultado(s) para: '.$toSearch.'
-					</h5>
-					<a class="btn-floating blue" onclick="javascript:xport.toCSV('.$idTableDown.');"><i class="material-icons small">cloud_download</i></a>
-				</div>
-			</div>
-						
-			<div class="section">
-				<div class="container row">
-					<table id="'.$idTable.'" class="mdl-data-table">
-						<thead>
-							<tr>
-								<th>VENTA</th>
-								<th>LEAD</th>
-								<th>ID</th>
-								<th>NOMBRE</th>
-								<th>DNI</th>
-								<th>ESTATUS</th>
-								<th>FECHA (ST)</th>
-								<th>PROCESADO</th>
-								<th>FECHA (PR)</th>
-							</tr>
-						</thead>
-			
-			';
+					<h3 class="light header">Ubicar por identificador</h3>
+					<p class="caption">
+						Ingresa el identificador asignado por el cliente al afiliado.<br>
+						En caso de consultas multiples puedes ingresar identificadores separados por coma (,).
+					</p>
+					<div class="row valign-wrapper">
+						<form class="col l10 offset-l1 m10 offset-m1 s12" action="'.$_SERVER['PHP_SELF'].'" method="POST">
+							<div class="input-field col l11 m10 s10">
+								<i class="material-icons prefix">how_to_reg</i> ';
 
-		while ($rstRow = sqlsrv_fetch_array($rst, SQLSRV_FETCH_ASSOC)) { 
-			$afiliado = $rstRow['nombre_afiliado'];
-			$dni = $rstRow['dni'];
-			if ($rstRow['fecha_venta']) {
-				$fecha = $rstRow['fecha_venta']->format('Y/m/d');
-			} else {
-				$fecha = '';
-			}
-			$clafiltmk = $rstRow['clafiltmk'];
-			$identificador = $rstRow['identificador'];
-			$estatus = $rstRow['estatus'];
-			if ($rstRow['fecha_estatus']) {
-				$fecha_estatus = $rstRow['fecha_estatus']->format('Y/m/d');
-			} else {
-				$fecha_estatus = '';
-			}
-			$ultimo_procesado = $rstRow['ultimo_procesado'];
-			if ($rstRow['fecha_ultimo_procesado']) {
-				$fecha_ultimo_procesado = $rstRow['fecha_ultimo_procesado']->format('Y/m/d');
-			} else {
-				$fecha_ultimo_procesado = '';
-			}
-	
-			$ultimo_procesado = substr($ultimo_procesado,3);
-	
-			if ($estatus == "CANCELADO") {
-				$icon = 'cancel';
-				$color = 'red-text';
-			} elseif ($estatus == "TDC CANCELADA") {
-				$icon = 'report';
-				$color = 'purple-text';
-			} elseif ($estatus == "INTENTOS") {
-				$icon = 'warning';
-				$color = 'light-blue-text';
-			} elseif ($estatus == "CONTRACARGO") {
-				$icon = 'note_add';
-				$color = 'deep-orange-text';
-			} elseif ($estatus == "REINTEGRO") {
-				$icon = 'note_add';
-				$color = 'orange-text';
-			} elseif ($estatus == "RESERVAR") {
-				$icon = 'pause';
-				$color = 'grey-text';
-			} else {
-				$icon = 'verified_user';
-				$color = 'green-text';
-				$estatus = 'ACTIVO';
-			}
-	
-			$ultimo_procesado = $ultimo_procesado;
-			if ($ultimo_procesado == 'VTAS') {
-				$ultimo_procesado = '<i class="material-icons green-text tiny prefix">account_balance_wallet</i> '.$ultimo_procesado;
-			} elseif ($ultimo_procesado == 'F.INS') {
-				$ultimo_procesado = '<i class="material-icons blue-text tiny prefix">account_balance_wallet</i> '.$ultimo_procesado;
-			} elseif ($ultimo_procesado == 'RZDA') {
-				$ultimo_procesado = '<i class="material-icons amber-text tiny prefix">account_balance_wallet</i> '.$ultimo_procesado;
-			} elseif ($ultimo_procesado == 'RCHZ') {
-				$ultimo_procesado = '<i class="material-icons amber-text tiny prefix">account_balance_wallet</i> '.$ultimo_procesado;
-			} elseif ($ultimo_procesado == 'T.RST') {
-				$ultimo_procesado = '<i class="material-icons grey-text tiny prefix">account_balance_wallet</i> '.$ultimo_procesado;
-			} elseif ($ultimo_procesado == 'T.EXT') {
-				$ultimo_procesado = '<i class="material-icons grey-text tiny prefix">account_balance_wallet</i> '.$ultimo_procesado;
-			} elseif ($ultimo_procesado == 'L.BEM') {
-				$ultimo_procesado = '<i class="material-icons red-text tiny prefix">account_balance_wallet</i> '.$ultimo_procesado;
-			} elseif ($ultimo_procesado == 'TNP') {
-				$ultimo_procesado = '<i class="material-icons red-text tiny prefix">account_balance_wallet</i> '.$ultimo_procesado;
-			} elseif ($ultimo_procesado == '') {
-				$ultimo_procesado = $ultimo_procesado;
-			}
-
+		if (isset($_POST['identificador'])) {
+			$toSearch = $_POST['identificador'];		
 			echo '
-						<tr>
-							<td>'.$fecha.'</td>
-							<td><a href="/prod/pages/searchByClafi/toSearched.php?clafi='.$clafiltmk.'">'.$clafiltmk.'</a></td>
-							<td>'.$identificador.'</td>
-							<td>'.$afiliado.'</td>
-							<td><i class="material-icons tiny prefix">credit_card</i> '.$dni.'</td>
-							<td><i class="material-icons '.$color.' tiny prefix">'.$icon.'</i> '.$estatus.'</td>
-							<td>'.$fecha_estatus.'</td>
-							<td>'.$ultimo_procesado.'</td>
-							<td>'.$fecha_ultimo_procesado.'</td>
-						</tr>';
-			}
+								<input id="nombre_afiliado" type="text" class="validate" autofocus="autofocus" name="identificador" value="'.$toSearch.'">';
+		} else {
+			echo '
+								<input id="nombre_afiliado" type="text" class="validate" name="identificador" value="">';
+		}
+								
+		echo '
+								<label for="identificador">Identificador de afiliado</label>
+							</div>
+							<button class="col l1 m2 s2 btn-large waves-effect waves-light" type="submit" name="action">
+								<i class="material-icons prefix">search</i> 
+							</button>
 
-			echo "
-					</table>
+						</form>
+					</div>
 				</div>
 			</div>
-			<script>
-				$(document).ready(function() {
-					$('#".$idTable."').DataTable( {
-						'paging':   false,
-						'ordering': true,
-						'info':     true,
-					} );
-				} );
-			</script>				
-			";
+			';
+				
+		if (isset($_POST['identificador'])) {
 			
-		} else {
-				
-				withToMuchResults($numRst);
-				
-		}
-		}
-	}
-		
+			$toSearch = strip_tags($_POST['identificador'],ENT_QUOTES);
+			$toSearchDB = $toSearch;
 
+			$sql = "
+				SELECT 
+					clafiltmk, 
+					nombre_afiliado, 
+					fecha_venta, 
+					dni, 
+					identificador, 
+					estatus, 
+					fecha_estatus, 
+					ultimo_procesado, 
+					fecha_ultimo_procesado 
+				FROM 
+					afiliados 
+				WHERE 
+					identificador IN (".$toSearchDB.")";
+			
+			$conn = sqlsrv_connect(COBRANZASRVR, array('Database' => 'tmk', 'Uid' => COBRANZAUSER, 'PWD' => COBRANZAPWD));
+			$rst = sqlsrv_query($conn, $sql, array(), array( "Scrollable" => SQLSRV_CURSOR_KEYSET));
+		
+			if ($rst == FALSE) {die(SQL_SRVR_FormatErrors(sqlsrv_errors()));}
+		
+			$numRst = sqlsrv_num_rows($rst);
+
+			if ($numRst == 0) {
+				
+				withNoResults();
+				
+			} elseif ($numRst > 0) {
+				
+				if ($numRst < 10000) {
+					
+					$idTable = str_replace(",","",str_replace(" ","_",$toSearch."_".$numRst));
+					$idTableDown = "'".$idTable."'";
+					
+					searchResultsInfo($numRst, '', $idTableDown);
+					searchResultsHead($idTable);
+					searchResultsRows($rst);
+					searchResultsEnd($idTable);
+					
+				} else {
+
+					withToMuchResults($numRst);
+
+				}
+			}
+		}
 	}
 	
+
 ?>

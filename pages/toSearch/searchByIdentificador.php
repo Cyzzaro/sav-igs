@@ -18,6 +18,10 @@
 		</header>
 		
 		<main>
+
+<?php 
+		formSearchById('');
+?>
 		
 		</main>
 
