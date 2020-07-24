@@ -1,0 +1,17 @@
+# 301 Redirect Old File
+# Redirect 301 /prod/toSearchByName.php /prod/
+# Redirect 301 /dev/toSearchByName.php /prod/
+
+# Prevent viewing of .htaccess file
+<Files .htaccess>
+order allow,deny
+deny from all
+</Files>
+
+# Prevent directory listings
+# Options All -Indexes
+
+# Custom 404 errors
+ErrorDocument 404 /sav-igs/pages/error/error.php
+ErrorDocument 414 /sav-igs/pages/error/error.php
+ 
