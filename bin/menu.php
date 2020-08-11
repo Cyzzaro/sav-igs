@@ -56,7 +56,8 @@
 							menuElement(GLOBALPATH.'/pages/apolo/detalle_proveedores.php', '', 'Detalle - Proveedores', (activePageDir() == GLOBALPATH."/pages/apolo" ? "active" : ""));
 							menuElement(GLOBALPATH.'/pages/apolo/asistencias_programadas.php', '', 'Asistencias programadas', (activePageDir() == GLOBALPATH."/pages/apolo" ? "active" : ""));
 						menu_seccion_fin();
-					
+						echo '<div class="divider"> &nbsp; </div>';
+						echo '<br><br><br><span class="new badge blue-grey white-text">' . $_SERVER['REMOTE_ADDR'] . '</span>';
 					?>
 
 	</ul>

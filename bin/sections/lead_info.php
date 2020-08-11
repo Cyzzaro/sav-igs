@@ -18,7 +18,7 @@
 			$lead_id = $_GET['lead_id'];
 			$string_to_search = strip_tags($lead_id, ENT_QUOTES);
 			$string_to_search_higienized_for_query = higienizeString($string_to_search);
-			if ($_SERVER['REMOTE_ADDR'] == !'::1') {
+			if ($_SERVER['REMOTE_ADDR'] ==! '127.0.0.1') {
 				// Devuelve el numero de TDC completo - Vista especial para quien administra cobranza de la cuenta.
 				$query = "SELECT TOP(1) cliente, asistencia, clafiltmk, identificador, CAST(fecha_venta AS VARCHAR(12)) AS fecha_venta, nombre_afiliado, 
 					CAST(fecha_nacimiento AS VARCHAR(12)) AS fecha_nacimiento, tipo_tarjeta, dia_corte, dni, 
@@ -147,6 +147,7 @@
 						case 'T5 RECHAZAR'; $color_evento = 'blue lighten-5'; break;
 						case '87 RECHAZADA'; $color_evento = 'blue lighten-5'; break;
 						case 'N0 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE'; $color_evento = 'blue lighten-5'; break;
+						case '65 EXCEDE LIMITE DE DISPOSICIONES DIARIAS'; $color_evento = 'blue lighten-5'; break;
 
 						case '62 TARJETA RESTRINGIDA'; $color_evento = 'amber lighten-5'; break;
 						case '57 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE'; $color_evento = 'amber lighten-5'; break;

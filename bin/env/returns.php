@@ -596,48 +596,10 @@ function formReportOperativo()
 		$obj_rst = new ApoloDB();
 		$query = "
 			SELECT
-				a.id AS 'Asistencia',
-				a.numero AS 'Expediente',
-				COALESCE(a.fechasolicitud, e.fechaapertura) AS 'Fecha apertura',
-				a.fechaconcluida AS 'Fecha cierre',
-				UCASE(e1.nombre) AS 'Status',
-				UCASE(COALESCE(t.nombre, 'LLAMADA INFORMATIVA')) AS 'TipoServicio',
-				UCASE(COALESCE(s.nombre, 'Llamada informativa')) AS 'Servicio',
-				UCASE(COALESCE(p2.nombre, '* SIN PROVEEDOR ASIGNADO')) AS 'Proveedor',
-				UCASE(CASE WHEN c.nombre = 'GRUPO BAL' THEN 'ASIST. PSICOL. GPO. BAL' ELSE c.nombre END) AS 'Cuenta',
-				UCASE(p.nombre) AS 'Plan',
-				UCASE(COALESCE(CASE WHEN p1.nombre = 'CIUDAD DE MÉXICO' THEN 'DISTRITO FEDERAL' WHEN p1.nombre = 'NA' THEN 'DISTRITO FEDERAL' WHEN p1.nombre = 'OAXACA DE JUÁREZ' THEN 'OAXACA' WHEN p1.nombre = 'VERACRUZ DE IGNACIO DE LA LLAVE' THEN 'VERACRUZ' ELSE p1.nombre END, 'NA')) AS 'Estado',
-				UCASE(COALESCE(z.nombre, 'NA')) AS 'Ciudad',
-				UCASE(a1.nombre) AS 'Nombre',
-				UCASE(a1.apellido) AS 'Apellido',
-				a1.dni AS 'DNI',
-				c1.importe AS 'Costo',
-				p3.nombre AS 'Pagador',
-				UCASE(CONCAT(ureg.firstname,' ',ureg.lastname)) AS 'Usuario Registra',
-				UCASE(CONCAT(ucoord.firstname,' ',ucoord.lastname)) AS 'Usuario Coordina',
-				UCASE(concat(umodif.firstname,' ',umodif.lastname)) AS 'Usuario Modifica',
-				1 AS 'ParaContador'
-			FROM mx.asistencia a
-				LEFT JOIN mx.expediente e ON a.expediente = e.id
-				LEFT JOIN mx.estadoasistencia e1 ON a.estado = e1.id
-				LEFT JOIN mx.proveedor p2 ON a.proveedor = p2.id
-				LEFT JOIN mx.cuenta c ON e.cuenta = c.id
-				LEFT JOIN mx.plan p ON e.plan = p.id
-				LEFT JOIN mx.provincia p1 ON a.provincia = p1.id
-				LEFT JOIN mx.zona z ON a.zona = z.id
-				LEFT JOIN mx.afiliado a1 ON e.afiliado = a1.id
-				LEFT JOIN mx.servicio s ON a.servicio = s.id
-				LEFT JOIN mx.tipodeservicio t ON a.tipo = t.id
-				LEFT JOIN mx.costo c1 ON c1.asistencia = a.id
-				LEFT JOIN mx.pagadorcosto p3 ON c1.pagador = p3.id
-				LEFT JOIN mx.user ureg ON e.registro = ureg.id
-				LEFT JOIN mx.user ucoord ON e.coordinador=ucoord.id
-				LEFT JOIN mx.user umodif ON a.usuariomodificacion = umodif.id
-			WHERE (
-			e.fechaapertura BETWEEN '".$date_ini." 00:00:00' AND '".$date_fin." 23:59:59'
-			OR 
-			a.fechasolicitud BETWEEN '".$date_ini." 00:00:00' AND '".$date_fin." 23:59:59'
-			);
+				*
+			FROM mx.vwREO
+			WHERE 
+			(`Fecha apertura` BETWEEN '".$date_ini." 00:00:00' AND '".$date_fin." 23:59:59');
 			";
 		$rst = $obj_rst->buscar($query);
 		if($rst)
@@ -663,8 +625,7 @@ function formReportOperativo()
 								<th>Plan</th>
 								<th>Estado</th>
 								<th>Ciudad</th>
-								<th>Nombre</th>
-								<th>Apellido</th>
+								<th>Nombre Afiliado</th>
 								<th>DNI</th>
 								<th>Costo</th>
 								<th>Pagador</th>
@@ -681,16 +642,15 @@ function formReportOperativo()
 								<td>'.$field_name['Fecha apertura'].'&nbsp;</td>
 								<td>'.$field_name['Fecha cierre'].'&nbsp;</td>
 								<td>'.$field_name['Status'].'&nbsp;</td>
-								<td>'.$field_name['TipoServicio'].'&nbsp;</td>
+								<td>'.$field_name['Tipo Servicio'].'&nbsp;</td>
 								<td>'.$field_name['Servicio'].'&nbsp;</td>
 								<td>'.$field_name['Proveedor'].'&nbsp;</td>
 								<td>'.$field_name['Cuenta'].'&nbsp;</td>
 								<td>'.$field_name['Plan'].'&nbsp;</td>
 								<td>'.$field_name['Estado'].'&nbsp;</td>
 								<td>'.$field_name['Ciudad'].'&nbsp;</td>
-								<td>'.$field_name['Nombre'].'&nbsp;</td>
-								<td>'.$field_name['Apellido'].'&nbsp;</td>
-								<td>'.$field_name['DNI'].'&nbsp;</td>
+								<td>'.$field_name['Nombre Afiliado'].'&nbsp;</td>
+								<td>'.$field_name['DNI Afiliado'].'&nbsp;</td>
 								<td>'.$field_name['Costo'].'&nbsp;</td>
 								<td>'.$field_name['Pagador'].'&nbsp;</td>
 								<td>'.$field_name['Usuario Registra'].'&nbsp;</td>

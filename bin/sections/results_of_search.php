@@ -145,26 +145,7 @@ function rowsGeneralResultsTable($obj_rst, $modal)
 				$color = 'green-text';
 				$estatus = 'ACTIVO';
 			}
-//		$ultimo_procesado = $ultimo_procesado;
-//			if ($ultimo_procesado == 'VTAS') {
-//				$ultimo_procesado = '<span class="green-text "><i class="material-icons tiny prefix">account_balance_wallet</i> '.$ultimo_procesado.'</span>';
-//			} elseif ($ultimo_procesado == 'F.INS') {
-//				$ultimo_procesado = '<span class="blue-text"><i class="material-icons tiny prefix">account_balance_wallet</i> '.$ultimo_procesado.'</span>';
-//			} elseif ($ultimo_procesado == 'RZDA') {
-//				$ultimo_procesado = '<span class="amber-text"><i class="material-icons tiny prefix">account_balance_wallet</i> '.$ultimo_procesado.'</span>';
-//			} elseif ($ultimo_procesado == 'RCHZ') {
-//				$ultimo_procesado = '<span class="amber-text"><i class="material-icons tiny prefix">account_balance_wallet</i> '.$ultimo_procesado.'</span>';
-//			} elseif ($ultimo_procesado == 'T.RST') {
-//				$ultimo_procesado = '<span class="grey-text"><i class="material-icons tiny prefix">account_balance_wallet</i> '.$ultimo_procesado.'</span>';
-//			} elseif ($ultimo_procesado == 'T.EXT') {
-//				$ultimo_procesado = '<span class="grey-text"><i class="material-icons tiny prefix">account_balance_wallet</i> '.$ultimo_procesado.'</span>';
-//			} elseif ($ultimo_procesado == 'L.BEM') {
-//				$ultimo_procesado = '<span class="red-text"><i class="material-icons tiny prefix">account_balance_wallet</i> '.$ultimo_procesado.'</span>';
-//			} elseif ($ultimo_procesado == 'TNP') {
-//				$ultimo_procesado = '<span class="red-text"><i class="material-icons tiny prefix">account_balance_wallet</i> '.$ultimo_procesado.'</span>';
-//			} elseif ($ultimo_procesado == '') {
-//				$ultimo_procesado = $ultimo_procesado;
-//			}
+
 		if ($modal == True) 
 		{
 			$lead_detail = '<a href="'.GLOBALPATH.'/bin/sections/lead_info.php?lead_id='.$lead_id.'" target="new">'.$lead_id.'</a>';
