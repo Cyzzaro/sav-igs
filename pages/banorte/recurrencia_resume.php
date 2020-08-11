@@ -4,125 +4,45 @@
 	$query = "
 		SELECT
 			FORMAT(fecha_procesado, 'yyyy-MM') AS [Fecha]
-		   ,COUNT(CASE
-				WHEN evento = '00 VENTAS' THEN 1
-				ELSE NULL
-			END)							   AS [00-VTAS]
-		   ,COUNT(CASE
-				WHEN evento = '01 VENTAS' THEN 1
-				ELSE NULL
-			END)							   AS [01-VTAS]
-
-		   ,COUNT(CASE
-				WHEN evento = '51 FONDOS INSUFICIENTES' THEN 1
-				ELSE NULL
-			END)							   AS [51-F.INS]
-		   ,COUNT(CASE
-				WHEN evento = '05 RECHAZADA' THEN 1
-				ELSE NULL
-			END)							   AS [05-RZDA]
-		   ,COUNT(CASE
-				WHEN evento = 'T5 RECHAZAR' THEN 1
-				ELSE NULL
-			END)							   AS [T5-RCHZ]
-		   ,COUNT(CASE
-				WHEN evento = '87 RECHAZADA' THEN 1
-				ELSE NULL
-			END)							   AS [87-RZDA]
-		   ,COUNT(CASE
-				WHEN evento = 'N0 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE' THEN 1
-				ELSE NULL
-			END)							   AS [N0-TNP]
-			
-
-		   ,COUNT(CASE
-				WHEN evento = '62 TARJETA RESTRINGIDA' THEN 1
-				ELSE NULL
-			END)							   AS [62-T.RST]
-		   ,COUNT(CASE
-				WHEN evento = '57 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE' THEN 1
-				ELSE NULL
-			END)							   AS [57-TNP]
-		   ,COUNT(CASE
-				WHEN evento = '01 LLAMAR AL BANCO EMISOR' THEN 1
-				ELSE NULL
-			END)							   AS [01-L.BEM]
-		   ,COUNT(CASE
-				WHEN evento = 'O6 RECHAZADA' THEN 1
-				ELSE NULL
-			END)							   AS [O6-RZDA]
-
-			,COUNT(CASE
-				WHEN evento = '41 TARJETA EXTRAVIADA' THEN 1
-				ELSE NULL
-			END)							   AS [41-T.EXT]
-		   ,COUNT(CASE
-				WHEN evento = 'N7 RECHAZADA' THEN 1
-				ELSE NULL
-			END)							   AS [N7-RZDA]
-		   ,COUNT(id)						   AS [Procesados]
+			,COUNT(CASE WHEN evento = '00 VENTAS' THEN 1 ELSE NULL END) AS '00-VTAS'
+			,COUNT(CASE WHEN evento = '01 VENTAS' THEN 1 ELSE NULL END) AS '01-VTAS'
+			,COUNT(CASE WHEN evento = '05 RECHAZADA' THEN 1 ELSE NULL END) AS '05-RZDA'
+			,COUNT(CASE WHEN evento = '51 FONDOS INSUFICIENTES' THEN 1 ELSE NULL END) AS '51-F.INS'
+			,COUNT(CASE WHEN evento = '65 EXCEDE LIMITE DE DISPOSICIONES DIARIAS' THEN 1 ELSE NULL END) AS '65-L.DISP'
+			,COUNT(CASE WHEN evento = '87 RECHAZADA' THEN 1 ELSE NULL END) AS '87-RZDA'
+			,COUNT(CASE WHEN evento = 'N0 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE' THEN 1 ELSE NULL END) AS 'N0-TNP'
+			,COUNT(CASE WHEN evento = 'T5 RECHAZAR' THEN 1 ELSE NULL END) AS 'T5-RCHZ'
+			,COUNT(CASE WHEN evento = '01 LLAMAR AL BANCO EMISOR' THEN 1 ELSE NULL END) AS '01-L.BEM'
+			,COUNT(CASE WHEN evento = '57 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE' THEN 1 ELSE NULL END) AS '57-TNP'
+			,COUNT(CASE WHEN evento = '62 TARJETA RESTRINGIDA' THEN 1 ELSE NULL END) AS '62-T.RST'
+			,COUNT(CASE WHEN evento = 'O6 RECHAZADA' THEN 1 ELSE NULL END) AS 'O6-RZDA'
+			,COUNT(CASE WHEN evento = '0  DENEGADO' THEN 1 ELSE NULL END) AS '0-DEN'
+			,COUNT(CASE WHEN evento = '41 TARJETA EXTRAVIADA' THEN 1 ELSE NULL END) AS '41-T.EXT'
+			,COUNT(CASE WHEN evento = '56 TARJETA SIN REGISTRO' THEN 1 ELSE NULL END) AS '56-T.SREG'
+			,COUNT(CASE WHEN evento = 'N7 RECHAZADA' THEN 1 ELSE NULL END) AS 'N7-RZDA'
+		  ,COUNT(id)						   AS [Procesados]
 		FROM tmk.dbo.Procesados
 		GROUP BY FORMAT(fecha_procesado, 'yyyy-MM')
 		UNION ALL
 		SELECT
 			'Total' AS [Fecha]
-		   ,COUNT(CASE
-				WHEN evento = '00 VENTAS' THEN 1
-				ELSE NULL
-			END)							   AS [00-VTAS]
-		   ,COUNT(CASE
-				WHEN evento = '01 VENTAS' THEN 1
-				ELSE NULL
-			END)							   AS [01-VTAS]
-
-		   ,COUNT(CASE
-				WHEN evento = '51 FONDOS INSUFICIENTES' THEN 1
-				ELSE NULL
-			END)							   AS [51-F.INS]
-		   ,COUNT(CASE
-				WHEN evento = '05 RECHAZADA' THEN 1
-				ELSE NULL
-			END)							   AS [05-RZDA]
-		   ,COUNT(CASE
-				WHEN evento = 'T5 RECHAZAR' THEN 1
-				ELSE NULL
-			END)							   AS [T5-RCHZ]
-		   ,COUNT(CASE
-				WHEN evento = '87 RECHAZADA' THEN 1
-				ELSE NULL
-			END)							   AS [87-RZDA]
-		   ,COUNT(CASE
-				WHEN evento = 'N0 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE' THEN 1
-				ELSE NULL
-			END)							   AS [N0-TNP]
-			
-
-		   ,COUNT(CASE
-				WHEN evento = '62 TARJETA RESTRINGIDA' THEN 1
-				ELSE NULL
-			END)							   AS [62-T.RST]
-		   ,COUNT(CASE
-				WHEN evento = '57 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE' THEN 1
-				ELSE NULL
-			END)							   AS [57-TNP]
-		   ,COUNT(CASE
-				WHEN evento = '01 LLAMAR AL BANCO EMISOR' THEN 1
-				ELSE NULL
-			END)							   AS [01-L.BEM]
-		   ,COUNT(CASE
-				WHEN evento = 'O6 RECHAZADA' THEN 1
-				ELSE NULL
-			END)							   AS [O6-RZDA]
-
-			,COUNT(CASE
-				WHEN evento = '41 TARJETA EXTRAVIADA' THEN 1
-				ELSE NULL
-			END)							   AS [41-T.EXT]
-		   ,COUNT(CASE
-				WHEN evento = 'N7 RECHAZADA' THEN 1
-				ELSE NULL
-			END)							   AS [N7-RZDA]
-		   ,COUNT(id)						   AS [Procesados]
+			,COUNT(CASE WHEN evento = '00 VENTAS' THEN 1 ELSE NULL END) AS '00-VTAS'
+			,COUNT(CASE WHEN evento = '01 VENTAS' THEN 1 ELSE NULL END) AS '01-VTAS'
+			,COUNT(CASE WHEN evento = '05 RECHAZADA' THEN 1 ELSE NULL END) AS '05-RZDA'
+			,COUNT(CASE WHEN evento = '51 FONDOS INSUFICIENTES' THEN 1 ELSE NULL END) AS '51-F.INS'
+			,COUNT(CASE WHEN evento = '65 EXCEDE LIMITE DE DISPOSICIONES DIARIAS' THEN 1 ELSE NULL END) AS '65-L.DISP'
+			,COUNT(CASE WHEN evento = '87 RECHAZADA' THEN 1 ELSE NULL END) AS '87-RZDA'
+			,COUNT(CASE WHEN evento = 'N0 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE' THEN 1 ELSE NULL END) AS 'N0-TNP'
+			,COUNT(CASE WHEN evento = 'T5 RECHAZAR' THEN 1 ELSE NULL END) AS 'T5-RCHZ'
+			,COUNT(CASE WHEN evento = '01 LLAMAR AL BANCO EMISOR' THEN 1 ELSE NULL END) AS '01-L.BEM'
+			,COUNT(CASE WHEN evento = '57 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE' THEN 1 ELSE NULL END) AS '57-TNP'
+			,COUNT(CASE WHEN evento = '62 TARJETA RESTRINGIDA' THEN 1 ELSE NULL END) AS '62-T.RST'
+			,COUNT(CASE WHEN evento = 'O6 RECHAZADA' THEN 1 ELSE NULL END) AS 'O6-RZDA'
+			,COUNT(CASE WHEN evento = '0  DENEGADO' THEN 1 ELSE NULL END) AS '0-DEN'
+			,COUNT(CASE WHEN evento = '41 TARJETA EXTRAVIADA' THEN 1 ELSE NULL END) AS '41-T.EXT'
+			,COUNT(CASE WHEN evento = '56 TARJETA SIN REGISTRO' THEN 1 ELSE NULL END) AS '56-T.SREG'
+			,COUNT(CASE WHEN evento = 'N7 RECHAZADA' THEN 1 ELSE NULL END) AS 'N7-RZDA'
+		  ,COUNT(id)						   AS [Procesados]
 		FROM tmk.dbo.Procesados
 		ORDER BY [Fecha]
 		";
@@ -156,19 +76,19 @@
 				$fecha = $rst['Fecha'];
 				$vtas_00 = number_format($rst['00-VTAS']);
 				$vtas_01 = number_format($rst['01-VTAS']);
-				
-				$f_ins_51 = number_format($rst['51-F.INS']);
 				$rzda_05 = number_format($rst['05-RZDA']);
-				$rchz_t5 = number_format($rst['T5-RCHZ']);
+				$f_ins_51 = number_format($rst['51-F.INS']);
+				$l_disp_65 = number_format($rst['65-L.DISP']);
 				$rzda_87 = number_format($rst['87-RZDA']);
 				$tnp_n0 = number_format($rst['N0-TNP']);
-				
-				$t_rst_62 = number_format($rst['62-T.RST']);
-				$tnp_57 = number_format($rst['57-TNP']);
+				$rchz_t5 = number_format($rst['T5-RCHZ']);
 				$l_bem_01 = number_format($rst['01-L.BEM']);
+				$tnp_57 = number_format($rst['57-TNP']);
+				$t_rst_62 = number_format($rst['62-T.RST']);
 				$rzda_o6 = number_format($rst['O6-RZDA']);
-				
+				$den_0 = number_format($rst['0-DEN']);
 				$t_ext_41 = number_format($rst['41-T.EXT']);
+				$t_sreg_56 = number_format($rst['56-T.SREG']);
 				$rzda_n7 = number_format($rst['N7-RZDA']);
 				$procesados = number_format($rst['Procesados']);
 
@@ -183,19 +103,19 @@
 									<td>".$fecha."</td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=00-VTAS_".$fecha."' target='new'>".$vtas_00."</a></td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=01-VTAS_".$fecha."' target='new'>".$vtas_01."</a></td>
-									
-									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=51-F.INS_".$fecha."' target='new'>".$f_ins_51."</a></td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=05-RZDA_".$fecha."' target='new'>".$rzda_05."</a></td>
-									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=T5-RCHZ_".$fecha."' target='new'>".$rchz_t5."</a></td>
+									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=51-F.INS_".$fecha."' target='new'>".$f_ins_51."</a></td>
+									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=65-L.DISP_".$fecha."' target='new'>".$l_disp_65."</a></td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=87-RZDA_".$fecha."' target='new'>".$rzda_87."</a></td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=N0-TNP_".$fecha."' target='new'>".$tnp_n0."</a></td>
-									
-									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=62-T.RST_".$fecha."' target='new'>".$t_rst_62."</a></td>
-									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=57-TNP_".$fecha."' target='new'>".$tnp_57."</a></td>
+									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=T5-RCHZ_".$fecha."' target='new'>".$rchz_t5."</a></td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=01-L.BEM_".$fecha."' target='new'>".$l_bem_01."</a></td>
+									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=57-TNP_".$fecha."' target='new'>".$tnp_57."</a></td>
+									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=62-T.RST_".$fecha."' target='new'>".$t_rst_62."</a></td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=O6-RZDA_".$fecha."' target='new'>".$rzda_o6."</a></td>
-									
+									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=0-DEN_".$fecha."' target='new'>".$den_0."</a></td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=41-T.EXT_".$fecha."' target='new'>".$t_ext_41."</a></td>
+									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=56-T.SREG_".$fecha."' target='new'>".$t_sreg_56."</a></td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=N7-RZDA_".$fecha."' target='new'>".$rzda_n7."</a></td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=_".$fecha."' target='new'>".$procesados."</a></td>
 								</tr>";
@@ -220,19 +140,19 @@
 									<th>FECHA</th>
 									<th class="green">00-VTAS</th>
 									<th class="green">01-VTAS</th>
-									
-									<th class="blue">51-F.INS</th>
 									<th class="blue">05-RZDA</th>
-									<th class="blue">T5-RCHZ</th>
+									<th class="blue">51-F.INS</th>
+									<th class="blue">65-L.DISP</th>
 									<th class="blue">87-RZDA</th>
 									<th class="blue">N0-TNP</th>
-									
-									<th class="amber black-text">62-T.RST</th>
-									<th class="amber black-text">57-TNP</th>
-									<th class="amber black-text">01-L.BEM</th>
-									<th class="amber black-text">O6-RZDA</th>
-									
+									<th class="blue">T5-RCHZ</th>
+									<th class="amber">01-L.BEM</th>
+									<th class="amber">57-TNP</th>
+									<th class="amber">62-T.RST</th>
+									<th class="amber">O6-RZDA</th>
+									<th class="red">0-DEN</th>
 									<th class="red">41-T.EXT</th>
+									<th class="red">56-T.SREG</th>
 									<th class="red">N7-RZDA</th>
 									<th>Procesados</th>
 								</tr>

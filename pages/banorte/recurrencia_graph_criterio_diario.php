@@ -4,32 +4,30 @@
 	$query = "
 		SELECT
 			'Total' AS [Fecha]
-		   ,COUNT(CASE
+			,COUNT(CASE
 				WHEN evento = '00 VENTAS' THEN 1
 				WHEN evento = '01 VENTAS' THEN 1
-				ELSE NULL
-			END)								  AS [Exitoso]
-		   ,COUNT(CASE
-				WHEN evento = '51 FONDOS INSUFICIENTES' THEN 1
+			END) AS [Exitoso]
+			,COUNT(CASE
 				WHEN evento = '05 RECHAZADA' THEN 1
-				WHEN evento = 'T5 RECHAZAR' THEN 1
+				WHEN evento = '51 FONDOS INSUFICIENTES' THEN 1
+				WHEN evento = '65 EXCEDE LIMITE DE DISPOSICIONES DIARIAS' THEN 1
 				WHEN evento = '87 RECHAZADA' THEN 1
 				WHEN evento = 'N0 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE' THEN 1
-				WHEN evento = '65 EXCEDE LIMITE DE DISPOSICIONES DIARIAS' THEN 1
-				ELSE NULL
-			END)								  AS [Retry]
-		   ,COUNT(CASE
-				WHEN evento = '62 TARJETA RESTRINGIDA' THEN 1
-				WHEN evento = '57 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE' THEN 1
+				WHEN evento = 'T5 RECHAZAR' THEN 1
+			END) AS [Retry]
+			,COUNT(CASE
 				WHEN evento = '01 LLAMAR AL BANCO EMISOR' THEN 1
+				WHEN evento = '57 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE' THEN 1
+				WHEN evento = '62 TARJETA RESTRINGIDA' THEN 1
 				WHEN evento = 'O6 RECHAZADA' THEN 1
-				ELSE NULL
-			END)								  AS [Soft]
-		   ,COUNT(CASE
+			END) AS [Soft]
+			,COUNT(CASE
+				WHEN evento = '0  DENEGADO' THEN 1
 				WHEN evento = '41 TARJETA EXTRAVIADA' THEN 1
+				WHEN evento = '56 TARJETA SIN REGISTRO' THEN 1
 				WHEN evento = 'N7 RECHAZADA' THEN 1
-				ELSE NULL
-			END)								  AS [Hard]
+			END) AS [Hard]
 		   ,COUNT(id)							  AS [Procesado]
 		FROM tmk.dbo.procesados
 		WHERE fecha_procesado BETWEEN CONVERT(DATE, DATEADD(d, -( DAY(DATEADD(m, -2, GETDATE() -1)) ), DATEADD(m, -2, GETDATE()))) AND GETDATE()
