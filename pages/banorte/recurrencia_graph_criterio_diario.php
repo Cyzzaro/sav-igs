@@ -75,7 +75,7 @@
 				</div>
 				<script type="text/javascript">
 					new Chart(document.getElementById("recurrencia_graph_criterio_diario"), {
-						type: 'pie',
+						type: 'doughnut',
 						data: {
 							labels: ['Exitoso','Retry','Soft','Hard'],
 							datasets: [

@@ -128,7 +128,6 @@
 	} elseif ($total_num_rst > 0) {
 		if ($total_num_rst < 500) {
 			echo '
-			<div class="container">
 				<div class="col l1 offset-l11 m1 offset-m11 s2 offset-s10">
 					<a class="btn-floating blue" onclick="javascript:xport.toCSV('.TABLEINFOEXPORT.');"><i class="material-icons small">cloud_download</i></a>
 				</div>
@@ -162,7 +161,6 @@
 						</table>
 					</div>
 				</div>
-			</div>
 			';
 
 		} else {
