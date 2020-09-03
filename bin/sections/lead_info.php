@@ -50,7 +50,7 @@
 			estatus,
 			CAST(fecha_estatus AS VARCHAR(12)) as fecha_estatus
 		FROM tmk.dbo.procesados 
-		WHERE (/*evento LIKE '%VENTAS%' AND*/ evento NOT LIKE '%-%') AND clafiltmk = " . $lead_id . "
+		WHERE (evento LIKE '%VENTAS%' AND evento NOT LIKE '%-%') AND clafiltmk = " . $lead_id . "
 		ORDER BY fecha_procesado DESC";
 			$obj_conn_SQLSERVER = sqlsrv_connect(COBRANZASRVR, array('Database' => 'tmk', 'Uid' => COBRANZAUSER, 'PWD' => COBRANZAPWD));
 			$obj_rst = sqlsrv_query($obj_conn_SQLSERVER, $query, array(), array("Scrollable" => SQLSRV_CURSOR_KEYSET));
@@ -163,15 +163,18 @@
 					}
 					$color_evento = '';
 					$autorizacion = $individual_rst_2['autorizacion'];
-					if ($autorizacion == !"") {
-						$autorizacion = '<span class="new badge teal white-text">' . $monto . '    <b>' . $autorizacion . '</b>    ' . $origen_pago . '</span>';
-					}
+					
 					$estatus_intento = $individual_rst_2['estatus'];
 					$fecha_estatus_intento = $individual_rst_2['fecha_estatus'];
-					if ($estatus_intento == !"") {
-						$estatus_intento = '<span class="new badge red">' . $monto . '    <b>' . $estatus_intento . '</b>    ' . $origen_pago . '</span>';
+					if ($autorizacion == !"") {
+						if ($estatus_intento == !"") {
+							$autorizacion = '<span class="new badge red">' . $monto . '    <b>' . $autorizacion . '</b>       <b>' . $estatus_intento . '</b>    ' . $origen_pago . '</span>';
+						} else {
+							$autorizacion = '<span class="new badge teal">' . $monto . '    <b>' . $autorizacion . '</b>       <b>' .
+									$estatus_intento . '</b>    ' . $origen_pago . '</span>';
+						}
 					}
-					$intento = 'Fecha: ' . $fecha_procesado . ' ' . $autorizacion . ' ' . $estatus_intento . ' <br>Código: <b>[' . $evento . ']</b> ';
+					$intento = 'Fecha: ' . $fecha_procesado . ' ' . $autorizacion . '  <br>Código: <b>[' . $evento . ']</b> ';
 					if ($historico == "") {
 						$historico = '<a class="collection-item">' . $intento . '</a>';
 					} else {

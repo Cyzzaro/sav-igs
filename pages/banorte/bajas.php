@@ -18,10 +18,6 @@
 ?>
 
 			<div class="section container row">
-				<h4>Resumen</h4>
-				<?php include_once 'bajas_resume.php'; ?>
-			</div>
-			<div class="section container row">
 				<h4>Acumulado mensual</h4>
 				<div class="col l12 m12 s12">
 					<div class="col l9 m7 s12">
@@ -42,6 +38,10 @@
 						<?php include_once 'bajas_graph_criterio_diario.php'; ?>
 					</div>
 				</div>
+			</div>
+			<div class="section container row">
+				<h4>Resumen</h4>
+				<?php include_once 'bajas_resume.php'; ?>
 			</div>
 
 		</main>
