@@ -188,7 +188,7 @@
 					<div class="row section">
 						<h4 class="truncate show-on-medium-and-down">' . $nombre_afiliado . '</h4>
 						<div class="col l12 m12 s12">
-							<div class="col l6 m12 s12">
+							<div class="col l5 m12 s12">
 								<h6>Datos de afiliado</h6>
 								<div class="collection">
 									<a href="#!" class="collection-item black-text">' . $tarjeta . '
@@ -212,7 +212,7 @@
 									<a href="#!" class="collection-item black-text">Contador de rechazos<span class="badge">' . $acumulado_rechazos . '</span></a>
 								</div>
 							</div>
-							<div class="col l6 m12 s12">
+							<div class="col l7 m12 s12">
 								<h6>Recurrencia</h6>
 								<div class="collection with-header">
 									<div class="inner-content">
