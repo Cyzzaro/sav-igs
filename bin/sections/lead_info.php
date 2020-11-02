@@ -18,7 +18,7 @@
 			$lead_id = $_GET['lead_id'];
 			$string_to_search = strip_tags($lead_id, ENT_QUOTES);
 			$string_to_search_higienized_for_query = higienizeString($string_to_search);
-			if ($_SERVER['REMOTE_ADDR'] ==! '127.0.0.1') {
+			if ($_SERVER['REMOTE_ADDR'] ==! '::1') {
 				// Devuelve el numero de TDC completo - Vista especial para quien administra cobranza de la cuenta.
 				$query = "SELECT TOP(1) cliente, asistencia, clafiltmk, identificador, CAST(fecha_venta AS VARCHAR(12)) AS fecha_venta, nombre_afiliado, 
 					CAST(fecha_nacimiento AS VARCHAR(12)) AS fecha_nacimiento, tipo_tarjeta, dia_corte, dni, 

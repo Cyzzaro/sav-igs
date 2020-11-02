@@ -2,7 +2,7 @@
 
 setlocale(LC_TIME, 'spanish'); 
 
-define('GLOBALPATH','');
+define('GLOBALPATH','/sav-igs');
 define('AUTHORNAME','César Valencia');
 define('AUTHORMAIL','cesarvalencia@live.com.mx');
 define('AUTHORURL','https://github.com/Cyzzaro');
