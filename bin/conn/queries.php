@@ -579,7 +579,7 @@ SELECT
    	END) AS [OTROS]
 	,COUNT(id) AS [Total]
 FROM iamsa.dbo.viaje
-ORDER BY [Fecha]
+ORDER BY [Fecha] DESC
 ";
 
 

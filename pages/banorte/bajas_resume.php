@@ -62,7 +62,7 @@
 		   ,COUNT(id)							AS [Total]
 		FROM tmk.dbo.afiliados
 		WHERE (estatus IS NOT NULL /*AND estatus NOT LIKE '%RESERVAR%'*/)
-		ORDER BY [Fecha]	
+		ORDER BY [Fecha] DESC
 		";
 
 	$obj_conn_params_SQLSERVER = array('Database' => COBRANZABD, 'Uid' => COBRANZAUSER, 'PWD' => COBRANZAPWD);

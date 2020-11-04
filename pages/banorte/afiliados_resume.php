@@ -44,7 +44,7 @@
 			END)	  AS [Reactivacion]
 		   ,COUNT(id) AS [Total]
 		FROM tmk.dbo.afiliados
-		ORDER BY [fecha]		
+		ORDER BY [fecha] DESC
 		";
 
 	$obj_conn_params_SQLSERVER = array('Database' => COBRANZABD, 'Uid' => COBRANZAUSER, 'PWD' => COBRANZAPWD);
