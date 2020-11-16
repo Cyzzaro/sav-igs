@@ -641,7 +641,7 @@ function formReportOperativo()
 								<td>'.$field_name['Expediente'].'&nbsp;</td>
 								<td>'.$field_name['Fecha apertura'].'&nbsp;</td>
 								<td>'.$field_name['Fecha cierre'].'&nbsp;</td>
-								<td>'.$field_name['Status'].'&nbsp;</td>
+								<td>'.$field_name['Status asistencia'].'&nbsp;</td>
 								<td>'.$field_name['Tipo Servicio'].'&nbsp;</td>
 								<td>'.$field_name['Servicio'].'&nbsp;</td>
 								<td>'.$field_name['Proveedor'].'&nbsp;</td>
@@ -651,7 +651,7 @@ function formReportOperativo()
 								<td>'.$field_name['Ciudad'].'&nbsp;</td>
 								<td>'.$field_name['Nombre Afiliado'].'&nbsp;</td>
 								<td>'.$field_name['DNI Afiliado'].'&nbsp;</td>
-								<td>'.$field_name['Costo'].'&nbsp;</td>
+								<td>'.$field_name['Costo($)'].'&nbsp;</td>
 								<td>'.$field_name['Pagador'].'&nbsp;</td>
 								<td>'.$field_name['Usuario Registra'].'&nbsp;</td>
 								<td>'.$field_name['Usuario Coordina'].'&nbsp;</td>
