@@ -10,7 +10,7 @@
 			<img id="front-page-logo" src="<?php echo GLOBALPATH; ?>/res/images/logo-igs.png">
 		</a>
 	</li>
-	<li><a href="#" class="waves-effect"> Buscar afiliado por...</a></li>
+	<li><a href="#" class="waves-effect"> Afiliados Banorte...</a></li>
 	<div class="row valign-wrapper">
 		<form class="col l12 m12 s12" action="<?php echo GLOBALPATH.'/pages/buscar/por_nombre.php'; ?>" method="GET">
 			<div class="input-field col s12">
