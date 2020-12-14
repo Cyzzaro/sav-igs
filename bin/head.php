@@ -48,7 +48,7 @@
 		<link href="<?php echo GLOBALPATH; ?>/res/css/data_tables.css" type="text/css" rel="stylesheet" media="screen,projection">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" media="screen,projection">
 
-		<script type="text/javascript" src="<?php echo GLOBALPATH; ?>/res/js//chart_js.js"></script>
+		<script type="text/javascript" src="<?php echo GLOBALPATH; ?>/res/js/chart_js.js"></script>
 
 		<meta name="robots" content="noindex,nofollow">
 		<meta name="Revisit-after" content="30 days">
