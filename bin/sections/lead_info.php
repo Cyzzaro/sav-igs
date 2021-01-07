@@ -50,7 +50,7 @@
 			estatus,
 			CAST(fecha_estatus AS VARCHAR(12)) as fecha_estatus
 		FROM tmk.dbo.procesados 
-		WHERE (evento LIKE '%VENTAS%' AND evento NOT LIKE '%-%') AND clafiltmk = " . $lead_id . "
+		WHERE (/*evento LIKE '%VENTAS%' AND*/ evento NOT LIKE '%-%') AND clafiltmk = " . $lead_id . "
 		ORDER BY fecha_procesado DESC";
 			$obj_conn_SQLSERVER = sqlsrv_connect(COBRANZASRVR, array('Database' => 'tmk', 'Uid' => COBRANZAUSER, 'PWD' => COBRANZAPWD));
 			$obj_rst = sqlsrv_query($obj_conn_SQLSERVER, $query, array(), array("Scrollable" => SQLSRV_CURSOR_KEYSET));
@@ -139,29 +139,33 @@
 
 					$evento = $individual_rst_2['evento'];
 					switch ($evento) {
-						case '00 VENTAS'; $color_evento = 'green lighten-5'; break;
-						case '01 VENTAS'; $color_evento = 'green lighten-5'; break;
 
-						case '51 FONDOS INSUFICIENTES'; $color_evento = 'blue lighten-5'; break;
-						case '05 RECHAZADA'; $color_evento = 'blue lighten-5'; break;
-						case 'T5 RECHAZAR'; $color_evento = 'blue lighten-5'; break;
-						case '87 RECHAZADA'; $color_evento = 'blue lighten-5'; break;
-						case 'N0 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE'; $color_evento = 'blue lighten-5'; break;
-						case '65 EXCEDE LIMITE DE DISPOSICIONES DIARIAS'; $color_evento = 'blue lighten-5'; break;
+						case '00 VENTAS'; $color_evento = 'green lighten-5 black-text'; break;
+						case '01 VENTAS'; $color_evento = 'green lighten-5 black-text'; break;
 
-						case '62 TARJETA RESTRINGIDA'; $color_evento = 'amber lighten-5'; break;
-						case '57 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE'; $color_evento = 'amber lighten-5'; break;
-						case '01 LLAMAR AL BANCO EMISOR'; $color_evento = 'amber lighten-5'; break;
-						case 'O6 RECHAZADA'; $color_evento = 'amber lighten-5'; break;
+						case '05 RECHAZADA'; $color_evento = 'black-text'; break;
+						case '51 FONDOS INSUFICIENTES'; $color_evento = 'black-text'; break;
+						case '65 EXCEDE LIMITE DE DISPOSICIONES DIARIAS'; $color_evento = 'black-text'; break;
+						case '87 RECHAZADA'; $color_evento = 'black-text'; break;
+					  case '91 IMPOSIBLE AUTORIZAR EN ESTE MOMENTO'; $color_evento = 'black-text'; break;
+						case 'N0 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE'; $color_evento = 'black-text'; break;
+						case 'T5 RECHAZAR'; $color_evento = 'black-text'; break;
 
-						case 'N7 RECHAZADA'; $color_evento = 'red lighten-5'; break;
-						case '41 TARJETA EXTRAVIADA'; $color_evento = 'red lighten-5'; break;
-						case '0  DENEGADO'; $color_evento = 'red lighten-5'; break;
-						case '56 TARJETA SIN REGISTRO'; $color_evento = 'red lighten-5'; break;
+						case '01 LLAMAR AL BANCO EMISOR'; $color_evento = 'black-text'; break;
+						case '57 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE'; $color_evento = 'black-text'; break;
+						case '62 TARJETA RESTRINGIDA'; $color_evento = 'black-text'; break;
+						case 'O6 RECHAZADA'; $color_evento = 'black-text'; break;
+
+						case '0  DENEGADO'; $color_evento = 'black-text'; break;
+					  case '14 NUMERO DE TARJETA INVALIDO'; $color_evento = 'black-text'; break;
+						case '41 TARJETA EXTRAVIADA'; $color_evento = 'black-text'; break;
+						case '56 TARJETA SIN REGISTRO'; $color_evento = 'black-text'; break;
+						case 'N7 RECHAZADA'; $color_evento = 'black-text'; break;
+					  case 'O8 RECHAZADA'; $color_evento = 'black-text'; break;
 						
 						default: $color_evento = ''; break;
 					}
-					$color_evento = '';
+					/*$color_evento = '';*/
 					$autorizacion = $individual_rst_2['autorizacion'];
 					
 					$estatus_intento = $individual_rst_2['estatus'];
@@ -174,12 +178,12 @@
 									$estatus_intento . '</b>    ' . $origen_pago . '</span>';
 						}
 					}
-					$intento = 'Fecha: ' . $fecha_procesado . ' ' . $autorizacion . '  <br>Código: <b>[' . $evento . ']</b> ';
+					$intento = '' . $fecha_procesado . ' ' . $autorizacion . ' <b>[' . $evento . ']</b> ';
 					if ($historico == "") {
 						$historico = '<a class="collection-item">' . $intento . '</a>';
 					} else {
 						$historico = $historico . '
-										<a href="#!" class="collection-item ' . $color_evento . ' black-text">' . $intento . '</a>';
+										<a href="#!" class="collection-item ' . $color_evento . '">' . $intento . '</a>';
 					}
 				}
 				sqlsrv_free_stmt($obj_rst_2);
