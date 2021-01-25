@@ -4,8 +4,8 @@
 			<div class="col l8 m8 s12">
 				<div class="card-panel-git grey lighten-5 z-depth-1">
 					<div class="row valign-wrapper">
-						<span class="col l2 m2 s4 gh-photo"></span>
-						<div class="col l10 m10 s8">
+						<span class="col l1 m2 s4 gh-photo"></span>
+						<div class="col l11 m10 s8">
 							<div class="github-commit">
 								<div class="commit left-align">
 									<ul>

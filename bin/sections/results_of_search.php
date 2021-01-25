@@ -190,7 +190,7 @@ function endGeneralResultsTable($table_results_name, $is_paging)
 					{
 						$('#".$table_results_name."').DataTable(
 							{
-								'paging': ".$is_paging.",
+								'paging': false,
 								'ordering': false,
 								'info': true,
 								'filter': true,
