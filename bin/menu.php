@@ -51,6 +51,12 @@
 							menuElement(GLOBALPATH.'/pages/iamsa/resumen.php', '', 'Reporte de viajes', (activePageDir() == GLOBALPATH."/pages/iamsa" ? "active" : ""));
 						menu_seccion_fin();
 						echo '<div class="divider"> &nbsp; </div>';
+						menuSectionIni('dns', 'Info de Apolo', (activePageDir() == GLOBALPATH . "/pages/apolo" ? "active" : ""));
+						menuElement(GLOBALPATH . '/pages/apolo/detalle_operativo.php', '', 'Detalle - Operaciones', (activePageDir() == GLOBALPATH . "/pages/apolo" ? "active" : ""));
+						menuElement(GLOBALPATH . '/pages/apolo/detalle_proveedores.php', '', 'Detalle - Proveedores', (activePageDir() == GLOBALPATH . "/pages/apolo" ? "active" : ""));
+						menuElement(GLOBALPATH . '/pages/apolo/asistencias_programadas.php', '', 'Asistencias programadas', (activePageDir() == GLOBALPATH . "/pages/apolo" ? "active" : ""));
+						menu_seccion_fin();
+						echo '<div class="divider"> &nbsp; </div>';
 						echo '<br><br><br><span class="new badge blue-grey white-text">' . $_SERVER['REMOTE_ADDR'] . '</span>';
 					?>
 
