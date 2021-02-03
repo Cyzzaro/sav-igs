@@ -160,6 +160,7 @@
 					  case '14 NUMERO DE TARJETA INVALIDO'; $color_evento = 'black-text'; break;
 						case '41 TARJETA EXTRAVIADA'; $color_evento = 'black-text'; break;
 						case '56 TARJETA SIN REGISTRO'; $color_evento = 'black-text'; break;
+						case '83 RECHAZADA'; $color_evento = 'black-text'; break;
 						case 'N7 RECHAZADA'; $color_evento = 'black-text'; break;
 					  case 'O8 RECHAZADA'; $color_evento = 'black-text'; break;
 						
