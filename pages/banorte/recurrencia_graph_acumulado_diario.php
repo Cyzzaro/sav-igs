@@ -1,7 +1,6 @@
 <?php 
 //	include_once '../../bin/head.php'; 
 
-
 	$query = "
 		SELECT
 			FORMAT(fecha_procesado, 'yyyy-MM-dd') AS [Fecha]
@@ -11,10 +10,10 @@
 			END) AS [Exitoso]
 			,COUNT(CASE
 				WHEN evento = '05 RECHAZADA' THEN 1
-				WHEN evento = '51 FONDOS INSUFICIENTES' THEN 1 E
-				WHEN evento = '65 EXCEDE LIMITE DE DISPOSICIONES DIARIAS' THEN 1 E
+				WHEN evento = '51 FONDOS INSUFICIENTES' THEN 1
+				WHEN evento = '65 EXCEDE LIMITE DE DISPOSICIONES DIARIAS' THEN 1
 				WHEN evento = '87 RECHAZADA' THEN 1
-				WHEN evento = '91 IMPOSIBLE AUTORIZAR EN ESTE MOMENTO' THEN 1 E
+				WHEN evento = '91 IMPOSIBLE AUTORIZAR EN ESTE MOMENTO' THEN 1
 				WHEN evento = 'N0 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE' THEN 1
 				WHEN evento = 'T5 RECHAZAR' THEN 1
 			END) AS [Retry]
