@@ -42,13 +42,13 @@
                                             fill: true,
                                             data: [<?php echo $datasets_etn; ?>],
                                             borderColor: <?php echo "'".$white_rgb_1."'"; ?>,
-                                            backgroundColor: <?php echo "'".$red_rgb_5."'"; ?>,
+                                            backgroundColor: <?php echo "'".$blue_rgb_5."'"; ?>,
                                         },{
                                             label: "AERS",
                                             fill: true,
                                             data: [<?php echo $datasets_aers; ?>],
                                             borderColor: <?php echo "'".$white_rgb_1."'"; ?>,
-                                            backgroundColor: <?php echo "'".$blue_rgb_5."'"; ?>,
+                                            backgroundColor: <?php echo "'".$red_rgb_5."'"; ?>,
                                         },
                                         ]
                                 },
