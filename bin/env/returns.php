@@ -592,7 +592,7 @@ function formReportOperativo()
 	{
 		$date_ini = strip_tags($_GET['date_ini'],ENT_QUOTES);
 		$date_fin = strip_tags($_GET['date_fin'],ENT_QUOTES);
-		
+		$string_to_search_higienized_for_query = $date_ini.$date_fin;
 		$obj_rst = new ApoloDB();
 		$query = "
 			SELECT
