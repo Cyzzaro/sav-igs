@@ -596,10 +596,27 @@ function formReportOperativo()
 		$obj_rst = new ApoloDB();
 		$query = "
 			SELECT
-				*
+				Expediente,
+				FechaAperturaAsistencia,
+				FechaConcluidaAsistencia,
+				StatusAsistencia,
+				TipoServicio,
+				Servicio,
+				Proveedor,
+				Cuenta,
+				Plan,
+				EstadoProvincia,
+				CiudadZona,
+				NombreAfiliado,
+				DNIAfiliado,
+				Costo,
+				Pagador,
+				UsuarioRegistra,
+				UsuarioCoordina,
+				UsuarioModifica
 			FROM mx.vwREO
 			WHERE 
-			(`Fecha apertura` BETWEEN '".$date_ini." 00:00:00' AND '".$date_fin." 23:59:59');
+			(`FechaAperturaAsistencia` BETWEEN '".$date_ini." 00:00:00' AND '".$date_fin." 23:59:59');
 			";
 		$rst = $obj_rst->buscar($query);
 		if($rst)
@@ -639,23 +656,23 @@ function formReportOperativo()
 				echo '
 							<tr>
 								<td>'.$field_name['Expediente'].'&nbsp;</td>
-								<td>'.$field_name['Fecha apertura'].'&nbsp;</td>
-								<td>'.$field_name['Fecha cierre'].'&nbsp;</td>
-								<td>'.$field_name['Status asistencia'].'&nbsp;</td>
-								<td>'.$field_name['Tipo Servicio'].'&nbsp;</td>
+								<td>'.$field_name['FechaAperturaAsistencia'].'&nbsp;</td>
+								<td>'.$field_name['FechaConcluidaAsistencia'].'&nbsp;</td>
+								<td>'.$field_name['StatusAsistencia'].'&nbsp;</td>
+								<td>'.$field_name['TipoServicio'].'&nbsp;</td>
 								<td>'.$field_name['Servicio'].'&nbsp;</td>
 								<td>'.$field_name['Proveedor'].'&nbsp;</td>
 								<td>'.$field_name['Cuenta'].'&nbsp;</td>
 								<td>'.$field_name['Plan'].'&nbsp;</td>
-								<td>'.$field_name['Estado'].'&nbsp;</td>
-								<td>'.$field_name['Ciudad'].'&nbsp;</td>
-								<td>'.$field_name['Nombre Afiliado'].'&nbsp;</td>
-								<td>'.$field_name['DNI Afiliado'].'&nbsp;</td>
-								<td>'.$field_name['Costo($)'].'&nbsp;</td>
+								<td>'.$field_name['EstadoProvincia'].'&nbsp;</td>
+								<td>'.$field_name['CiudadZona'].'&nbsp;</td>
+								<td>'.$field_name['NombreAfiliado'].'&nbsp;</td>
+								<td>'.$field_name['DNIAfiliado'].'&nbsp;</td>
+								<td>'.$field_name['Costo'].'&nbsp;</td>
 								<td>'.$field_name['Pagador'].'&nbsp;</td>
-								<td>'.$field_name['Usuario Registra'].'&nbsp;</td>
-								<td>'.$field_name['Usuario Coordina'].'&nbsp;</td>
-								<td>'.$field_name['Usuario Modifica'].'&nbsp;</td>
+								<td>'.$field_name['UsuarioRegistra'].'&nbsp;</td>
+								<td>'.$field_name['UsuarioCoordina'].'&nbsp;</td>
+								<td>'.$field_name['UsuarioModifica'].'&nbsp;</td>
 							</tr>';
 			}
 			endGeneralResultsTable($table_results_name, false);
