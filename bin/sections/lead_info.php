@@ -27,7 +27,7 @@
 					CAST(fecha_ultimo_procesado AS VARCHAR(12)) AS fecha_ultimo_procesado, CAST(fecha_ultimo_exitoso AS VARCHAR(12)) AS fecha_ultimo_exitoso, 
 					reus, reus_arco, acumulado_exitosos, acumulado_rechazos, origen, nombre_agente
 				FROM tmk.dbo.afiliados
-				WHERE clafiltmk = " . $string_to_search_higienized_for_query . "";
+				WHERE clafiltmk = " . $string_to_search_higienized_for_query;
 			} else {
 				// Devuelve los 4TDC formateados o enmascarados - Vista para el publico en general.
 				$query = "SELECT TOP(1) cliente, asistencia, clafiltmk, identificador, CAST(fecha_venta AS VARCHAR(12)) AS fecha_venta, nombre_afiliado, 
@@ -37,7 +37,7 @@
 					CAST(fecha_ultimo_procesado AS VARCHAR(12)) AS fecha_ultimo_procesado, CAST(fecha_ultimo_exitoso AS VARCHAR(12)) AS fecha_ultimo_exitoso, 
 					reus, reus_arco, acumulado_exitosos, acumulado_rechazos, origen, nombre_agente
 				FROM tmk.dbo.afiliados
-				WHERE clafiltmk = " . $string_to_search_higienized_for_query . "";
+				WHERE clafiltmk = " . $string_to_search_higienized_for_query;
 			}
 			// Obtiene detalles de procesamiento exitoso para el Lead Id.
 			$query2 = "
@@ -73,10 +73,6 @@
 				$fecha_vto = $individual_rst['fecha_vto'];
 				$estatus = $individual_rst['estatus'];
 				switch ($estatus) {
-					case 'CANCELADO';
-						$section_icon = 'cancel';
-						$section_icon_color = 'red';
-						break;
 					case 'CANCELADO';
 						$section_icon = 'cancel';
 						$section_icon_color = 'red';
@@ -140,29 +136,29 @@
 					$evento = $individual_rst_2['evento'];
 					switch ($evento) {
 
-						case '00 VENTAS'; $color_evento = 'green lighten-5 black-text'; break;
+						case '00 VENTAS';
 						case '01 VENTAS'; $color_evento = 'green lighten-5 black-text'; break;
 
-						case '05 RECHAZADA'; $color_evento = 'black-text'; break;
-						case '51 FONDOS INSUFICIENTES'; $color_evento = 'black-text'; break;
-						case '65 EXCEDE LIMITE DE DISPOSICIONES DIARIAS'; $color_evento = 'black-text'; break;
-						case '87 RECHAZADA'; $color_evento = 'black-text'; break;
-					  case '91 IMPOSIBLE AUTORIZAR EN ESTE MOMENTO'; $color_evento = 'black-text'; break;
-						case 'N0 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE'; $color_evento = 'black-text'; break;
-						case 'T5 RECHAZAR'; $color_evento = 'black-text'; break;
+						case '05 RECHAZADA';
+						case '51 FONDOS INSUFICIENTES';
+						case '65 EXCEDE LIMITE DE DISPOSICIONES DIARIAS';
+						case '87 RECHAZADA';
+					    case '91 IMPOSIBLE AUTORIZAR EN ESTE MOMENTO';
+						case 'N0 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE';
+						case 'T5 RECHAZAR';
 
-						case '01 LLAMAR AL BANCO EMISOR'; $color_evento = 'black-text'; break;
-						case '57 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE'; $color_evento = 'black-text'; break;
-						case '62 TARJETA RESTRINGIDA'; $color_evento = 'black-text'; break;
-						case 'O6 RECHAZADA'; $color_evento = 'black-text'; break;
+						case '01 LLAMAR AL BANCO EMISOR';
+						case '57 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE';
+						case '62 TARJETA RESTRINGIDA';
+						case 'O6 RECHAZADA';
 
-						case '0  DENEGADO'; $color_evento = 'black-text'; break;
-					  case '14 NUMERO DE TARJETA INVALIDO'; $color_evento = 'black-text'; break;
-						case '41 TARJETA EXTRAVIADA'; $color_evento = 'black-text'; break;
-						case '56 TARJETA SIN REGISTRO'; $color_evento = 'black-text'; break;
-						case '83 RECHAZADA'; $color_evento = 'black-text'; break;
-						case 'N7 RECHAZADA'; $color_evento = 'black-text'; break;
-					  case 'O8 RECHAZADA'; $color_evento = 'black-text'; break;
+						case '0  DENEGADO';
+					    case '14 NUMERO DE TARJETA INVALIDO';
+						case '41 TARJETA EXTRAVIADA';
+						case '56 TARJETA SIN REGISTRO';
+						case '83 RECHAZADA';
+						case 'N7 RECHAZADA';
+					    case 'O8 RECHAZADA'; $color_evento = 'black-text'; break;
 						
 						default: $color_evento = ''; break;
 					}
