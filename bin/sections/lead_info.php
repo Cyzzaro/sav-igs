@@ -73,6 +73,14 @@
 				$fecha_vto = $individual_rst['fecha_vto'];
 				$estatus = $individual_rst['estatus'];
 				switch ($estatus) {
+					case 'BAJA DEL SERVICIO';
+						$section_icon = 'cancel';
+						$section_icon_color = 'red';
+						break;
+					case 'BAJA DEL SERVICIO (SPONSOR)';
+						$section_icon = 'cancel';
+						$section_icon_color = 'red';
+						break;
 					case 'CANCELADO';
 						$section_icon = 'cancel';
 						$section_icon_color = 'red';
@@ -101,10 +109,14 @@
 						$section_icon = 'system-update';
 						$section_icon_color = 'grey';
 						break;
+					case NULL;
+						$section_icon = 'verified-user';
+						$section_icon_color = 'green';
+						$estatus = 'ACTIVO';
+						break;	
 					default:
 						$section_icon = "verified-user";
-						$section_icon_color = 'teal';
-						$estatus = 'ACTIVO';
+						$section_icon_color = 'blue-grey';
 						break;
 				}
 				$fecha_estatus = $individual_rst['fecha_estatus'];

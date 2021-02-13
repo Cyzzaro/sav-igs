@@ -125,6 +125,12 @@ function rowsGeneralResultsTable($obj_rst, $modal)
 			if ($estatus == "CANCELADO") {
 				$section_icon = 'cancel';
 				$color = 'red-text';
+			} elseif ($estatus == "BAJA DEL SERVICIO") {
+				$section_icon = 'cancel';
+				$color = 'red-text';
+			} elseif ($estatus == "BAJA DEL SERVICIO (SPONSOR)") {
+				$section_icon = 'cancel';
+				$color = 'red-text';
 			} elseif ($estatus == "TDC CANCELADA") {
 				$section_icon = 'report';
 				$color = 'purple-text';
