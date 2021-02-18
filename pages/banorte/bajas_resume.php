@@ -4,30 +4,13 @@
 	$query = "
 		SELECT
 			FORMAT(fecha_estatus, 'yyyy-MM') AS [Fecha]
-		   ,COUNT(CASE
-				WHEN estatus = 'CANCELADO' THEN 1
-				ELSE NULL
-			END)								AS [Cancelado]
-		   ,COUNT(CASE
-				WHEN estatus = 'CONTRACARGO' THEN 1
-				ELSE NULL
-			END)								AS [Contracargo]
-		   ,COUNT(CASE
-				WHEN estatus = 'REINTEGRO' THEN 1
-				ELSE NULL
-			END)								AS [Reintegro]
-		   ,COUNT(CASE
-				WHEN estatus = 'TDC CANCELADA' THEN 1
-				ELSE NULL
-			END)								AS [TDC Cancelada]
-		   ,COUNT(CASE
-				WHEN estatus = 'INTENTOS' THEN 1
-				ELSE NULL
-			END)								AS [Intentos]
-			,COUNT(CASE
-				WHEN estatus = 'RESERVAR' THEN 1
-				ELSE NULL
-			END)								AS [Reservar]
+		  ,COUNT(CASE WHEN estatus = 'BAJA DEL SERVICIO (SAC)' THEN 1 ELSE NULL END) AS [Baja(SAC)]
+			,COUNT(CASE WHEN estatus = 'BAJA DEL SERVICIO (SPONSOR)' THEN 1 ELSE NULL END) AS [Baja(SPONSOR)]
+			,COUNT(CASE WHEN estatus = 'CONTRACARGO' THEN 1 ELSE NULL END) AS [Contracargo]
+			,COUNT(CASE WHEN estatus = 'REINTEGRO' THEN 1 ELSE NULL END) AS [Reintegro]
+			,COUNT(CASE WHEN estatus = 'TDC CANCELADA' THEN 1 ELSE NULL END) AS [TDC Cancelada]
+			,COUNT(CASE WHEN estatus = 'INTENTOS' THEN 1 ELSE NULL END) AS [Intentos]
+			,COUNT(CASE WHEN estatus = 'RESERVAR' THEN 1 ELSE NULL END) AS [Reservar]
 		   ,COUNT(id)							AS [Total]
 		FROM tmk.dbo.afiliados
 		WHERE (estatus IS NOT NULL /*AND estatus NOT LIKE '%RESERVAR%'*/)
@@ -35,30 +18,13 @@
 		UNION ALL
 		SELECT
 			'Total' AS [Fecha]
-		   ,COUNT(CASE
-				WHEN estatus = 'CANCELADO' THEN 1
-				ELSE NULL
-			END)								AS [Cancelado]
-		   ,COUNT(CASE
-				WHEN estatus = 'CONTRACARGO' THEN 1
-				ELSE NULL
-			END)								AS [Contracargo]
-		   ,COUNT(CASE
-				WHEN estatus = 'REINTEGRO' THEN 1
-				ELSE NULL
-			END)								AS [Reintegro]
-		   ,COUNT(CASE
-				WHEN estatus = 'TDC CANCELADA' THEN 1
-				ELSE NULL
-			END)								AS [TDC Cancelada]
-		   ,COUNT(CASE
-				WHEN estatus = 'INTENTOS' THEN 1
-				ELSE NULL
-			END)								AS [Intentos]
-			,COUNT(CASE
-				WHEN estatus = 'RESERVAR' THEN 1
-				ELSE NULL
-			END)								AS [Reservar]
+		  ,COUNT(CASE WHEN estatus = 'BAJA DEL SERVICIO (SAC)' THEN 1 ELSE NULL END) AS [Baja(SAC)]
+			,COUNT(CASE WHEN estatus = 'BAJA DEL SERVICIO (SPONSOR)' THEN 1 ELSE NULL END) AS [Baja(SPONSOR)]
+			,COUNT(CASE WHEN estatus = 'CONTRACARGO' THEN 1 ELSE NULL END) AS [Contracargo]
+			,COUNT(CASE WHEN estatus = 'REINTEGRO' THEN 1 ELSE NULL END) AS [Reintegro]
+			,COUNT(CASE WHEN estatus = 'TDC CANCELADA' THEN 1 ELSE NULL END) AS [TDC Cancelada]
+			,COUNT(CASE WHEN estatus = 'INTENTOS' THEN 1 ELSE NULL END) AS [Intentos]
+			,COUNT(CASE WHEN estatus = 'RESERVAR' THEN 1 ELSE NULL END) AS [Reservar]
 		   ,COUNT(id)							AS [Total]
 		FROM tmk.dbo.afiliados
 		WHERE (estatus IS NOT NULL /*AND estatus NOT LIKE '%RESERVAR%'*/)
@@ -92,7 +58,8 @@
 	function priv_filas_tabla_para_resultados_obtenidos_bajas($client_name, $obj_rst) {
 			while ($rst = sqlsrv_fetch_array($obj_rst, SQLSRV_FETCH_ASSOC)) { 
 				$fecha = $rst['Fecha'];
-				$cancelado = number_format($rst['Cancelado']);
+				$baja_sac = number_format($rst['Baja(SAC)']);
+				$baja_sponsor = number_format($rst['Baja(SPONSOR)']);
 				$contracargo = number_format($rst['Contracargo']);
 				$reintegro = number_format($rst['Reintegro']);
 				$tdccancelada = number_format($rst['TDC Cancelada']);
@@ -109,7 +76,8 @@
 				echo "
 								<tr".$class_for_totals_row.">
 									<td>".$fecha."</td>
-									<td><a href='".GLOBALPATH."/pages/detalle/detalle_bajas.php?client=BANORTE&dato=CANCELADO_".$fecha."' target='new'>".$cancelado."</a></td>
+									<td><a href='".GLOBALPATH."/pages/detalle/detalle_bajas.php?client=BANORTE&dato=BAJA+DEL+SERVICIO+(SAC)_".$fecha."' target='new'>".$baja_sac."</a></td>
+									<td><a href='".GLOBALPATH. "/pages/detalle/detalle_bajas.php?client=BANORTE&dato=BAJA+DEL+SERVICIO+(sponsor)_".$fecha."' target='new'>".$baja_sponsor."</a></td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_bajas.php?client=BANORTE&dato=CONTRACARGO_".$fecha."' target='new'>".$contracargo."</a></td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_bajas.php?client=BANORTE&dato=REINTEGRO_".$fecha."' target='new'>".$reintegro."</a></td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_bajas.php?client=BANORTE&dato=TDC+CANCELADA_".$fecha."' target='new'>".$tdccancelada."</a></td>
@@ -136,7 +104,8 @@
 							<thead class="'.activePagePrimaryColor().' white-text">
 								<tr>
 									<th>FECHA</th>
-									<th>CANCELADO</th>
+									<th>BAJA(SAC)</th>
+									<th>BAJA(SPONSOR)</th>
 									<th>CONTRACARGO</th>
 									<th>REINTEGRO</th>
 									<th>TDC CANCELADA</th>

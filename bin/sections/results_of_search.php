@@ -72,7 +72,7 @@ function headRowGeneralResultsTable($table_results_name)
 					<table id="'.$table_results_name.'" class="table responsive-table bordered hoverable card-panel">
 						<thead class="'.activePagePrimaryColor().' white-text bold">
 							<tr>
-								<th>VENTA</th>
+								<th>FECHA(VT)</th>
 								<th>LEADID</th>
 								<th>IDENTIFICADOR</th>
 								<th>NOMBRE</th>
@@ -122,10 +122,7 @@ function rowsGeneralResultsTable($obj_rst, $modal)
 				$fecha_ultimo_procesado = '';
 			}
 //		$ultimo_procesado = substr($ultimo_procesado,3);
-			if ($estatus == "CANCELADO") {
-				$section_icon = 'cancel';
-				$color = 'red-text';
-			} elseif ($estatus == "BAJA DEL SERVICIO") {
+			if ($estatus == "BAJA DEL SERVICIO (SAC)") {
 				$section_icon = 'cancel';
 				$color = 'red-text';
 			} elseif ($estatus == "BAJA DEL SERVICIO (SPONSOR)") {

@@ -4,30 +4,13 @@
 	$query = "
 		SELECT
 			FORMAT(fecha_estatus, 'yyyy-MM') AS [Fecha]
-		   ,COUNT(CASE
-				WHEN estatus = 'CANCELADO' THEN 1
-				ELSE NULL
-			END)								AS [Cancelado]
-		   ,COUNT(CASE
-				WHEN estatus = 'CONTRACARGO' THEN 1
-				ELSE NULL
-			END)								AS [Contracargo]
-		   ,COUNT(CASE
-				WHEN estatus = 'REINTEGRO' THEN 1
-				ELSE NULL
-			END)								AS [Reintegro]
-		   ,COUNT(CASE
-				WHEN estatus = 'TDC CANCELADA' THEN 1
-				ELSE NULL
-			END)								AS [TDC Cancelada]
-		   ,COUNT(CASE
-				WHEN estatus = 'INTENTOS' THEN 1
-				ELSE NULL
-			END)								AS [Intentos]
-			,COUNT(CASE
-				WHEN estatus = 'RESERVAR' THEN 1
-				ELSE NULL
-			END)								AS [Reservar]
+		  ,COUNT(CASE WHEN estatus = 'BAJA DEL SERVICIO (SAC)' THEN 1 ELSE NULL END) AS [Baja(SAC)]
+			,COUNT(CASE WHEN estatus = 'BAJA DEL SERVICIO (SPONSOR)' THEN 1 ELSE NULL END) AS [Baja(SPONSOR)]
+			,COUNT(CASE WHEN estatus = 'CONTRACARGO' THEN 1 ELSE NULL END) AS [Contracargo]
+			,COUNT(CASE WHEN estatus = 'REINTEGRO' THEN 1 ELSE NULL END) AS [Reintegro]
+			,COUNT(CASE WHEN estatus = 'TDC CANCELADA' THEN 1 ELSE NULL END) AS [TDC Cancelada]
+			,COUNT(CASE WHEN estatus = 'INTENTOS' THEN 1 ELSE NULL END) AS [Intentos]
+			,COUNT(CASE WHEN estatus = 'RESERVAR' THEN 1 ELSE NULL END) AS [Reservar]
 		   ,COUNT(id)							AS [Total]
 		FROM tmk.dbo.afiliados
 		WHERE estatus IS NOT NULL
@@ -47,7 +30,8 @@
 		die(errorConnSQLSRVR(sqlsrv_errors()));
 
 	$graph_field_name = '';
-	$datasets_cancelado = '';
+	$datasets_baja_sac = '';
+	$datasets_baja_sponsor = '';
 	$datasets_contracargo = '';
 	$datasets_reintegro = '';
 	$datasets_tdc_cancelada = '';
@@ -57,7 +41,8 @@
 	$periods = '';
 	while ($rst = sqlsrv_fetch_array($obj_rst, SQLSRV_FETCH_ASSOC)) {
 			$graph_field_name = $graph_field_name.'"'.$rst['Fecha'].'",';
-			$datasets_cancelado = $datasets_cancelado.'"'.$rst['Cancelado'].'",';
+			$datasets_baja_sac = $datasets_baja_sac.'"'.$rst['Baja(SAC)'].'",';
+			$datasets_baja_sponsor = $datasets_baja_sponsor.'"'.$rst['Baja(SPONSOR)'].'",';
 			$datasets_contracargo = $datasets_contracargo.'"'.$rst['Contracargo'].'",';
 			$datasets_reintegro = $datasets_reintegro.'"'.$rst['Reintegro'].'",';
 			$datasets_tdc_cancelada = $datasets_tdc_cancelada.'"'.$rst['TDC Cancelada'].'",';
@@ -77,9 +62,14 @@
 							labels: [<?php echo $graph_field_name; ?>],
 							datasets: [
 								{
-									label: "Cancelado",
+									label: "Baja(SAC)",
 									fill: true,
-									data: [<?php echo $datasets_cancelado; ?>],
+									data: [<?php echo $datasets_baja_sac; ?>],
+									backgroundColor: <?php echo "'".$red_rgb_4."'"; ?>,
+								},{
+									label: "Baja(SPONSOR)",
+									fill: true,
+									data: [<?php echo $datasets_baja_sponsor; ?>],
 									backgroundColor: <?php echo "'".$red_rgb_7."'"; ?>,
 								},{
 									label: "Contracargo ",
@@ -124,7 +114,7 @@
 								display: true,
 								position: 'right',
 								labels: {
-									fontSize: 10,
+									fontSize: 8,
 								}
 							},
 							layout: {
