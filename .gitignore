@@ -41,4 +41,4 @@ _notes
 ###################
 #bin/conn/access.php
 #bin/conn/database_mysql.php
-bin/conn
+bin/conn/*
