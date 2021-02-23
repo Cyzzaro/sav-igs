@@ -2,39 +2,39 @@
 
 <body>
 
-	<header>
+    <header>
 
-		<?php
+        <?php
 		pageNavHead('Detalle de afiliado');
 		include_once '../menu.php';
 		?>
 
-	</header>
+    </header>
 
-	<main>
+    <main>
 
-		<div class="container section">
-			<?php
+        <div class="container section">
+            <?php
 			$lead_id = $_GET['lead_id'];
 			$string_to_search = strip_tags($lead_id, ENT_QUOTES);
 			$string_to_search_higienized_for_query = higienizeString($string_to_search);
-			if ($_SERVER['REMOTE_ADDR'] == '::1') {
+			if ($_SERVER['REMOTE_ADDR'] == '::1' or $_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
 				// Devuelve el numero de TDC completo - Vista especial para quien administra cobranza de la cuenta.
-				$query = "SELECT TOP(1) cliente, asistencia, clafiltmk, identificador, CAST(fecha_venta AS VARCHAR(12)) AS fecha_venta, nombre_afiliado, 
-					CAST(fecha_nacimiento AS VARCHAR(12)) AS fecha_nacimiento, tipo_tarjeta, dia_corte, dni, 
+				$query = "SELECT TOP(1) cliente, asistencia, clafiltmk, identificador, fecha_venta, nombre_afiliado, 
+					fecha_nacimiento, tipo_tarjeta, dia_corte, dni, 
 					CONCAT(SUBSTRING(tarjeta, 1, 4),' - ',SUBSTRING(tarjeta, 5, 4),' - ',SUBSTRING(tarjeta, 9, 4),' - ',SUBSTRING(tarjeta, 13, 4)) as tarjeta, 
-					CAST(fecha_vto AS VARCHAR(12)) AS fecha_vto, estatus, CAST(fecha_estatus AS VARCHAR(12)) AS fecha_estatus, ultimo_procesado, 
-					CAST(fecha_ultimo_procesado AS VARCHAR(12)) AS fecha_ultimo_procesado, CAST(fecha_ultimo_exitoso AS VARCHAR(12)) AS fecha_ultimo_exitoso, 
+					fecha_vto, estatus, fecha_estatus, ultimo_procesado, 
+					fecha_ultimo_procesado, fecha_ultimo_exitoso, 
 					reus, reus_arco, acumulado_exitosos, acumulado_rechazos, origen, nombre_agente
 				FROM tmk.dbo.afiliados
 				WHERE clafiltmk = " . $string_to_search_higienized_for_query;
 			} else {
 				// Devuelve los 4TDC formateados o enmascarados - Vista para el publico en general.
-				$query = "SELECT TOP(1) cliente, asistencia, clafiltmk, identificador, CAST(fecha_venta AS VARCHAR(12)) AS fecha_venta, nombre_afiliado, 
-					CAST(fecha_nacimiento AS VARCHAR(12)) AS fecha_nacimiento, tipo_tarjeta, dia_corte, dni, 
+				$query = "SELECT TOP(1) cliente, asistencia, clafiltmk, identificador, fecha_venta, nombre_afiliado, 
+					fecha_nacimiento, tipo_tarjeta, dia_corte, dni, 
 					CONCAT(REPLICATE('#### - ',3),SUBSTRING(tarjeta, 13, 4)) as tarjeta, 
-					CAST(fecha_vto AS VARCHAR(12)) AS fecha_vto, estatus, CAST(fecha_estatus AS VARCHAR(12)) AS fecha_estatus, ultimo_procesado, 
-					CAST(fecha_ultimo_procesado AS VARCHAR(12)) AS fecha_ultimo_procesado, CAST(fecha_ultimo_exitoso AS VARCHAR(12)) AS fecha_ultimo_exitoso, 
+					fecha_vto, estatus, fecha_estatus, ultimo_procesado, 
+					fecha_ultimo_procesado, fecha_ultimo_exitoso, 
 					reus, reus_arco, acumulado_exitosos, acumulado_rechazos, origen, nombre_agente
 				FROM tmk.dbo.afiliados
 				WHERE clafiltmk = " . $string_to_search_higienized_for_query;
@@ -42,13 +42,13 @@
 			// Obtiene detalles de procesamiento exitoso para el Lead Id.
 			$query2 = "
 		SELECT 
-			CAST(fecha_procesado AS VARCHAR(12)) as fecha_procesado,
+			fecha_procesado,
 			CONCAT('$ ',monto) as monto,
 			evento,
 			autorizacion,
 			origen, 
 			estatus,
-			CAST(fecha_estatus AS VARCHAR(12)) as fecha_estatus
+			fecha_estatus
 		FROM tmk.dbo.procesados 
 		WHERE (/*evento LIKE '%VENTAS%' AND*/ evento NOT LIKE '%-%') AND clafiltmk = " . $lead_id . "
 		ORDER BY fecha_procesado DESC";
@@ -63,7 +63,7 @@
 				$asistencia = $individual_rst['asistencia'];
 				$lead_id = $individual_rst['clafiltmk'];
 				$identificador = $individual_rst['identificador'];
-				$fecha_venta = $individual_rst['fecha_venta'];
+				$fecha_venta = $individual_rst['fecha_venta']->format('Y/m/d');
 				$nombre_afiliado = $individual_rst['nombre_afiliado'];
 				$fecha_nacimiento = $individual_rst['fecha_nacimiento'];
 				$tipo_tarjeta = $individual_rst['tipo_tarjeta'];
@@ -73,15 +73,11 @@
 				$fecha_vto = $individual_rst['fecha_vto'];
 				$estatus = $individual_rst['estatus'];
 				switch ($estatus) {
-					case 'BAJA DEL SERVICIO';
+					case 'BAJA DEL SERVICIO (SAC)';
 						$section_icon = 'cancel';
-						$section_icon_color = 'red';
+						$section_icon_color = 'deep orange';
 						break;
 					case 'BAJA DEL SERVICIO (SPONSOR)';
-						$section_icon = 'cancel';
-						$section_icon_color = 'red';
-						break;
-					case 'CANCELADO';
 						$section_icon = 'cancel';
 						$section_icon_color = 'red';
 						break;
@@ -101,10 +97,6 @@
 						$section_icon = 'note-add';
 						$section_icon_color = 'amber';
 						break;
-					case 'VENCIDO';
-						$section_icon = 'warning';
-						$section_icon_color = 'yellow';
-						break;
 					case 'RESERVAR';
 						$section_icon = 'system-update';
 						$section_icon_color = 'grey';
@@ -119,9 +111,9 @@
 						$section_icon_color = 'blue-grey';
 						break;
 				}
-				$fecha_estatus = $individual_rst['fecha_estatus'];
+				$fecha_estatus = $individual_rst['fecha_estatus']->format('Y/m/d');
 				$ultimo_procesado = $individual_rst['ultimo_procesado'];
-				$fecha_ultimo_procesado = $individual_rst['fecha_ultimo_procesado'];
+				$fecha_ultimo_procesado = $individual_rst['fecha_ultimo_procesado']->format('Y/m/d');
 				$fecha_ultimo_exitoso = $individual_rst['fecha_ultimo_exitoso'];
 				$reus = $individual_rst['reus'];
 				$reus_arco = $individual_rst['reus_arco'];
@@ -129,6 +121,7 @@
 				$acumulado_rechazos = $individual_rst['acumulado_rechazos'];
 				$origen = $individual_rst['origen'];
 				$nombre_agente = $individual_rst['nombre_agente'];
+				
 				$obj_rst_2 = sqlsrv_query($obj_conn_SQLSERVER, $query2, array(), array("Scrollable" => SQLSRV_CURSOR_KEYSET));
 				if ($obj_rst_2 == FALSE) {
 					die(errorConnSQLSRVR(sqlsrv_errors()));
@@ -136,7 +129,7 @@
 				$recaudo = getUniqueCountDecimalValueFromDB("SELECT SUM(monto) AS 'recaudo'  FROM tmk.dbo.procesados WHERE (evento LIKE '%VENTAS%' AND evento NOT LIKE '%-%') AND clafiltmk = " . $lead_id . "", "recaudo");
 				$historico = '<a href="#!" class="collection-item ' . $section_icon_color . ' white-text"><br><h4 class="center-align">$ ' . $recaudo . '</h4></a>';
 				while ($individual_rst_2 = sqlsrv_fetch_array($obj_rst_2, SQLSRV_FETCH_ASSOC)) {
-					$fecha_procesado = $individual_rst_2['fecha_procesado'];
+					$fecha_procesado = $individual_rst_2['fecha_procesado']->format('Y/m/d');
 					$monto = $individual_rst_2['monto'];
 					
 					$origen_pago = $individual_rst_2['origen'];
@@ -147,34 +140,11 @@
 
 					$evento = $individual_rst_2['evento'];
 					switch ($evento) {
-
 						case '00 VENTAS';
 						case '01 VENTAS'; $color_evento = 'green lighten-5 black-text'; break;
-
-						case '05 RECHAZADA';
-						case '51 FONDOS INSUFICIENTES';
-						case '65 EXCEDE LIMITE DE DISPOSICIONES DIARIAS';
-						case '87 RECHAZADA';
-					    case '91 IMPOSIBLE AUTORIZAR EN ESTE MOMENTO';
-						case 'N0 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE';
-						case 'T5 RECHAZAR';
-
-						case '01 LLAMAR AL BANCO EMISOR';
-						case '57 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE';
-						case '62 TARJETA RESTRINGIDA';
-						case 'O6 RECHAZADA';
-
-						case '0  DENEGADO';
-					    case '14 NUMERO DE TARJETA INVALIDO';
-						case '41 TARJETA EXTRAVIADA';
-						case '56 TARJETA SIN REGISTRO';
-						case '83 RECHAZADA';
-						case 'N7 RECHAZADA';
-					    case 'O8 RECHAZADA'; $color_evento = 'black-text'; break;
-						
 						default: $color_evento = ''; break;
 					}
-					/*$color_evento = '';*/
+
 					$autorizacion = $individual_rst_2['autorizacion'];
 					
 					$estatus_intento = $individual_rst_2['estatus'];
@@ -184,7 +154,7 @@
 							$autorizacion = '<span class="new badge red">' . $monto . '    <b>' . $autorizacion . '</b>       <b>' . $estatus_intento . '</b>    ' . $origen_pago . '</span>';
 						} else {
 							$autorizacion = '<span class="new badge teal">' . $monto . '    <b>' . $autorizacion . '</b>       <b>' .
-									$estatus_intento . '</b>    ' . $origen_pago . '</span>';
+							$estatus_intento . '</b>    ' . $origen_pago . '</span>';
 						}
 					}
 					$intento = '' . $fecha_procesado . ' ' . $autorizacion . ' <b>[' . $evento . ']</b> ';
@@ -196,6 +166,7 @@
 					}
 				}
 				sqlsrv_free_stmt($obj_rst_2);
+				
 				echo '
 				<div class="">
 					<div class="row section">
@@ -243,11 +214,11 @@
 
 			?>
 
-		</div>
+        </div>
 
-	</main>
+    </main>
 
-	<?php
+    <?php
 	include_once '../footer.php';
 	include_once '../jquery.php';
 	?>
