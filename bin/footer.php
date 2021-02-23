@@ -11,7 +11,7 @@
 									<ul>
 										<li>
 											<span class="message"></span>
-											<a href="" class="sha"></a>
+											<span href="" class="sha"></span>
 											<span class="additions green-text bold"></span>,
 											<span class="deletions red-text bold"></span>
 										</li>
