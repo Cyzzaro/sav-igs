@@ -1,7 +1,7 @@
 <footer class="page-footer <?php echo activePagePrimaryColor(); ?>">
 	<div class="container">
 		<div class="row">
-			<div class="col l8 m8 s12">
+			<div class="col l9 m9 s12">
 				<div class="card-panel-git grey lighten-5 z-depth-1">
 					<div class="row valign-wrapper">
 						<span class="col l1 m2 s4 gh-photo"></span>
@@ -25,7 +25,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col l4 m4 s12">
+			<div class="col l3 m3 s12">
 				<h5 class="white-text">Soporte</h5>
 				<ul>
 					<li class="white-text"><i class="material-icons tiny prefix">phone</i> <?php echo PHONECIA; ?></li>
