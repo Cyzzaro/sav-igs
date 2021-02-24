@@ -20,21 +20,21 @@
 			$string_to_search_higienized_for_query = higienizeString($string_to_search);
 			if ($_SERVER['REMOTE_ADDR'] == '::1' or $_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
 				// Devuelve el numero de TDC completo - Vista especial para quien administra cobranza de la cuenta.
-				$query = "SELECT TOP(1) cliente, asistencia, clafiltmk, identificador, fecha_venta, nombre_afiliado, 
-					fecha_nacimiento, tipo_tarjeta, dia_corte, dni, 
+				$query = "SELECT TOP(1) cliente, asistencia, clafiltmk, identificador, cast(fecha_venta as varchar(12)) fecha_venta, nombre_afiliado, 
+					cast(fecha_nacimiento as varchar(12)) fecha_nacimiento, tipo_tarjeta, dia_corte, dni, 
 					CONCAT(SUBSTRING(tarjeta, 1, 4),' - ',SUBSTRING(tarjeta, 5, 4),' - ',SUBSTRING(tarjeta, 9, 4),' - ',SUBSTRING(tarjeta, 13, 4)) as tarjeta, 
-					fecha_vto, estatus, fecha_estatus, ultimo_procesado, 
-					fecha_ultimo_procesado, fecha_ultimo_exitoso, 
+					cast(fecha_vto as varchar(12)) fecha_vto, estatus, cast(fecha_estatus as varchar(12)) fecha_estatus, ultimo_procesado, 
+					cast(fecha_ultimo_procesado as varchar(12)) fecha_ultimo_procesado, cast(fecha_ultimo_exitoso as varchar(12)) fecha_ultimo_exitoso, 
 					reus, reus_arco, acumulado_exitosos, acumulado_rechazos, origen, nombre_agente
 				FROM tmk.dbo.afiliados
 				WHERE clafiltmk = " . $string_to_search_higienized_for_query;
 			} else {
 				// Devuelve los 4TDC formateados o enmascarados - Vista para el publico en general.
-				$query = "SELECT TOP(1) cliente, asistencia, clafiltmk, identificador, fecha_venta, nombre_afiliado, 
-					fecha_nacimiento, tipo_tarjeta, dia_corte, dni, 
+				$query = "SELECT TOP(1) cliente, asistencia, clafiltmk, identificador, cast(fecha_venta as varchar(12)) fecha_venta, nombre_afiliado, 
+					cast(fecha_nacimiento as varchar(12)) fecha_nacimiento, tipo_tarjeta, dia_corte, dni, 
 					CONCAT(REPLICATE('#### - ',3),SUBSTRING(tarjeta, 13, 4)) as tarjeta, 
-					fecha_vto, estatus, fecha_estatus, ultimo_procesado, 
-					fecha_ultimo_procesado, fecha_ultimo_exitoso, 
+					cast(fecha_vto as varchar(12)) fecha_vto, estatus, cast(fecha_estatus as varchar(12)) fecha_estatus, ultimo_procesado, 
+					cast(fecha_ultimo_procesado as varchar(12)) fecha_ultimo_procesado, cast(fecha_ultimo_exitoso as varchar(12)) fecha_ultimo_exitoso, 
 					reus, reus_arco, acumulado_exitosos, acumulado_rechazos, origen, nombre_agente
 				FROM tmk.dbo.afiliados
 				WHERE clafiltmk = " . $string_to_search_higienized_for_query;
@@ -42,13 +42,13 @@
 			// Obtiene detalles de procesamiento exitoso para el Lead Id.
 			$query2 = "
 		SELECT 
-			fecha_procesado,
+			cast(fecha_procesado as varchar(12)) fecha_procesado,
 			CONCAT('$ ',monto) as monto,
 			evento,
 			autorizacion,
 			origen, 
 			estatus,
-			fecha_estatus
+			cast(fecha_estatus as varchar(12)) fecha_estatus
 		FROM tmk.dbo.procesados 
 		WHERE (/*evento LIKE '%VENTAS%' AND*/ evento NOT LIKE '%-%') AND clafiltmk = " . $lead_id . "
 		ORDER BY fecha_procesado DESC";
@@ -63,7 +63,7 @@
 				$asistencia = $individual_rst['asistencia'];
 				$lead_id = $individual_rst['clafiltmk'];
 				$identificador = $individual_rst['identificador'];
-				$fecha_venta = $individual_rst['fecha_venta']->format('Y/m/d');
+				$fecha_venta = $individual_rst['fecha_venta'];
 				$nombre_afiliado = $individual_rst['nombre_afiliado'];
 				$fecha_nacimiento = $individual_rst['fecha_nacimiento'];
 				$tipo_tarjeta = $individual_rst['tipo_tarjeta'];
@@ -111,9 +111,9 @@
 						$section_icon_color = 'blue-grey';
 						break;
 				}
-				$fecha_estatus = $individual_rst['fecha_estatus']->format('Y/m/d');
+				$fecha_estatus = $individual_rst['fecha_estatus'];
 				$ultimo_procesado = $individual_rst['ultimo_procesado'];
-				$fecha_ultimo_procesado = $individual_rst['fecha_ultimo_procesado']->format('Y/m/d');
+				$fecha_ultimo_procesado = $individual_rst['fecha_ultimo_procesado'];
 				$fecha_ultimo_exitoso = $individual_rst['fecha_ultimo_exitoso'];
 				$reus = $individual_rst['reus'];
 				$reus_arco = $individual_rst['reus_arco'];
@@ -129,7 +129,7 @@
 				$recaudo = getUniqueCountDecimalValueFromDB("SELECT SUM(monto) AS 'recaudo'  FROM tmk.dbo.procesados WHERE (evento LIKE '%VENTAS%' AND evento NOT LIKE '%-%') AND clafiltmk = " . $lead_id . "", "recaudo");
 				$historico = '<a href="#!" class="collection-item ' . $section_icon_color . ' white-text"><br><h4 class="center-align">$ ' . $recaudo . '</h4></a>';
 				while ($individual_rst_2 = sqlsrv_fetch_array($obj_rst_2, SQLSRV_FETCH_ASSOC)) {
-					$fecha_procesado = $individual_rst_2['fecha_procesado']->format('Y/m/d');
+					$fecha_procesado = $individual_rst_2['fecha_procesado'];
 					$monto = $individual_rst_2['monto'];
 					
 					$origen_pago = $individual_rst_2['origen'];
@@ -142,7 +142,7 @@
 					switch ($evento) {
 						case '00 VENTAS';
 						case '01 VENTAS'; $color_evento = 'green lighten-5 black-text'; break;
-						default: $color_evento = ''; break;
+						default: $color_evento = 'black-text'; break;
 					}
 
 					$autorizacion = $individual_rst_2['autorizacion'];
