@@ -77,7 +77,7 @@
 								<tr".$class_for_totals_row.">
 									<td>".$fecha."</td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_bajas.php?client=BANORTE&dato=BAJA+DEL+SERVICIO+(SAC)_".$fecha."' target='new'>".$baja_sac."</a></td>
-									<td><a href='".GLOBALPATH. "/pages/detalle/detalle_bajas.php?client=BANORTE&dato=BAJA+DEL+SERVICIO+(sponsor)_".$fecha."' target='new'>".$baja_sponsor."</a></td>
+									<td><a href='".GLOBALPATH. "/pages/detalle/detalle_bajas.php?client=BANORTE&dato=BAJA+DEL+SERVICIO+(SPONSOR)_".$fecha."' target='new'>".$baja_sponsor."</a></td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_bajas.php?client=BANORTE&dato=CONTRACARGO_".$fecha."' target='new'>".$contracargo."</a></td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_bajas.php?client=BANORTE&dato=REINTEGRO_".$fecha."' target='new'>".$reintegro."</a></td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_bajas.php?client=BANORTE&dato=TDC+CANCELADA_".$fecha."' target='new'>".$tdccancelada."</a></td>
