@@ -11,11 +11,12 @@
 									<ul>
 										<li>
 											<span class="message"></span>
+										</li>
+										<li>
 											<span href="" class="sha"></span>
 											<span class="additions green-text bold"></span>,
 											<span class="deletions red-text bold"></span>
-										</li>
-										<li><span class="date"></span>
+											<span class="date"></span>
 											por <span class="author"></span>
 										</li>
 									</ul>

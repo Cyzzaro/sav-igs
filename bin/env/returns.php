@@ -958,7 +958,7 @@ function activePagePrimaryColor()
 		//case 'recurrencia'; $page_color = 'teal darken-1'; break;
 		//case 'reservar'; $page_color = 'blue-grey darken-1'; break;
 		case 'error'; $page_color = 'red darken-1'; break;
-		default: $page_color = 'light-blue darken-3'; break;
+		default: $page_color = 'blue-grey darken-3'; break;
 	}
 	return $page_color;
 }
