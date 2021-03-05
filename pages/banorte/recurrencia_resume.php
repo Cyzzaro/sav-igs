@@ -6,20 +6,21 @@
 			FORMAT(fecha_procesado, 'yyyy-MM') AS [Fecha]
 			,COUNT(CASE WHEN evento = '00 VENTAS' THEN 1 ELSE NULL END) AS '00-VTAS'
 			,COUNT(CASE WHEN evento = '01 VENTAS' THEN 1 ELSE NULL END) AS '01-VTAS'
-			
+
 			,COUNT(CASE WHEN evento = '05 RECHAZADA' THEN 1 ELSE NULL END) AS '05-RZDA'
 			,COUNT(CASE WHEN evento = '51 FONDOS INSUFICIENTES' THEN 1 ELSE NULL END) AS '51-F.INS'
 			,COUNT(CASE WHEN evento = '65 EXCEDE LIMITE DE DISPOSICIONES DIARIAS' THEN 1 ELSE NULL END) AS '65-L.DISP'
 			,COUNT(CASE WHEN evento = '87 RECHAZADA' THEN 1 ELSE NULL END) AS '87-RZDA'
 			,COUNT(CASE WHEN evento = '91 IMPOSIBLE AUTORIZAR EN ESTE MOMENTO' THEN 1 ELSE NULL END) AS '91-N.AUT'
 			,COUNT(CASE WHEN evento = 'N0 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE' THEN 1 ELSE NULL END) AS 'N0-TNP'
+			,COUNT(CASE WHEN evento = 'P1 EXCEDE LIMITE DE DISPOSICION DIARIA' THEN 1 ELSE NULL END) AS 'P1-L.DISP'
 			,COUNT(CASE WHEN evento = 'T5 RECHAZAR' THEN 1 ELSE NULL END) AS 'T5-RCHZ'
-			
+
 			,COUNT(CASE WHEN evento = '01 LLAMAR AL BANCO EMISOR' THEN 1 ELSE NULL END) AS '01-L.BEM'
 			,COUNT(CASE WHEN evento = '57 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE' THEN 1 ELSE NULL END) AS '57-TNP'
 			,COUNT(CASE WHEN evento = '62 TARJETA RESTRINGIDA' THEN 1 ELSE NULL END) AS '62-T.RST'
 			,COUNT(CASE WHEN evento = 'O6 RECHAZADA' THEN 1 ELSE NULL END) AS 'O6-RZDA'
-			
+
 			,COUNT(CASE WHEN evento = '0  DENEGADO' THEN 1 ELSE NULL END) AS '0-DEN'
 			,COUNT(CASE WHEN evento = '14 NUMERO DE TARJETA INVALIDO' THEN 1 ELSE NULL END) AS '14-T.INV'
 			,COUNT(CASE WHEN evento = '41 TARJETA EXTRAVIADA' THEN 1 ELSE NULL END) AS '41-T.EXT'
@@ -35,20 +36,21 @@
 			'Total' AS [Fecha]
 			,COUNT(CASE WHEN evento = '00 VENTAS' THEN 1 ELSE NULL END) AS '00-VTAS'
 			,COUNT(CASE WHEN evento = '01 VENTAS' THEN 1 ELSE NULL END) AS '01-VTAS'
-			
+
 			,COUNT(CASE WHEN evento = '05 RECHAZADA' THEN 1 ELSE NULL END) AS '05-RZDA'
 			,COUNT(CASE WHEN evento = '51 FONDOS INSUFICIENTES' THEN 1 ELSE NULL END) AS '51-F.INS'
 			,COUNT(CASE WHEN evento = '65 EXCEDE LIMITE DE DISPOSICIONES DIARIAS' THEN 1 ELSE NULL END) AS '65-L.DISP'
 			,COUNT(CASE WHEN evento = '87 RECHAZADA' THEN 1 ELSE NULL END) AS '87-RZDA'
 			,COUNT(CASE WHEN evento = '91 IMPOSIBLE AUTORIZAR EN ESTE MOMENTO' THEN 1 ELSE NULL END) AS '91-N.AUT'
 			,COUNT(CASE WHEN evento = 'N0 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE' THEN 1 ELSE NULL END) AS 'N0-TNP'
+			,COUNT(CASE WHEN evento = 'P1 EXCEDE LIMITE DE DISPOSICION DIARIA' THEN 1 ELSE NULL END) AS 'P1-L.DISP'
 			,COUNT(CASE WHEN evento = 'T5 RECHAZAR' THEN 1 ELSE NULL END) AS 'T5-RCHZ'
-			
+
 			,COUNT(CASE WHEN evento = '01 LLAMAR AL BANCO EMISOR' THEN 1 ELSE NULL END) AS '01-L.BEM'
 			,COUNT(CASE WHEN evento = '57 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE' THEN 1 ELSE NULL END) AS '57-TNP'
 			,COUNT(CASE WHEN evento = '62 TARJETA RESTRINGIDA' THEN 1 ELSE NULL END) AS '62-T.RST'
 			,COUNT(CASE WHEN evento = 'O6 RECHAZADA' THEN 1 ELSE NULL END) AS 'O6-RZDA'
-			
+
 			,COUNT(CASE WHEN evento = '0  DENEGADO' THEN 1 ELSE NULL END) AS '0-DEN'
 			,COUNT(CASE WHEN evento = '14 NUMERO DE TARJETA INVALIDO' THEN 1 ELSE NULL END) AS '14-T.INV'
 			,COUNT(CASE WHEN evento = '41 TARJETA EXTRAVIADA' THEN 1 ELSE NULL END) AS '41-T.EXT'
@@ -109,6 +111,8 @@
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=87-RZDA_".$fecha."' target='new'>".number_format($rst['87-RZDA'])."</a></td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=91-N.AUT_".$fecha."' target='new'>".number_format($rst['91-N.AUT'])."</a></td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=N0-TNP_".$fecha."' target='new'>".number_format($rst['N0-TNP'])."</a></td>
+									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=P1-L.DISP_".$fecha."' target='new'>".number_format($rst['P1-L.DISP'])."</a></td>
+									
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=T5-RCHZ_".$fecha."' target='new'>".number_format($rst['T5-RCHZ'])."</a></td>
 									
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=01-L.BEM_".$fecha."' target='new'>".number_format($rst['01-L.BEM'])."</a></td>
@@ -152,6 +156,7 @@
 									<th class="blue">87-RZDA</th>
 									<th class="blue">91-N.AUT</th>
 									<th class="blue">N0-TNP</th>
+									<th class="blue">P1-L.DISP</th>
 									<th class="blue">T5-RCHZ</th>
 									
 									<th class="amber">01-L.BEM</th>
