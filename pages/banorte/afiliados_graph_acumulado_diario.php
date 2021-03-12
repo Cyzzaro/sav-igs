@@ -5,7 +5,7 @@
 		SELECT
 			FORMAT(fecha_venta, 'yyyy-MM-dd') AS [Fecha]
 		   ,COUNT(CASE
-				WHEN origen = 'PREVALIDACIONES' THEN 1
+				WHEN origen = '192.168.12.18' or origen = '192.168.12.19' THEN 1
 				ELSE NULL
 			END)						   AS [Prevalidaciones]
 		   ,COUNT(CASE

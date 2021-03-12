@@ -5,7 +5,7 @@
 		SELECT
 			FORMAT(fecha_venta, 'yyyy-MM') AS [Fecha]
 		   ,COUNT(CASE
-				WHEN origen = 'PREVALIDACIONES' THEN 1
+				WHEN origen = '192.168.12.18' or origen = '192.168.12.19' THEN 1
 				ELSE NULL
 			END)						   AS [Prevalidaciones]
 		   ,COUNT(CASE
@@ -27,7 +27,7 @@
 		SELECT
 			'Total'	  AS [Fecha]
 		   ,COUNT(CASE
-				WHEN origen = 'PREVALIDACIONES' THEN 1
+				WHEN origen = '192.168.12.18' or origen = '192.168.12.19' THEN 1
 				ELSE NULL
 			END)	  AS [Prevalidaciones]
 		   ,COUNT(CASE
@@ -89,7 +89,7 @@
 				echo "
 									<tr".$class_for_totals_row.">
 										<td>".$fecha."</td>
-										<td><a href='".GLOBALPATH."/pages/detalle/detalle_afiliados.php?client=BANORTE&dato=PREVALIDACIONES_".$fecha."' target='new'>".$prevalidaciones."</a></td>
+										<td><a href='".GLOBALPATH."/pages/detalle/detalle_afiliados.php?client=BANORTE&dato=192.168.12._".$fecha."' target='new'>".$prevalidaciones."</a></td>
 										<td><a href='".GLOBALPATH."/pages/detalle/detalle_afiliados.php?client=BANORTE&dato=OTROS+CANALES_".$fecha."' target='new'>".$otros_canales."</a></td>
 										<td><a href='".GLOBALPATH."/pages/detalle/detalle_afiliados.php?client=BANORTE&dato=INBOUND_".$fecha."' target='new'>".$inbound."</a></td>
 										<td><a href='".GLOBALPATH."/pages/detalle/detalle_afiliados.php?client=BANORTE&dato=REACTIVACION_".$fecha."' target='new'>".$reactivacion."</a></td>
