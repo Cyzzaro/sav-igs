@@ -77,9 +77,10 @@
 							datasets: [
 								{
 									label: "Exitoso",
-									fill: true,
+									fill: false,
 									data: [<?php echo $datasets_exitoso; ?>],
 									backgroundColor: <?php echo "'".$green_rgb_5."'"; ?>,
+									type: 'line',
 								},{
 									label: "Retry ",
 									fill: true,

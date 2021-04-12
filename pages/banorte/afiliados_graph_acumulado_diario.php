@@ -72,12 +72,12 @@
 											label: "Otros canales ",
 											fill: true,
 											data: [<?php echo $datasets_otros_canales; ?>],
-											backgroundColor: <?php echo "'".$blue_rgb_5."'"; ?>,
+											backgroundColor: <?php echo "'".$blue_rgb_4."'"; ?>,
 										},{
 											label: "Inbound",
 											fill: true,
 											data: [<?php echo $datasets_inbound; ?>],
-											backgroundColor: <?php echo "'".$blue_rgb_3."'"; ?>,
+											backgroundColor: <?php echo "'".$blue_rgb_2."'"; ?>,
 										},{
 											label: "Reactivacion",
 											fill: true,

@@ -133,10 +133,6 @@
 					$monto = $individual_rst_2['monto'];
 					
 					$origen_pago = $individual_rst_2['origen'];
-					switch ($origen_pago) {
-						case 'Payworks'; $origen_pago = 'Payworks'; break;
-						default: $origen_pago = 'ConnectEnterprise'; break;
-					}
 
 					$evento = $individual_rst_2['evento'];
 					switch ($evento) {
