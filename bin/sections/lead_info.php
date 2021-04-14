@@ -147,13 +147,13 @@
 					$fecha_estatus_intento = $individual_rst_2['fecha_estatus'];
 					if ($autorizacion == !"") {
 						if ($estatus_intento == !"") {
-							$autorizacion = '<span class="new badge red">' . $monto . '  <b>' . $autorizacion . '</b>  <b>' . $estatus_intento . '</b>  ' . $origen_pago . '</span>';
+							$autorizacion = '<span class="new badge red">' . $monto . '  <b>' . $autorizacion . '</b>  <b>' . $estatus_intento . '</b>  </span>';
 						} else {
 							$autorizacion = '<span class="new badge teal">' . $monto . '  <b>' . $autorizacion . '</b>  <b>' .
-							$estatus_intento . '</b>  ' . $origen_pago . '</span>';
+							$estatus_intento . '</b>  </span>';
 						}
 					}
-					$intento = '' . $fecha_procesado . ' ' . $autorizacion . ' <b>[' . $evento . ']</b> ';
+					$intento = '' . $fecha_procesado . ' ' . $autorizacion . '    <b>[' . $evento . ']</b> <br>' . $origen_pago;
 					if ($historico == "") {
 						$historico = '<a class="collection-item">' . $intento . '</a>';
 					} else {
