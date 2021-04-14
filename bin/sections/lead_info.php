@@ -50,7 +50,7 @@
 			estatus,
 			cast(fecha_estatus as varchar(12)) fecha_estatus
 		FROM tmk.dbo.procesados 
-		WHERE (/*evento LIKE '%VENTAS%' AND*/ evento NOT LIKE '%-%') AND clafiltmk = " . $lead_id . "
+		WHERE (evento LIKE '%VENTAS%' AND evento NOT LIKE '%-%') AND clafiltmk = " . $lead_id . "
 		ORDER BY fecha_procesado DESC";
 			$obj_conn_SQLSERVER = sqlsrv_connect(COBRANZASRVR, array('Database' => 'tmk', 'Uid' => COBRANZAUSER, 'PWD' => COBRANZAPWD));
 			$obj_rst = sqlsrv_query($obj_conn_SQLSERVER, $query, array(), array("Scrollable" => SQLSRV_CURSOR_KEYSET));
