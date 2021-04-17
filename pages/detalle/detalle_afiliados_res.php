@@ -31,7 +31,8 @@
 	
 	$query = "
 		SELECT 
-			clafiltmk, 
+		id,	
+		clafiltmk, 
 			nombre_afiliado, 
 			fecha_venta, 
 			dni, 

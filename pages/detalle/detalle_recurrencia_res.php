@@ -33,16 +33,17 @@
 		SELECT
 			p.cliente		  AS [Cliente]
 		   ,CAST(p.fecha_procesado AS VARCHAR(10)) AS [Fecha]
-		   ,p.clafiltmk		  AS [Clafiltmk]
+		   ,a.clafiltmk		  AS [Clafiltmk]
+			 ,a.identificador as [Identificador]
 		   ,a.nombre_afiliado AS [Nombre afiliado]
 		   ,p.evento		  AS [Codigo rechazo]
 		   ,p.monto			  AS [Importe]
 		   ,p.Autorizacion	  AS [Autorizacion]
 		FROM tmk.dbo.procesados p
 		INNER JOIN tmk.dbo.afiliados a
-			ON a.clafiltmk = p.clafiltmk "
+			ON a.id = p.afiliado "
 			.$query_criteria_filter_en_bd.$query_date_filterFilter.
-			" ORDER BY p.fecha_procesado, p.clafiltmk
+			" ORDER BY p.fecha_procesado, p.afiliado
 		";
 	
 	$obj_conn_params_SQLSERVER = array('Database' => COBRANZABD, 'Uid' => COBRANZAUSER, 'PWD' => COBRANZAPWD);
@@ -85,6 +86,7 @@
 			$cliente = $rst['Cliente'];
 			$fecha = $rst['Fecha'];
 			$lead_id = $rst['Clafiltmk'];
+			$identificador = $rst['Identificador'];
 			$nombre_afiliado = $rst['Nombre afiliado'];
 			$codigo_rechazo = $rst['Codigo rechazo'];
 			$importe = $rst['Importe'];
@@ -103,8 +105,9 @@
 			echo '
 								<tr'.$totals.'>
 									<td>'.$cliente.'</td>
-									<td>'.$fecha.'</td>
-									<td>'.$lead_id.'</td>
+									<td>'.$fecha. '</td>
+									<td><a href="' . GLOBALPATH . '/bin/sections/lead_info.php?lead_id=' . $lead_id . '&identificador=' . $identificador . '" target="new">' . $lead_id . '</a></td>  
+									<td>' . $identificador . '</td>
 									<td>'.$nombre_afiliado.'</td>
 									<td>'.$codigo_rechazo.'</td>
 									<td>'.$importe.'</td>
@@ -135,11 +138,12 @@
 				<div class="row">
 					<div class="col l12 m12 s12">
 						<table id="'.$table_results_name.'" class="hoverable card centered">
-							<thead class="white-text '.activePagePrimaryColor().'">
+							<thead class="white-text '.activePagePrimaryColor(). '">
 								<tr>
 									<th>Cliente</th>
 									<th>Fecha</th>
 									<th>Lead ID</th>
+									<th>Identificador</th>
 									<th>Nombre afiliado</th>
 									<th>Evento</th>
 									<th>Importe</th>									

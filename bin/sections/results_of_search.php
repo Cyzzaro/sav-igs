@@ -151,7 +151,7 @@ function rowsGeneralResultsTable($obj_rst, $modal)
 
 		if ($modal == True) 
 		{
-			$lead_detail = '<a href="'.GLOBALPATH.'/bin/sections/lead_info.php?lead_id='.$lead_id.'" target="new">'.$lead_id.'</a>';
+			$lead_detail = '<a href="'.GLOBALPATH. '/bin/sections/lead_info.php?lead_id=' . $lead_id . '&identificador=' . $identificador . '" target="new">'.$lead_id.'</a>';
 		} else {
 			$lead_detail = $lead_id;
 		}

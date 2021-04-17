@@ -5,9 +5,9 @@
     <header>
 
         <?php
-		pageNavHead('Detalle de afiliado');
-		include_once '../menu.php';
-		?>
+				//pageNavHead('Detalle de afiliado');
+				include_once '../menu.php';
+				?>
 
     </header>
 
@@ -16,6 +16,8 @@
         <div class="container section">
             <?php
 			$lead_id = $_GET['lead_id'];
+			$identificador = $_GET['identificador'];
+			
 			$string_to_search = strip_tags($lead_id, ENT_QUOTES);
 			$string_to_search_higienized_for_query = higienizeString($string_to_search);
 			if ($_SERVER['REMOTE_ADDR'] == '::1' or $_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
@@ -27,7 +29,7 @@
 					cast(fecha_ultimo_procesado as varchar(12)) fecha_ultimo_procesado, cast(fecha_ultimo_exitoso as varchar(12)) fecha_ultimo_exitoso, 
 					reus, reus_arco, acumulado_exitosos, acumulado_rechazos, origen, nombre_agente
 				FROM tmk.dbo.afiliados
-				WHERE clafiltmk = " . $string_to_search_higienized_for_query;
+				WHERE clafiltmk = " . higienizeString($lead_id) . " AND identificador = " . higienizeString($identificador);
 			} else {
 				// Devuelve los 4TDC formateados o enmascarados - Vista para el publico en general.
 				$query = "SELECT TOP(1) cliente, asistencia, clafiltmk, identificador, cast(fecha_venta as varchar(12)) fecha_venta, nombre_afiliado, 
@@ -37,7 +39,7 @@
 					cast(fecha_ultimo_procesado as varchar(12)) fecha_ultimo_procesado, cast(fecha_ultimo_exitoso as varchar(12)) fecha_ultimo_exitoso, 
 					reus, reus_arco, acumulado_exitosos, acumulado_rechazos, origen, nombre_agente
 				FROM tmk.dbo.afiliados
-				WHERE clafiltmk = " . $string_to_search_higienized_for_query;
+				WHERE clafiltmk = " . higienizeString($lead_id) . " AND identificador = " . higienizeString($identificador);
 			}
 			// Obtiene detalles de procesamiento exitoso para el Lead Id.
 			$query2 = "
@@ -50,7 +52,7 @@
 			estatus,
 			cast(fecha_estatus as varchar(12)) fecha_estatus
 		FROM tmk.dbo.procesados 
-		WHERE (evento LIKE '%VENTAS%' AND evento NOT LIKE '%-%') AND clafiltmk = " . $lead_id . "
+		WHERE /*(evento LIKE '%VENTAS%' AND evento NOT LIKE '%-%') AND*/ afiliado = (SELECT id FROM tmk.dbo.afiliados WHERE clafiltmk=" . $lead_id . " AND identificador = " . $identificador . ")
 		ORDER BY fecha_procesado DESC";
 			$obj_conn_SQLSERVER = sqlsrv_connect(COBRANZASRVR, array('Database' => 'tmk', 'Uid' => COBRANZAUSER, 'PWD' => COBRANZAPWD));
 			$obj_rst = sqlsrv_query($obj_conn_SQLSERVER, $query, array(), array("Scrollable" => SQLSRV_CURSOR_KEYSET));
@@ -126,8 +128,9 @@
 				if ($obj_rst_2 == FALSE) {
 					die(errorConnSQLSRVR(sqlsrv_errors()));
 				}
-				$recaudo = getUniqueCountDecimalValueFromDB("SELECT SUM(monto) AS 'recaudo'  FROM tmk.dbo.procesados WHERE (evento LIKE '%VENTAS%' AND evento NOT LIKE '%-%') AND clafiltmk = " . $lead_id . "", "recaudo");
-				$historico = '<a href="#!" class="collection-item ' . $section_icon_color . ' white-text"><br><h4 class="center-align">$ ' . $recaudo . '</h4></a>';
+				$recaudo = getUniqueCountDecimalValueFromDB("SELECT SUM(monto) AS 'recaudo'  FROM tmk.dbo.procesados WHERE (evento LIKE '%VENTAS%' AND evento NOT LIKE '%-%') AND afiliado=(SELECT id FROM tmk.dbo.afiliados WHERE clafiltmk=" . $lead_id . " AND identificador = " . $identificador . ")", "recaudo");
+				//$historico = '<a href="#!" class="collection-item ' . $section_icon_color . ' white-text"><br><h4 class="center-align">$ ' . $recaudo . '</h4></a>';
+				$historico = '<span>';
 				while ($individual_rst_2 = sqlsrv_fetch_array($obj_rst_2, SQLSRV_FETCH_ASSOC)) {
 					$fecha_procesado = $individual_rst_2['fecha_procesado'];
 					$monto = $individual_rst_2['monto'];
@@ -153,7 +156,7 @@
 							$estatus_intento . '</b>  </span>';
 						}
 					}
-					$intento = '' . $fecha_procesado . ' ' . $autorizacion . '    <b>[' . $evento . ']</b> <br>' . $origen_pago;
+					$intento = '' . $fecha_procesado . ' ' . $autorizacion . '    <b>' . $evento . '</b>    [' . $origen_pago . ']';
 					if ($historico == "") {
 						$historico = '<a class="collection-item">' . $intento . '</a>';
 					} else {
@@ -194,6 +197,9 @@
 							</div>
 							<div class="col l7 m12 s12">
 								<h6>Recurrencia</h6>
+								<div class="collection">
+									<a href="#!" class="collection-item ' . $section_icon_color . ' white-text"><br><h4 class="center-align">$ ' . $recaudo . '</h4></a>
+								</div>
 								<div class="collection with-header">
 									<div class="inner-content">
 									' . $historico . '
@@ -215,7 +221,7 @@
     </main>
 
     <?php
-	include_once '../footer.php';
+	//include_once '../footer.php';
 	include_once '../jquery.php';
 	?>
 
