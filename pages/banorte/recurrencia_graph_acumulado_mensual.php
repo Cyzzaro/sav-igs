@@ -80,7 +80,7 @@
 									fill: false,
 									data: [<?php echo $datasets_exitoso; ?>],
 									backgroundColor: <?php echo "'".$green_rgb_5."'"; ?>,
-									type: 'line',
+									/*type: 'line',*/
 								},{
 									label: "Retry ",
 									fill: true,

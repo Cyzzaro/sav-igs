@@ -136,7 +136,11 @@
 					$monto = $individual_rst_2['monto'];
 					
 					$origen_pago = $individual_rst_2['origen'];
-
+					if (substr($origen_pago,0,2) == 'CE') {
+						$origen_pago = 'ConnectEnterprise';
+					} else {
+						$origen_pago = $origen_pago;
+					}
 					$evento = $individual_rst_2['evento'];
 					switch ($evento) {
 						case '00 VENTAS';
@@ -150,13 +154,13 @@
 					$fecha_estatus_intento = $individual_rst_2['fecha_estatus'];
 					if ($autorizacion == !"") {
 						if ($estatus_intento == !"") {
-							$autorizacion = '<span class="new badge red">' . $monto . '  <b>' . $autorizacion . '</b>  <b>' . $estatus_intento . '</b>  </span>';
+							$autorizacion = '<span class="new badge red">' . $origen_pago . '   ' . $monto . '  <b>' . $autorizacion . '</b>  <b>' . $estatus_intento . '</b>  </span>';
 						} else {
-							$autorizacion = '<span class="new badge teal">' . $monto . '  <b>' . $autorizacion . '</b>  <b>' .
+							$autorizacion = '<span class="new badge teal">' . $origen_pago . '   ' . $monto . '  <b>' . $autorizacion . '</b>  <b>' .
 							$estatus_intento . '</b>  </span>';
 						}
 					}
-					$intento = '' . $fecha_procesado . ' ' . $autorizacion . '    <b>' . $evento . '</b>    [' . $origen_pago . ']';
+					$intento = '' . $fecha_procesado . ' ' . $autorizacion . '    <b>' . $evento . '</b>    ';
 					if ($historico == "") {
 						$historico = '<a class="collection-item">' . $intento . '</a>';
 					} else {
