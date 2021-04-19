@@ -22,22 +22,22 @@ include_once '../../bin/head.php';
 
 				echo
 					generalCardCounter( // IAMSA General
-						'l6 m6 s12',
+						'l3 m4 s12',
 						'blue-grey',
-						'Viajes reportados en el mes',
+						'Total viajes en el mes',
 						'directions_bus',
 						getUniqueCountValueFromDB($count_iamsa_acumulado, "Cuantos"),
 						getUniqueCountValueFromDB($count_iamsa_anterior, "Cuantos"),
 						getUniqueCountValueFromDB($count_iamsa_actual, "Cuantos"),
-						$graph_iamsa_acumulado,
+						'',/*$graph_iamsa_acumulado,*/
 						'Fecha',
 						'Total'
 					)
 						.
 						generalCardCounter( // IAMSA ETN
-							'l3 m5 s6',
+							'l3 m4 s6',
 							'blue',
-							'ETN',
+							'Viajes ETN',
 							'directions_bus',
 							getUniqueCountValueFromDB($count_iamsa_etn_acumulado, "Cuantos"),
 							getUniqueCountValueFromDB($count_iamsa_etn_anterior, "Cuantos"),
@@ -48,9 +48,9 @@ include_once '../../bin/head.php';
 						)
 						.
 						generalCardCounter( // IAMSA AERS
-							'l3 m5 s6',
+							'l3 m4 s6',
 							'red',
-							'AERS',
+							'Viajes AERS',
 							'directions_bus',
 							getUniqueCountValueFromDB($count_iamsa_aers_acumulado, "Cuantos"),
 							getUniqueCountValueFromDB($count_iamsa_aers_anterior, "Cuantos"),
@@ -61,9 +61,9 @@ include_once '../../bin/head.php';
 						)
 						.
 						generalCardCounter( // IAMSA vigente ETN
-							'l4 offset-l1 m3  offset-m6 s6',
+							'l3 m4 s6',
 							'green lighten-1',
-							'Vigente',
+							'Vigente Apolo',
 							'looks',
 							'0',
 							'0',
@@ -78,8 +78,8 @@ include_once '../../bin/head.php';
 			</div>
 			<div class="section row">
 				<h5>Registro diario y proporción</h5>
-				<div class="col l9 m12 s12"><?php include_once 'graph_diario.php'; ?></div>
-				<div class="col l3 m12 s12"><?php include_once 'graph_criterio.php'; ?></div>
+				<div class="col l12 m12 s12"><?php include_once 'graph_diario.php'; ?></div>
+				
 			</div>
 			<div class="section row">
 				<h5>Resumen</h5>

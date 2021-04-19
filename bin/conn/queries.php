@@ -524,62 +524,25 @@ ORDER BY [Fecha] DESC
 
 $table_iamsa_acumulado = "
 SELECT
-	FORMAT(fecha_salida, 'yyyy-MM') AS [Fecha]
-   ,COUNT(CASE
-		WHEN cliente = 'ETN' THEN 1
-		ELSE NULL
-	END) AS [ETN $15.00]
-   ,COUNT(CASE
-		WHEN cliente = 'AERS' AND
-			importe = 15.00 THEN 1
-		ELSE NULL
-	END) AS [AERS $15.00]
-   ,COUNT(CASE
-		WHEN cliente = 'AERS' AND
-			importe = 10.00 THEN 1
-		ELSE NULL
-	END) AS [AERS $10.00]
-   ,COUNT(CASE
-		WHEN cliente = 'AERS' AND
-			importe = 4.00 THEN 1
-		ELSE NULL
-	END) AS [AERS $4.00]
-   ,COUNT(CASE
-   		WHEN importe NOT IN ('15.00', '10.00', '4.00') THEN 1
-   		ELSE NULL
-   	END) AS [OTROS]
-   ,COUNT(id) AS [Total]
+ cliente Cliente
+ ,'Viajes' Concepto
+ ,YEAR(fecha_salida) AS Anio
+ ,COUNT(CASE WHEN DATEPART(m, fecha_salida)= 1 THEN 1 ELSE NULL END) Ene
+ ,COUNT(CASE WHEN DATEPART(m, fecha_salida)= 2 THEN 1 ELSE NULL END) Feb
+ ,COUNT(CASE WHEN DATEPART(m, fecha_salida)= 3 THEN 1 ELSE NULL END) Mar
+ ,COUNT(CASE WHEN DATEPART(m, fecha_salida)= 4 THEN 1 ELSE NULL END) Abr
+ ,COUNT(CASE WHEN DATEPART(m, fecha_salida)= 5 THEN 1 ELSE NULL END) May
+ ,COUNT(CASE WHEN DATEPART(m, fecha_salida)= 6 THEN 1 ELSE NULL END) Jun
+ ,COUNT(CASE WHEN DATEPART(m, fecha_salida)= 7 THEN 1 ELSE NULL END) Jul
+ ,COUNT(CASE WHEN DATEPART(m, fecha_salida)= 8 THEN 1 ELSE NULL END) Ago
+ ,COUNT(CASE WHEN DATEPART(m, fecha_salida)= 9 THEN 1 ELSE NULL END) Sep
+ ,COUNT(CASE WHEN DATEPART(m, fecha_salida)=10 THEN 1 ELSE NULL END) Oct
+ ,COUNT(CASE WHEN DATEPART(m, fecha_salida)=11 THEN 1 ELSE NULL END) Nov
+ ,COUNT(CASE WHEN DATEPART(m, fecha_salida)=12 THEN 1 ELSE NULL END) Dic
+ ,COUNT(Id) Total
 FROM iamsa.dbo.viaje
-GROUP BY FORMAT(fecha_salida, 'yyyy-MM')
-UNION ALL
-SELECT
-	'Total' AS [Fecha]
-   ,COUNT(CASE
-		WHEN cliente = 'ETN' THEN 1
-		ELSE NULL
-	END) AS [ETN $15.00]
-   ,COUNT(CASE
-		WHEN cliente = 'AERS' AND
-			importe = 15.00 THEN 1
-		ELSE NULL
-	END) AS [AERS $15.00]
-   ,COUNT(CASE
-		WHEN cliente = 'AERS' AND
-			importe = 10.00 THEN 1
-		ELSE NULL
-	END) AS [AERS $10.00]
-   ,COUNT(CASE
-		WHEN cliente = 'AERS' AND
-			importe = 4.00 THEN 1
-		ELSE NULL
-	END) AS [AERS $4.00]
-   ,COUNT(CASE
-   		WHEN importe in ('77.00', '110.00', '230.50', '332.50', '337.50', '380.00', '461.00', '0.00') THEN 1
-   		ELSE NULL
-   	END) AS [OTROS]
-	,COUNT(id) AS [Total]
-FROM iamsa.dbo.viaje
-ORDER BY [Fecha] DESC
+GROUP BY Cliente,YEAR(fecha_salida)
+ORDER BY YEAR(fecha_salida) DESC, Cliente
 ";
 
 

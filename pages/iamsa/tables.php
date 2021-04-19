@@ -39,33 +39,53 @@
 			
 			while ($rst = sqlsrv_fetch_array($obj_rst, SQLSRV_FETCH_ASSOC)) { 
 
-				$fecha = $rst['Fecha'];
-				$ETN_15 = number_format($rst['ETN $15.00']);
-				$AERS_15 = number_format($rst['AERS $15.00']);
-				$AERS_10 = number_format($rst['AERS $10.00']);
-				$AERS_4 = number_format($rst['AERS $4.00']);
-				$OTROS = number_format($rst['OTROS']);
-				$Total = number_format($rst['Total']);
+				$Cliente = $rst['Cliente'];
+ 				$Anio = $rst['Anio'];
+ 				$Ene = number_format($rst['Ene']);
+ 				$Feb = number_format($rst['Feb']);
+ 				$Mar = number_format($rst['Mar']);
+ 				$Abr = number_format($rst['Abr']);
+ 				$May = number_format($rst['May']);
+ 				$Jun = number_format($rst['Jun']);
+ 				$Jul = number_format($rst['Jul']);
+ 				$Ago = number_format($rst['Ago']);
+ 				$Sep = number_format($rst['Sep']);
+ 				$Oct = number_format($rst['Oct']);
+ 				$Nov = number_format($rst['Nov']);
+ 				$Dic = number_format($rst['Dic']);
+ 				$Total = number_format($rst['Total']);
 
-				if ($fecha == 'Total') {
-					
-					$totals = ' class="'.activePagePrimaryColor().' white-text"';
-					
-				} else {
-					
+				
+				
+
+//				if ($fecha == 'Total') {
+//					
+//					$totals = ' class="'.activePagePrimaryColor().' white-text"';
+//					
+//				} else {
+//					
 					$totals = '';
-					
-				}
+//					
+//				}
 			
 				echo '
-										<tr'.$totals.'>
-											<td>'.$fecha.'</td>
-											<td>'.$ETN_15.'</td>
-											<td>'.$AERS_15.'</td>
-											<td>'.$AERS_10.'</td>
-											<td>'.$AERS_4.'</td>
-											<td>'.$OTROS.'</td>
-											<td>'.$Total.'</td>
+
+										<tr'.$totals. '>
+											<td>' . $Cliente . '</td>
+											<td>' . $Anio . '</td>
+											<td>' . $Ene . '</td>
+											<td>' . $Feb . '</td>
+											<td>' . $Mar . '</td>
+											<td>' . $Abr . '</td>
+											<td>' . $May . '</td>
+											<td>' . $Jun . '</td>
+											<td>' . $Jul . '</td>
+											<td>' . $Ago . '</td>
+											<td>' . $Sep . '</td>
+											<td>' . $Oct . '</td>
+											<td>' . $Nov . '</td>
+											<td>' . $Dic . '</td>
+											<td>' . $Total . '</td>
 										</tr>';
 				}
 
@@ -82,16 +102,24 @@
 			echo '
 					<div class="container">
 						<div class="row">
-							<div class="col l8 offset-l2 m8 offset-m2 s12">
+							<div class="col l12 m8 offset-m2 s12">
 								<table id="table_info" class="responsive-table hoverable bordered card centered">
-									<thead class="white-text '.activePagePrimaryColor().'">
+									<thead class="white-text '.activePagePrimaryColor(). '">
 										<tr>
-											<th>Fecha</th>
-											<th class="light-blue">ETN $15.00</th>
-											<th class="red lighten-1">AERS $15.00</th>
-											<th class="red lighten-2">AERS $10.00</th>
-											<th class="red lighten-3">AERS $4.00</th>
-											<th class="blue-grey lighten-3">Otros...</th>
+											<th>Cliente</th>
+											<th>Año</th>
+											<th>Ene</th>
+											<th>Feb</th>
+											<th>Mar</th>
+											<th>Abr</th>
+											<th>May</th>
+											<th>Jun</th>
+											<th>Jul</th>
+											<th>Ago</th>
+											<th>Sep</th>
+											<th>Oct</th>
+											<th>Nov</th>
+											<th>Dic</th>
 											<th>Total</th>
 										</tr>
 									</thead>';	
