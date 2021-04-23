@@ -5,7 +5,7 @@
     <header>
 
         <?php
-				//pageNavHead('Detalle de afiliado');
+				pageNavHead('Detalle de afiliado');
 				include_once '../menu.php';
 				?>
 
@@ -144,7 +144,7 @@
 					$evento = $individual_rst_2['evento'];
 					switch ($evento) {
 						case '00 VENTAS';
-						case '01 VENTAS'; $color_evento = 'green lighten-5 black-text'; break;
+						case '01 VENTAS'; $color_evento = 'teal lighten-5 black-text'; break;
 						default: $color_evento = 'black-text'; break;
 					}
 
@@ -225,7 +225,7 @@
     </main>
 
     <?php
-	//include_once '../footer.php';
+	include_once '../footer.php';
 	include_once '../jquery.php';
 	?>
 
