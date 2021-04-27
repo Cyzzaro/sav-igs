@@ -41,7 +41,10 @@
 			estatus, 
 			fecha_estatus, 
 			ultimo_procesado, 
-			fecha_ultimo_procesado 
+			fecha_ultimo_procesado,
+			fecha_ultimo_exitoso,
+			acumulado_exitosos,
+			nombre_agente
 		FROM 
 			afiliados 
 		WHERE 
