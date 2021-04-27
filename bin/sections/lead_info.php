@@ -2,22 +2,22 @@
 
 <body>
 
-    <header>
+	<header>
 
-        <?php
-				pageNavHead('Detalle de afiliado');
-				include_once '../menu.php';
-				?>
+		<?php
+		pageNavHead('Detalle de afiliado');
+		include_once '../menu.php';
+		?>
 
-    </header>
+	</header>
 
-    <main>
+	<main>
 
-        <div class="container section">
-            <?php
+		<div class="container section">
+			<?php
 			$lead_id = $_GET['lead_id'];
 			$identificador = $_GET['identificador'];
-			
+
 			$string_to_search = strip_tags($lead_id, ENT_QUOTES);
 			$string_to_search_higienized_for_query = higienizeString($string_to_search);
 			if ($_SERVER['REMOTE_ADDR'] == '::1' or $_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
@@ -107,7 +107,7 @@
 						$section_icon = 'verified-user';
 						$section_icon_color = 'green';
 						$estatus = 'ACTIVO';
-						break;	
+						break;
 					default:
 						$section_icon = "verified-user";
 						$section_icon_color = 'blue-grey';
@@ -123,7 +123,7 @@
 				$acumulado_rechazos = $individual_rst['acumulado_rechazos'];
 				$origen = $individual_rst['origen'];
 				$nombre_agente = $individual_rst['nombre_agente'];
-				
+
 				$obj_rst_2 = sqlsrv_query($obj_conn_SQLSERVER, $query2, array(), array("Scrollable" => SQLSRV_CURSOR_KEYSET));
 				if ($obj_rst_2 == FALSE) {
 					die(errorConnSQLSRVR(sqlsrv_errors()));
@@ -134,9 +134,9 @@
 				while ($individual_rst_2 = sqlsrv_fetch_array($obj_rst_2, SQLSRV_FETCH_ASSOC)) {
 					$fecha_procesado = $individual_rst_2['fecha_procesado'];
 					$monto = $individual_rst_2['monto'];
-					
+
 					$origen_pago = $individual_rst_2['origen'];
-					if (substr($origen_pago,0,2) == 'CE') {
+					if (substr($origen_pago, 0, 2) == 'CE') {
 						$origen_pago = 'ConnectEnterprise';
 					} else {
 						$origen_pago = $origen_pago;
@@ -144,12 +144,16 @@
 					$evento = $individual_rst_2['evento'];
 					switch ($evento) {
 						case '00 VENTAS';
-						case '01 VENTAS'; $color_evento = 'teal lighten-5 black-text'; break;
-						default: $color_evento = 'black-text'; break;
+						case '01 VENTAS';
+							$color_evento = 'teal lighten-5 black-text';
+							break;
+						default:
+							$color_evento = 'black-text';
+							break;
 					}
 
 					$autorizacion = $individual_rst_2['autorizacion'];
-					
+
 					$estatus_intento = $individual_rst_2['estatus'];
 					$fecha_estatus_intento = $individual_rst_2['fecha_estatus'];
 					if ($autorizacion == !"") {
@@ -157,7 +161,7 @@
 							$autorizacion = '<span class="new badge red">' . $origen_pago . '   ' . $monto . '  <b>' . $autorizacion . '</b>  <b>' . $estatus_intento . '</b>  </span>';
 						} else {
 							$autorizacion = '<span class="new badge teal">' . $origen_pago . '   ' . $monto . '  <b>' . $autorizacion . '</b>  <b>' .
-							$estatus_intento . '</b>  </span>';
+								$estatus_intento . '</b>  </span>';
 						}
 					}
 					$intento = '' . $fecha_procesado . ' ' . $autorizacion . '    <b>' . $evento . '</b>    ';
@@ -169,7 +173,7 @@
 					}
 				}
 				sqlsrv_free_stmt($obj_rst_2);
-				
+
 				echo '
 				<div class="">
 					<div class="row section">
@@ -220,11 +224,11 @@
 
 			?>
 
-        </div>
+		</div>
 
-    </main>
+	</main>
 
-    <?php
+	<?php
 	include_once '../footer.php';
 	include_once '../jquery.php';
 	?>
