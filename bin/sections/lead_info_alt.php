@@ -190,9 +190,6 @@
 									<a href="#!" class="collection-item black-text">Lead Id<span class="badge">' . $lead_id . '</span></a>
 									<a href="#!" class="collection-item black-text">Identificador<span class="badge">' . $identificador . '</span></a>
 									<a href="#!" class="collection-item black-text">Fecha venta<span class="badge">' . $fecha_venta . '</span></a>
-									<a href="#!" class="collection-item black-text">Origen<span class="badge">' . $origen . '</span></a>
-									<a href="#!" class="collection-item black-text">Agente<span class="badge">' . $nombre_agente . '</span></a>
-
 								</div>
 								<div class="collection">
 									<a href="#!" class="collection-item black-text">Estatus<span class="badge ' . $section_icon_color . '-text">' . $estatus . ' ' . $fecha_estatus . '</span></a>
