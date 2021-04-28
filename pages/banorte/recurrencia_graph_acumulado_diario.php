@@ -17,6 +17,7 @@
 				WHEN evento = 'N0 TRANSACCION NO PERMITIDA AL TARJETAHABIENTE' THEN 1
 				WHEN evento = 'P1 EXCEDE LIMITE DE DISPOSICION DIARIA' THEN 1
 				WHEN evento = 'T5 RECHAZAR' THEN 1
+				WHEN evento = 'T2 RECHAZADA' THEN 1
 			END) AS [Retry]
 			,COUNT(CASE
 				WHEN evento = '01 LLAMAR AL BANCO EMISOR' THEN 1
@@ -83,19 +84,22 @@
 									backgroundColor: <?php echo "'".$green_rgb_5."'"; ?>,
 								},{
 									label: "Retry ",
-									fill: true,
+									fill: false,
 									data: [<?php echo $datasets_retry; ?>],
 									backgroundColor: <?php echo "'".$blue_rgb_5."'"; ?>,
+									type: 'line',
 								},{
 									label: "Soft",
-									fill: true,
+									fill: false,
 									data: [<?php echo $datasets_soft; ?>],
 									backgroundColor: <?php echo "'".$amber_rgb_5."'"; ?>,
+									type: 'line',
 								},{
 									label: "Hard",
-									fill: true,
+									fill: false,
 									data: [<?php echo $datasets_hard; ?>],
 									backgroundColor: <?php echo "'".$red_rgb_5."'"; ?>,
+									type: 'line',
 								},
 								]
 						},

@@ -106,7 +106,7 @@
 								<tr'.$totals.'>
 									<td>'.$cliente.'</td>
 									<td>'.$fecha. '</td>
-									<td><a href="' . GLOBALPATH . '/bin/sections/lead_info.php?lead_id=' . $lead_id . '&identificador=' . $identificador . '" target="new">' . $lead_id . '</a></td>  
+									<td><a href="' . GLOBALPATH . '/bin/sections/lead_info_alt.php?lead_id=' . $lead_id . '&identificador=' . $identificador . '" target="new">' . $lead_id . '</a></td>  
 									<td>' . $identificador . '</td>
 									<td>'.$nombre_afiliado.'</td>
 									<td>'.$codigo_rechazo.'</td>
