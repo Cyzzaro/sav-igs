@@ -27,7 +27,6 @@ define("TABLEINFOEXPORT","'resumen_solicitado'");
 include_once 'conn/access.php';
 include_once 'conn/queries.php';
 include_once 'conn/database_mssqlserver.php';
-include_once 'conn/database_mysql.php';
 
 include_once 'env/returns.php';
 include_once 'env/color_profile.php';
