@@ -152,6 +152,9 @@ function rowsGeneralResultsTable($obj_rst, $modal)
 		} elseif ($estatus == "RESERVAR") {
 			$section_icon = 'pause';
 			$color = 'grey-text';
+		} elseif ($estatus == "MES GRATIS") {
+			$section_icon = 'pause';
+			$color = 'grey-text';
 		} else {
 			$section_icon = 'verified_user';
 			$color = 'green-text';

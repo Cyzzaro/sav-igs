@@ -198,7 +198,7 @@
 									<a href="#!" class="collection-item black-text">Agente<span class="badge">' . $nombre_agente . '</span></a>
 								</div>
 								<div class="collection">
-									<a href="#!" class="collection-item black-text">Estatus<span class="badge ' . $section_icon_color . '-text">' . $estatus . ' ' . $fecha_estatus . '</span></a>
+									<a href="#!" class="collection-item black-text">Estatus<span class="badge ' . $section_icon_color . '-text">' . $estatus . ' (' . $fecha_estatus . ')</span></a>
 									<a href="#!" class="collection-item black-text">Cobros efectivos<span class="badge">' . $acumulado_exitosos . '</span></a>
 									<a href="#!" class="collection-item black-text">Contador de rechazos<span class="badge">' . $acumulado_rechazos . '</span></a>
 								</div>
