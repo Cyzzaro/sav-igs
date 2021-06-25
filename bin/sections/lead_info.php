@@ -174,14 +174,14 @@
 
 			$estatus_intento = $individual_rst_2['estatus'];
 			$fecha_estatus_intento = $individual_rst_2['fecha_estatus'];
-			if ($autorizacion == !"") {
-				if ($estatus_intento == !"") {
-					$autorizacion = '<span class="new badge red">' . $origen_pago . '   ' . $monto . '  <b>' . $autorizacion . '</b>  <b>' . $estatus_intento . '</b>  </span>';
-				} else {
-					$autorizacion = '<span class="new badge teal">' . $origen_pago . '   ' . $monto . '  <b>' . $autorizacion . '</b>  <b>' .
-						$estatus_intento . '</b>  </span>';
-				}
-			}
+					if ($autorizacion == !"") {
+						if ($estatus_intento == !"") {
+							$autorizacion = '<span class="new badge red"><span class="hide-on-med-and-down">' . $origen_pago . '</span>   ' . $monto . '  <b>' . $autorizacion . '</b>  <b>' . $estatus_intento . '</b>  </span>';
+						} else {
+							$autorizacion = '<span class="new badge teal"><span class="hide-on-med-and-down">' . $origen_pago . '</span>   ' . $monto . '  <b>' . $autorizacion . '</b>  <b>' .
+							$estatus_intento . '</b>  </span>';
+						}
+					}
 			$intento = '' . $fecha_procesado . ' ' . $autorizacion . '    <b>' . $evento . '</b>    ';
 			if ($historico == "") {
 				$historico = '<a class="collection-item">' . $intento . '</a>';
@@ -198,7 +198,7 @@
 					<div class="row section">
 						<h4 class="truncate show-on-medium-and-down">' . $nombre_afiliado . '</h4>
 						<div class="col l12 m12 s12">
-							<div class="col l5 m12 s12">
+							<div class="col l5 m6 s12">
 								<h6>Datos de afiliado</h6>
 								<div class="collection">
 									<a href="#!" class="collection-item black-text">' . $tarjeta . '
@@ -218,14 +218,14 @@
 									<a href="#!" class="collection-item black-text">Agente<span class="badge">' . $nombre_agente . '</span></a>
 									<a href="#!" class="collection-item black-text">Origen<span class="badge">' . $origen . '</span></a>
 								</div>
-							</div>
-							<div class="col l7 m12 s12">
-								<h6>Recurrencia</h6>
 								<div class="collection">
 									<a href="#!" class="collection-item black-text">Cobros efectivos<span class="badge">' . $acumulado_exitosos . '</span></a>
 									<a href="#!" class="collection-item black-text">Contador de rechazos<span class="badge">' . $acumulado_rechazos . '</span></a>
 									<a href="#!" class="collection-item black-text">Estatus<span class="badge ' . $section_icon_color . '-text">' . $estatus . ' (' . $fecha_estatus . ')</span></a>
 								</div>
+							</div>
+							<div class="col l7 m6 s12">
+								<h6>Recurrencia</h6>
 								<div class="collection">	
 									<a href="#!" class="collection-item ' . $section_icon_color . ' white-text"><h4 class="center-align">$ ' . $recaudo . '</h4></a>
 									' . $contracargado . '
