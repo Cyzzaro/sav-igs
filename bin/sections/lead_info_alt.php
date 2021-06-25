@@ -133,7 +133,7 @@
 					die(errorConnSQLSRVR(sqlsrv_errors()));
 				}
 				$recaudo = getUniqueCountDecimalValueFromDB("SELECT SUM(monto) AS 'recaudo'  FROM tmk.dbo.procesados WHERE (evento LIKE '%VENTAS%' AND evento NOT LIKE '%-%') AND afiliado=(SELECT id FROM tmk.dbo.afiliados WHERE clafiltmk=" . $lead_id . " AND identificador = " . $identificador . ")", "recaudo");
-				$contracargado = getUniqueCountDecimalValueFromDB("SELECT SUM(monto) AS 'contracargado'  FROM tmk.dbo.procesados WHERE (evento LIKE '%VENTAS%' AND evento NOT LIKE '%-%') AND afiliado=(SELECT id FROM tmk.dbo.afiliados WHERE clafiltmk=" . $lead_id . " AND identificador = " . $identificador . " AND estatus IS NOT NULL)", "contracargado");
+				$contracargado = getUniqueCountDecimalValueFromDB("SELECT SUM(monto) AS 'contracargado'  FROM tmk.dbo.procesados WHERE (evento LIKE '%VENTAS%' AND evento NOT LIKE '%-%' AND estatus IS NOT NULL ) AND afiliado=(SELECT id FROM tmk.dbo.afiliados WHERE clafiltmk=" . $lead_id . " AND identificador = " . $identificador . ")", "contracargado");
 				switch ($contracargado) {
 					case '0.00':
 							$contracargado = '';
