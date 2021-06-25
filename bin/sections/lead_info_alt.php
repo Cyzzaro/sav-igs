@@ -141,7 +141,7 @@
 					
 					default:
 									$contracargado = '$ ' . $contracargado;
-									$contracargado = '<a href="#!" class="collection-item black-text ' . $section_icon_color . ' lighten-4">Contracargado<span class="badge black-text">' . $contracargado . '</span></a>';
+									$contracargado = '<a href="#!" class="collection-item black-text ' . $section_icon_color . ' lighten-4">Contracargado o devuelto<span class="badge black-text">' . $contracargado . '</span></a>';
 						break;
 				}
 

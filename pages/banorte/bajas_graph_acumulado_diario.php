@@ -8,6 +8,7 @@ $query = "
 			,COUNT(CASE WHEN estatus = 'BAJA DEL SERVICIO (SPONSOR)' THEN 1 ELSE NULL END) AS [Baja(SPONSOR)]
 			,COUNT(CASE WHEN estatus = 'CONTRACARGO' THEN 1 ELSE NULL END) AS [Contracargo]
 			,COUNT(CASE WHEN estatus = 'REINTEGRO' THEN 1 ELSE NULL END) AS [Reintegro]
+			,COUNT(CASE WHEN estatus = 'REINTEGRO (SPONSOR)' THEN 1 ELSE NULL END) AS [Reintegro(SPONSOR)]
 			,COUNT(CASE WHEN estatus = 'TDC CANCELADA' THEN 1 ELSE NULL END) AS [TDC Cancelada]
 			,COUNT(CASE WHEN estatus = 'INTENTOS' THEN 1 ELSE NULL END) AS [Intentos]
 			,COUNT(CASE WHEN estatus = 'RESERVAR' THEN 1 ELSE NULL END) AS [Reservar]
@@ -35,6 +36,7 @@ $datasets_baja_sac = '';
 $datasets_baja_sponsor = '';
 $datasets_contracargo = '';
 $datasets_reintegro = '';
+$datasets_reintegro_sponsor = '';
 $datasets_tdc_cancelada = '';
 $datasets_intentos = '';
 $datasets_reservar = '';
@@ -46,6 +48,7 @@ while ($rst = sqlsrv_fetch_array($obj_rst, SQLSRV_FETCH_ASSOC)) {
 	$datasets_baja_sponsor = $datasets_baja_sponsor . '"' . $rst['Baja(SPONSOR)'] . '",';
 	$datasets_contracargo = $datasets_contracargo . '"' . $rst['Contracargo'] . '",';
 	$datasets_reintegro = $datasets_reintegro . '"' . $rst['Reintegro'] . '",';
+	$datasets_reintegro_sponsor = $datasets_reintegro_sponsor . '"' . $rst['Reintegro(SPONSOR)'] . '",';
 	$datasets_tdc_cancelada = $datasets_tdc_cancelada . '"' . $rst['TDC Cancelada'] . '",';
 	$datasets_intentos = $datasets_intentos . '"' . $rst['Intentos'] . '",';
 	$datasets_reservar = $datasets_reservar . '"' . $rst['Reservar'] . '",';
@@ -66,7 +69,6 @@ while ($rst = sqlsrv_fetch_array($obj_rst, SQLSRV_FETCH_ASSOC)) {
 				fill: true,
 				data: [<?php echo $datasets_reservar; ?>],
 				backgroundColor: <?php echo "'" . $grey_rgb_5 . "'"; ?>,
-				type: 'line',
 			}, {
 				label: "Baja(SAC)",
 				fill: true,
@@ -86,6 +88,11 @@ while ($rst = sqlsrv_fetch_array($obj_rst, SQLSRV_FETCH_ASSOC)) {
 				label: "Reintegro",
 				fill: true,
 				data: [<?php echo $datasets_reintegro; ?>],
+				backgroundColor: <?php echo "'" . $red_rgb_4 . "'"; ?>,
+			}, {
+				label: "Reintegro(SPONSOR)",
+				fill: true,
+				data: [<?php echo $datasets_reintegro_sponsor; ?>],
 				backgroundColor: <?php echo "'" . $red_rgb_4 . "'"; ?>,
 			}, {
 				label: "TDC Cancelada",
