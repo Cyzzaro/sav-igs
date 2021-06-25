@@ -149,6 +149,9 @@ function rowsGeneralResultsTable($obj_rst, $modal)
 		} elseif ($estatus == "REINTEGRO") {
 			$section_icon = 'note_add';
 			$color = 'orange-text';
+		} elseif ($estatus == "REINTEGRO (SPONSOR)") {
+			$section_icon = 'note_add';
+			$color = 'orange-text';
 		} elseif ($estatus == "RESERVAR") {
 			$section_icon = 'pause';
 			$color = 'grey-text';

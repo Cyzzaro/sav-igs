@@ -1849,7 +1849,7 @@ a.waves-effect .waves-ripple {
 
 .inner-content {
     position: relative;
-    max-height: 35rem;
+    max-height: 23rem;
     /***/
     /*width: 100%;*/
     overflow-y: auto;

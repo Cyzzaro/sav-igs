@@ -97,7 +97,11 @@
 						break;
 					case 'REINTEGRO';
 						$section_icon = 'note-add';
-						$section_icon_color = 'amber';
+						$section_icon_color = 'deep orange';
+						break;
+					case 'REINTEGRO (SPONSOR)';
+						$section_icon = 'note-add';
+						$section_icon_color = 'deep orange';
 						break;
 					case 'RESERVAR';
 						$section_icon = 'system-update';
@@ -129,6 +133,20 @@
 					die(errorConnSQLSRVR(sqlsrv_errors()));
 				}
 				$recaudo = getUniqueCountDecimalValueFromDB("SELECT SUM(monto) AS 'recaudo'  FROM tmk.dbo.procesados WHERE (evento LIKE '%VENTAS%' AND evento NOT LIKE '%-%') AND afiliado=(SELECT id FROM tmk.dbo.afiliados WHERE clafiltmk=" . $lead_id . " AND identificador = " . $identificador . ")", "recaudo");
+				$contracargado = getUniqueCountDecimalValueFromDB("SELECT SUM(monto) AS 'contracargado'  FROM tmk.dbo.procesados WHERE (evento LIKE '%VENTAS%' AND evento NOT LIKE '%-%') AND afiliado=(SELECT id FROM tmk.dbo.afiliados WHERE clafiltmk=" . $lead_id . " AND identificador = " . $identificador . " AND estatus IS NOT NULL)", "contracargado");
+				switch ($contracargado) {
+					case '0.00':
+							$contracargado = '';
+						break;
+					
+					default:
+									$contracargado = '$ ' . $contracargado;
+									$contracargado = '<a href="#!" class="collection-item black-text ' . $section_icon_color . ' lighten-4">Contracargado<span class="badge black-text">' . $contracargado . '</span></a>';
+						break;
+				}
+
+
+
 				//$historico = '<a href="#!" class="collection-item ' . $section_icon_color . ' white-text"><br><h4 class="center-align">$ ' . $recaudo . '</h4></a>';
 				$historico = '<span>';
 				while ($individual_rst_2 = sqlsrv_fetch_array($obj_rst_2, SQLSRV_FETCH_ASSOC)) {
@@ -144,7 +162,7 @@
 					$evento = $individual_rst_2['evento'];
 					switch ($evento) {
 						case '00 VENTAS';
-						case '01 VENTAS'; $color_evento = 'teal lighten-5 black-text'; break;
+						case '01 VENTAS'; $color_evento = 'black-text'; break;
 						default: $color_evento = 'black-text'; break;
 					}
 
@@ -189,20 +207,23 @@
 								<div class="collection">
 									<a href="#!" class="collection-item black-text">Lead Id<span class="badge">' . $lead_id . '</span></a>
 									<a href="#!" class="collection-item black-text">Identificador<span class="badge">' . $identificador . '</span></a>
-									<a href="#!" class="collection-item black-text">Fecha venta<span class="badge">' . $fecha_venta . '</span></a>
 								</div>
 								<div class="collection">
-									<a href="#!" class="collection-item black-text">Estatus<span class="badge ' . $section_icon_color . '-text">' . $estatus . ' (' . $fecha_estatus . ')</span></a>
-									<a href="#!" class="collection-item black-text">Cobros efectivos<span class="badge">' . $acumulado_exitosos . '</span></a>
-									<a href="#!" class="collection-item black-text">Contador de rechazos<span class="badge">' . $acumulado_rechazos . '</span></a>
+									<a href="#!" class="collection-item black-text">Fecha venta<span class="badge">' . $fecha_venta . '</span></a>
+									<a href="#!" class="collection-item black-text">Agente<span class="badge">' . $nombre_agente . '</span></a>
+									<a href="#!" class="collection-item black-text">Origen<span class="badge">' . $origen . '</span></a>
 								</div>
 							</div>
 							<div class="col l7 m12 s12">
 								<h6>Recurrencia</h6>
 								<div class="collection">
-									<a href="#!" class="collection-item ' . $section_icon_color . ' white-text"><br><h4 class="center-align">$ ' . $recaudo . '</h4></a>
+									<a href="#!" class="collection-item black-text">Cobros efectivos<span class="badge">' . $acumulado_exitosos . '</span></a>
+									<a href="#!" class="collection-item black-text">Contador de rechazos<span class="badge">' . $acumulado_rechazos . '</span></a>
+									<a href="#!" class="collection-item black-text">Estatus<span class="badge ' . $section_icon_color . '-text">' . $estatus . ' (' . $fecha_estatus . ')</span></a>
 								</div>
-								<div class="collection with-header">
+								<div class="collection">	
+									<a href="#!" class="collection-item ' . $section_icon_color . ' white-text"><h4 class="center-align">$ ' . $recaudo . '</h4></a>
+									' . $contracargado . '
 									<div class="inner-content">
 									' . $historico . '
 									</div>
