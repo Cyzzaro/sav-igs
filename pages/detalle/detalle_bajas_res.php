@@ -12,7 +12,7 @@
 		
 	} else {
 		
-		$query_criteria_filter_en_bd = " WHERE estatus LIKE '%".$query_criteria_filter."%'";
+		$query_criteria_filter_en_bd = " WHERE estatus = '".$query_criteria_filter."'";
 		
 	}
 	
