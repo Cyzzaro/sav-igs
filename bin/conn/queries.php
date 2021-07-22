@@ -526,6 +526,7 @@ $table_iamsa_acumulado = "
 SELECT
  'Viajes' Concepto
  ,YEAR(fecha_salida) AS Anio
+ ,cliente as Cliente
  ,COUNT(CASE WHEN DATEPART(m, fecha_salida)= 1 THEN 1 ELSE NULL END) Ene
  ,COUNT(CASE WHEN DATEPART(m, fecha_salida)= 2 THEN 1 ELSE NULL END) Feb
  ,COUNT(CASE WHEN DATEPART(m, fecha_salida)= 3 THEN 1 ELSE NULL END) Mar
@@ -540,8 +541,8 @@ SELECT
  ,COUNT(CASE WHEN DATEPART(m, fecha_salida)=12 THEN 1 ELSE NULL END) Dic
  ,COUNT(Id) Total
 FROM iamsa.dbo.viaje
-GROUP BY YEAR(fecha_salida)
-ORDER BY YEAR(fecha_salida) DESC
+GROUP BY YEAR(fecha_salida), Cliente
+ORDER BY YEAR(fecha_salida) DESC, Cliente ASC
 ";
 
 

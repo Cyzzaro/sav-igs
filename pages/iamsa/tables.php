@@ -40,6 +40,7 @@
 			while ($rst = sqlsrv_fetch_array($obj_rst, SQLSRV_FETCH_ASSOC)) { 
 
 				$Anio = $rst['Anio'];
+				$Cliente = $rst['Cliente'];
  				$Ene = number_format($rst['Ene']);
  				$Feb = number_format($rst['Feb']);
  				$Mar = number_format($rst['Mar']);
@@ -71,6 +72,7 @@
 
 										<tr'.$totals. '>
 											<td>' . $Anio . '</td>
+											<td>' . $Cliente . '</td>
 											<td>' . $Ene . '</td>
 											<td>' . $Feb . '</td>
 											<td>' . $Mar . '</td>
@@ -105,6 +107,7 @@
 									<thead class="white-text '.activePagePrimaryColor(). '">
 										<tr>
 											<th>Año</th>
+											<th>Cliente</th>
 											<th>Ene</th>
 											<th>Feb</th>
 											<th>Mar</th>
