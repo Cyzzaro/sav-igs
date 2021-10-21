@@ -1,20 +1,8 @@
 html {
-<<<<<<< HEAD
-    line-height: 0.8;
+    line-height: 1.2;
     font-family: "Roboto", "Calibri", "Lucida Sans", "Arial", "sans-serif";
     font-weight: 500;
     color: #000;
-||||||| 8cd2615
-    line-height: 0.8;
-    font-family: "Calibri", "Lucida Sans", "Arial", "sans-serif";
-    font-weight: 400;
-    color: #000;
-=======
-    line-height: 1.2;
-    font-family: "Roboto", "Lucida Sans", "Arial", "sans-serif";
-    font-weight: 430;
-    color: #333;
->>>>>>> 08364f639adc67a31710a5973aaf9c279c2255ba
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     box-sizing: border-box;
