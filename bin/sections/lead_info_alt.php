@@ -193,7 +193,7 @@
 					<div class="row section">
 						<h4 class="truncate show-on-medium-and-down">' . $nombre_afiliado . '</h4>
 						<div class="col l12 m12 s12">
-							<div class="col l5 m6 s12">
+							<div class="col l6 m6 s12">
 								<h6>Asistencia:</h6>
 								<div class="collection">
 									<a href="#!" class="collection-item black-text">Cliente<span class="badge">' . $client_name . '</span></a>
@@ -218,7 +218,7 @@
 									<a href="#!" class="collection-item black-text">Origen<span class="badge">' . $origen . '</span></a>
 								</div>
 							</div>
-							<div class="col l7 m6 s12">
+							<div class="col l6 m6 s12">
 								<h6>Estadistico:</h6>
 								<div class="collection">
 									<a href="#!" class="collection-item black-text">Cobros efectivos<span class="badge">' . $acumulado_exitosos . '</span></a>
