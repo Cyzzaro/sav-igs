@@ -64,7 +64,7 @@
           <div class="card yellow darken-1">
             <div class="card-content black-text">
               <span class="card-title black-text">¡Aviso importante!</span>
-              <p>Del 01 al 15 de noviembre del 2021, este sitio será sometido a mantenimiento programado.</p>
+              <p>Del 01 al 30 de noviembre del 2021, este sitio será sometido a mantenimiento programado.</p>
               <p>Es posible que durante el transcurso algunas funciones y/o consultas no se encuentren disponibles y puede que salgamos de linea un rato, asi que te pedimos paciencia sobre todo si eres un usuario habitual.</p>
               <b>
               	<p>Queremos renovarnos e implementar nuevas funciones para que tengas siempre la información correcta en el momento preciso. ;)</p>
