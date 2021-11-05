@@ -109,6 +109,7 @@ function rowsGeneralResultsTable($obj_rst, $modal)
 		} else {
 			$fecha = '';
 		}
+		$id = $individual_rst['id'];
 		$lead_id = $individual_rst['clafiltmk'];
 		$identificador = $individual_rst['identificador'];
 		$estatus = $individual_rst['estatus'];
@@ -137,6 +138,9 @@ function rowsGeneralResultsTable($obj_rst, $modal)
 		} elseif ($estatus == "BAJA DEL SERVICIO (SPONSOR)") {
 			$section_icon = 'cancel';
 			$color = 'red-text';
+		} elseif ($estatus == "BAJA DEL SERVICIO (CAMBIO DE PLAN)") {
+			$section_icon = 'cancel';
+			$color = 'grey-text';
 		} elseif ($estatus == "TDC CANCELADA") {
 			$section_icon = 'report';
 			$color = 'purple-text';
@@ -165,7 +169,7 @@ function rowsGeneralResultsTable($obj_rst, $modal)
 		}
 
 		if ($modal == True) {
-			$lead_detail = '<a href="' . GLOBALPATH . '/bin/sections/lead_info_alt.php?lead_id=' . $lead_id . '&identificador=' . $identificador . '" target="new">' . $lead_id . '</a>';
+			$lead_detail = '<a href="' . GLOBALPATH . '/bin/sections/lead_info_alt.php?id=' . $id . '" target="new">' . $lead_id . '</a>';
 		} else {
 			$lead_detail = $lead_id;
 		}

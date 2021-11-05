@@ -15,10 +15,9 @@
 
         <div class="container section">
             <?php
-			$lead_id = $_GET['lead_id'];
-			$identificador = $_GET['identificador'];
+			$id = $_GET['id'];
 			
-			$string_to_search = strip_tags($lead_id, ENT_QUOTES);
+			$string_to_search = strip_tags($id, ENT_QUOTES);
 			$string_to_search_higienized_for_query = higienizeString($string_to_search);
 			if ($_SERVER['REMOTE_ADDR'] == '::1' or $_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
 				// Devuelve el numero de TDC completo - Vista especial para quien administra cobranza de la cuenta.
@@ -29,7 +28,7 @@
 					cast(fecha_ultimo_procesado as varchar(12)) fecha_ultimo_procesado, cast(fecha_ultimo_exitoso as varchar(12)) fecha_ultimo_exitoso, 
 					reus, reus_arco, acumulado_exitosos, acumulado_rechazos, origen, nombre_agente
 				FROM tmk.dbo.afiliados
-				WHERE clafiltmk = " . higienizeString($lead_id) . " AND identificador = " . higienizeString($identificador);
+				WHERE id = " . higienizeString($id) ;
 			} else {
 				// Devuelve los 4TDC formateados o enmascarados - Vista para el publico en general.
 				$query = "SELECT TOP(1) cliente, asistencia, clafiltmk, identificador, cast(fecha_venta as varchar(12)) fecha_venta, nombre_afiliado, 
@@ -39,7 +38,7 @@
 					cast(fecha_ultimo_procesado as varchar(12)) fecha_ultimo_procesado, cast(fecha_ultimo_exitoso as varchar(12)) fecha_ultimo_exitoso, 
 					reus, reus_arco, acumulado_exitosos, acumulado_rechazos, origen, nombre_agente
 				FROM tmk.dbo.afiliados
-				WHERE clafiltmk = " . higienizeString($lead_id) . " AND identificador = " . higienizeString($identificador);
+				WHERE id = " . higienizeString($id) ;
 			}
 			// Obtiene detalles de procesamiento exitoso para el Lead Id.
 			$query2 = "
@@ -52,7 +51,7 @@
 			estatus,
 			cast(fecha_estatus as varchar(12)) fecha_estatus
 		FROM tmk.dbo.procesados 
-		WHERE (evento LIKE '%VENTAS%' AND evento NOT LIKE '%-%') AND afiliado = (SELECT id FROM tmk.dbo.afiliados WHERE clafiltmk=" . $lead_id . " AND identificador = " . $identificador . ")
+		WHERE (evento LIKE '%VENTAS%' AND evento NOT LIKE '%-%') AND afiliado = " . $id . " 
 		ORDER BY fecha_procesado DESC";
 			$obj_conn_SQLSERVER = sqlsrv_connect(COBRANZASRVR, array('Database' => 'tmk', 'Uid' => COBRANZAUSER, 'PWD' => COBRANZAPWD));
 			$obj_rst = sqlsrv_query($obj_conn_SQLSERVER, $query, array(), array("Scrollable" => SQLSRV_CURSOR_KEYSET));
@@ -82,6 +81,10 @@
 					case 'BAJA DEL SERVICIO (SPONSOR)';
 						$section_icon = 'cancel';
 						$section_icon_color = 'red';
+						break;
+					case 'BAJA DEL SERVICIO (CAMBIO DE PLAN)';
+						$section_icon = 'cancel';
+						$section_icon_color = 'grey';
 						break;
 					case 'TDC CANCELADA';
 						$section_icon = 'report purple-text';
@@ -132,8 +135,8 @@
 				if ($obj_rst_2 == FALSE) {
 					die(errorConnSQLSRVR(sqlsrv_errors()));
 				}
-				$recaudo = getUniqueCountDecimalValueFromDB("SELECT SUM(monto) AS 'recaudo'  FROM tmk.dbo.procesados WHERE (evento LIKE '%VENTAS%' AND evento NOT LIKE '%-%') AND afiliado=(SELECT id FROM tmk.dbo.afiliados WHERE clafiltmk=" . $lead_id . " AND identificador = " . $identificador . ")", "recaudo");
-				$contracargado = getUniqueCountDecimalValueFromDB("SELECT SUM(monto) AS 'contracargado'  FROM tmk.dbo.procesados WHERE (evento LIKE '%VENTAS%' AND evento NOT LIKE '%-%' AND estatus IS NOT NULL ) AND afiliado=(SELECT id FROM tmk.dbo.afiliados WHERE clafiltmk=" . $lead_id . " AND identificador = " . $identificador . ")", "contracargado");
+				$recaudo = getUniqueCountDecimalValueFromDB("SELECT SUM(monto) AS 'recaudo'  FROM tmk.dbo.procesados WHERE (evento LIKE '%VENTAS%' AND evento NOT LIKE '%-%') AND afiliado=" . $id, "recaudo");
+				$contracargado = getUniqueCountDecimalValueFromDB("SELECT SUM(monto) AS 'contracargado'  FROM tmk.dbo.procesados WHERE (evento LIKE '%VENTAS%' AND evento NOT LIKE '%-%' AND estatus IS NOT NULL ) AND afiliado=" . $id, "contracargado");
 				switch ($contracargado) {
 					case '0.00':
 							$contracargado = '';
