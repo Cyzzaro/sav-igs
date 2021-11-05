@@ -77,7 +77,7 @@ function formToSearchByName($string_to_search)
 		$string_to_search_higienized_for_query = higienizeString($string_to_search);
 		$query = "
 			SELECT 
-				id, clafiltmk, nombre_afiliado, fecha_venta, dni, identificador, estatus, fecha_estatus, ultimo_procesado, fecha_ultimo_procesado, fecha_ultimo_exitoso, acumulado_exitosos, nombre_agente  
+				id, cliente, asistencia, clafiltmk, nombre_afiliado, fecha_venta, dni, identificador, estatus, fecha_estatus, ultimo_procesado, fecha_ultimo_procesado, fecha_ultimo_exitoso, acumulado_exitosos, nombre_agente  
 			FROM tmk.dbo.afiliados 
 			WHERE nombre_afiliado LIKE '%".$string_to_search_higienized_for_query."%'";
 		$obj_conn_params_SQLSERVER = array('Database' => COBRANZABD, 'Uid' => COBRANZAUSER, 'PWD' => COBRANZAPWD);
@@ -158,7 +158,7 @@ function formToSearchByLeadId($string_to_search)
 		$string_to_search_higienized_for_query = $string_to_search;
 		$query = "
 			SELECT 
-				id, clafiltmk, nombre_afiliado, fecha_venta, dni, identificador, estatus, fecha_estatus, ultimo_procesado, fecha_ultimo_procesado, fecha_ultimo_exitoso, acumulado_exitosos, nombre_agente  
+				id, cliente, asistencia, clafiltmk, nombre_afiliado, fecha_venta, dni, identificador, estatus, fecha_estatus, ultimo_procesado, fecha_ultimo_procesado, fecha_ultimo_exitoso, acumulado_exitosos, nombre_agente  
 			FROM tmk.dbo.afiliados 
 			WHERE clafiltmk IN (".$string_to_search_higienized_for_query.")";
 		$obj_conn_params_SQLSERVER = array('Database' => COBRANZABD, 'Uid' => COBRANZAUSER, 'PWD' => COBRANZAPWD);
@@ -239,7 +239,7 @@ function formToSearchByIdentificador($string_to_search)
 		$string_to_search_higienized_for_query = $string_to_search;
 		$query = "
 			SELECT 
-				id, clafiltmk, nombre_afiliado, fecha_venta, dni, identificador, estatus, fecha_estatus, ultimo_procesado, fecha_ultimo_procesado, fecha_ultimo_exitoso, acumulado_exitosos, nombre_agente  
+				id, cliente, asistencia, clafiltmk, nombre_afiliado, fecha_venta, dni, identificador, estatus, fecha_estatus, ultimo_procesado, fecha_ultimo_procesado, fecha_ultimo_exitoso, acumulado_exitosos, nombre_agente  
 			FROM tmk.dbo.afiliados 
 			WHERE identificador IN (".$string_to_search_higienized_for_query.")";
 		$obj_conn_params_SQLSERVER = array('Database' => COBRANZABD, 'Uid' => COBRANZAUSER, 'PWD' => COBRANZAPWD);

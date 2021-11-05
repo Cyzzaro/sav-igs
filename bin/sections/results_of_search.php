@@ -72,6 +72,8 @@ function headRowGeneralResultsTable($table_results_name)
 					<table id="' . $table_results_name . '" class="table responsive-table bordered hoverable card-panel">
 						<thead class="' . activePagePrimaryColor() . ' white-text bold">
 							<tr>
+								<th>CLIENTE</th>
+								<th>ASISTENCIA</th>
 								<th>FECHA(VT)</th>
 								<th>LEADID</th>
 								<th>IDENTIFICADOR</th>
@@ -110,6 +112,8 @@ function rowsGeneralResultsTable($obj_rst, $modal)
 			$fecha = '';
 		}
 		$id = $individual_rst['id'];
+		$cliente = $individual_rst['cliente'];
+		$asistencia = $individual_rst['asistencia'];
 		$lead_id = $individual_rst['clafiltmk'];
 		$identificador = $individual_rst['identificador'];
 		$estatus = $individual_rst['estatus'];
@@ -175,6 +179,8 @@ function rowsGeneralResultsTable($obj_rst, $modal)
 		}
 		echo '
 						<tr>
+							<td>' . $cliente . '&nbsp;</td>
+							<td>' . $asistencia . '&nbsp;</td>
 							<td>' . $fecha . '&nbsp;</td>
 							<td>' . $lead_detail . '&nbsp;</td>
 							<td>' . $identificador . '&nbsp;</td>
