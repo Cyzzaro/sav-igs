@@ -31,6 +31,7 @@
 	$client_name = "cliente = '".$client_name."'";
 	$query = "
 		SELECT 
+			id, cliente, asistencia, 
 			clafiltmk, 
 			nombre_afiliado, 
 			fecha_venta, 

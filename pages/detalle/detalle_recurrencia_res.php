@@ -31,7 +31,9 @@
 	
 	$query = "
 		SELECT
-			p.cliente		  AS [Cliente]
+			a.id as [Id]
+			,p.cliente		  AS [Cliente]
+			,p.asistencia as [Asistencia]
 		   ,CAST(p.fecha_procesado AS VARCHAR(10)) AS [Fecha]
 		   ,a.clafiltmk		  AS [Clafiltmk]
 			 ,a.identificador as [Identificador]
@@ -82,8 +84,9 @@
 		) {
 		
 		while ($rst = sqlsrv_fetch_array($obj_rst, SQLSRV_FETCH_ASSOC)) { 
-		
+			$id = $rst['Id'];
 			$cliente = $rst['Cliente'];
+			$asistencia = $rst['Asistencia'];
 			$fecha = $rst['Fecha'];
 			$lead_id = $rst['Clafiltmk'];
 			$identificador = $rst['Identificador'];
@@ -105,8 +108,9 @@
 			echo '
 								<tr'.$totals.'>
 									<td>'.$cliente.'</td>
+									<td>'.$asistencia.'</td>
 									<td>'.$fecha. '</td>
-									<td><a href="' . GLOBALPATH . '/bin/sections/lead_info_alt.php?lead_id=' . $lead_id . '&identificador=' . $identificador . '" target="new">' . $lead_id . '</a></td>  
+									<td><a href="' . GLOBALPATH . '/bin/sections/lead_info_alt.php?id=' . $id . '" target="new">' . $lead_id . '</a></td>  
 									<td>' . $identificador . '</td>
 									<td>'.$nombre_afiliado.'</td>
 									<td>'.$codigo_rechazo.'</td>
@@ -141,6 +145,7 @@
 							<thead class="white-text '.activePagePrimaryColor(). '">
 								<tr>
 									<th>Cliente</th>
+									<th>Asistencia</th>
 									<th>Fecha</th>
 									<th>Lead ID</th>
 									<th>Identificador</th>
