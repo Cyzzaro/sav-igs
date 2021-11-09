@@ -11,6 +11,7 @@
 			,COUNT(CASE WHEN estatus = 'REINTEGRO (SPONSOR)' THEN 1 ELSE NULL END) AS [Reintegro(SPONSOR)]
 			,COUNT(CASE WHEN estatus = 'TDC CANCELADA' THEN 1 ELSE NULL END) AS [TDC Cancelada]
 			,COUNT(CASE WHEN estatus = 'INTENTOS' THEN 1 ELSE NULL END) AS [Intentos]
+			,COUNT(CASE WHEN estatus = 'BAJA DEL SERVICIO (CAMBIO DE PLAN)' THEN 1 ELSE NULL END) AS [Cambio de Plan]
 			,COUNT(CASE WHEN estatus = 'RESERVAR' THEN 1 ELSE NULL END) AS [Reservar]
 		   ,COUNT(id)							AS [Total]
 		FROM tmk.dbo.afiliados
@@ -26,6 +27,7 @@
 			,COUNT(CASE WHEN estatus = 'REINTEGRO (SPONSOR)' THEN 1 ELSE NULL END) AS [Reintegro(SPONSOR)]
 			,COUNT(CASE WHEN estatus = 'TDC CANCELADA' THEN 1 ELSE NULL END) AS [TDC Cancelada]
 			,COUNT(CASE WHEN estatus = 'INTENTOS' THEN 1 ELSE NULL END) AS [Intentos]
+			,COUNT(CASE WHEN estatus = 'BAJA DEL SERVICIO (CAMBIO DE PLAN)' THEN 1 ELSE NULL END) AS [Cambio de Plan]
 			,COUNT(CASE WHEN estatus = 'RESERVAR' THEN 1 ELSE NULL END) AS [Reservar]
 		   ,COUNT(id)							AS [Total]
 		FROM tmk.dbo.afiliados
@@ -67,6 +69,7 @@
 				$reintegro_sponsor = number_format($rst['Reintegro(SPONSOR)']);
 				$tdccancelada = number_format($rst['TDC Cancelada']);
 				$intentos = number_format($rst['Intentos']);
+				$baja_cambio_plan = number_format($rst['Cambio de Plan']);
 				$reservar = number_format($rst['Reservar']);
 				$bajas = number_format($rst['Total']);
 
@@ -85,7 +88,8 @@
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_bajas.php?client=BANORTE&dato=REINTEGRO_".$fecha."' target='new'>".$reintegro."</a></td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_bajas.php?client=BANORTE&dato=REINTEGRO+(SPONSOR)_".$fecha."' target='new'>".$reintegro_sponsor."</a></td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_bajas.php?client=BANORTE&dato=TDC+CANCELADA_".$fecha."' target='new'>".$tdccancelada."</a></td>
-									<td><a href='".GLOBALPATH."/pages/detalle/detalle_bajas.php?client=BANORTE&dato=INTENTOS_".$fecha."' target='new'>".$intentos."</a></td>
+									<td><a href='".GLOBALPATH."/pages/detalle/detalle_bajas.php?client=BANORTE&dato=INTENTOS_".$fecha."' target='new'>".$intentos. "</a></td>
+									<td><a href='" . GLOBALPATH . "/pages/detalle/detalle_bajas.php?client=BANORTE&dato=BAJA+DEL+SERVICIO+(CAMBIO+DE+PLAN)_" . $fecha . "' target='new'>" . $baja_cambio_plan . "</a></td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_bajas.php?client=BANORTE&dato=RESERVAR_".$fecha."' target='new'>".$reservar."</a></td>
 									<td><a href='".GLOBALPATH."/pages/detalle/detalle_bajas.php?client=BANORTE&dato=_".$fecha."' target='new'>".$bajas."</a></td>
 								</tr>";
@@ -105,7 +109,7 @@
 				<div class="row">
 					<div class="col l10 offset-l1 m12 s12">
 						<table id="resumen_solicitado" class="responsive-table bordered hoverable card centered">
-							<thead class="'.activePagePrimaryColor().' white-text">
+							<thead class="'.activePagePrimaryColor(). ' white-text">
 								<tr>
 									<th>FECHA</th>
 									<th>BAJA(SAC)</th>
@@ -115,6 +119,7 @@
 									<th>REINTEGRO(SPONSOR)</th>
 									<th>TDC CANCELADA</th>
 									<th>INTENTOS</th>
+									<th>CAMBIO DE PLAN</th>
 									<th>RESERVAR</th>
 									<th>TOTAL</th>
 								</tr>
