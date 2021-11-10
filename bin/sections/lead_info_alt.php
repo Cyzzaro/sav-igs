@@ -59,6 +59,7 @@
 				die(errorConnSQLSRVR(sqlsrv_errors()));
 			}
 			$total_num_rst = sqlsrv_num_rows($obj_rst);
+			
 			while ($individual_rst = sqlsrv_fetch_array($obj_rst, SQLSRV_FETCH_ASSOC)) {
 				$client_name = $individual_rst['cliente'];
 				$asistencia = $individual_rst['asistencia'];
