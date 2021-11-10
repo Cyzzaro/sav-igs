@@ -73,7 +73,7 @@
           shaURL = data.html_url;
           lastcommit = data.commit.message;
           datelastcommit = jQuery.timeago(data.commit.author.date);
-          author = data.commit.committer.name;
+          author = data.commit.committer.email;
           avatar =
             '<img src="' +
             data.committer.avatar_url +
