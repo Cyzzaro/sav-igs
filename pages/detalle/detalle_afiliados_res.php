@@ -22,7 +22,7 @@
 		
 	} else {
 		
-		$query_date_filterFilter = " AND fecha_venta BETWEEN '".$query_date_filter."-01' AND DATEADD(ms,-3,DATEADD(mm,0,DATEADD(mm,DATEDIFF(mm,0,'".$query_date_filter."-01')+1,0)))";
+		$query_date_filterFilter = " AND fecha_venta BETWEEN '".$query_date_filter. "-01T00:00:00' AND DATEADD(ms,-3,DATEADD(mm,0,DATEADD(mm,DATEDIFF(mm,0,'".$query_date_filter."-01T23:59:59')+1,0)))";
 		
 	}
 	

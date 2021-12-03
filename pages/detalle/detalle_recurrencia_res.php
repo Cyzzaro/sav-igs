@@ -25,7 +25,7 @@
 		
 	} else {
 		
-		$query_date_filterFilter = " AND fecha_procesado BETWEEN '".$query_date_filter."-01' AND DATEADD(ms,-3,DATEADD(mm,0,DATEADD(mm,DATEDIFF(mm,0,'".$query_date_filter."-01')+1,0)))";
+		$query_date_filterFilter = " AND fecha_procesado BETWEEN '".$query_date_filter."-01T00:00:00' AND DATEADD(ms,-3,DATEADD(mm,0,DATEADD(mm,DATEDIFF(mm,0,'".$query_date_filter."-01T23:59:59')+1,0)))";
 		
 	}
 	
@@ -48,6 +48,8 @@
 			" ORDER BY p.fecha_procesado, p.afiliado
 		";
 	
+		echo $query;
+
 	$obj_conn_params_SQLSERVER = array('Database' => COBRANZABD, 'Uid' => COBRANZAUSER, 'PWD' => COBRANZAPWD);
 	$obj_conn_SQLSERVER = sqlsrv_connect(COBRANZASRVR, $obj_conn_params_SQLSERVER);
 
