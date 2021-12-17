@@ -16,7 +16,7 @@ define('LICENSEIMAGE','data:imagpng;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAAAfCAYAA
 
 define('CHARSET','UTF-8');
 define('LANG','es-MX');
-define('PAGETITLE','SAV - IGS (Mexico) ');
+define('PAGETITLE','IGS México | Cobranza ');
 define('PAGEDESC','Portal de consulta y validación de capitas');
 define('KEYWORDS','sav,sistema,alterno,validacion,igs,asistencia,cobros,facturacion,analisis,cesar,cesar valencia,cesar valencia campuzano,cyzzaro,html,php,css,js,javascript,jquery');
 define('PROGRAM','sublimetext,dreamweaver');

@@ -43,7 +43,7 @@
 				document.write(new Date().getFullYear());
 			</script>
 			<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type"><?php echo PAGETITLE; ?></span>
-			por <a class="white-text" target="new" xmlns:cc="<?php echo LICENSEURL; ?>/ns#" href="<?php echo AUTHORURL; ?>" property="cc:attributionName" rel="cc:attributionURL"> @Cyzzaro</a>
+			<a class="white-text" target="new" xmlns:cc="<?php echo LICENSEURL; ?>/ns#" href="<?php echo AUTHORURL; ?>" property="cc:attributionName" rel="cc:attributionURL"> | @Cyzzaro</a>
 			<a class="right" target="new" href="<?php echo LICENSEURL; ?>/licenses/by-nc-sa/4.0/deed.es">
 				<img alt="Licencia Creative Commons" style="border-width:0;position:relative;top:10px;" src="<?php echo LICENSEIMAGE; ?>"></a>
 		</div>
