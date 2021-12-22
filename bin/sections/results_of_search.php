@@ -139,6 +139,9 @@ function rowsGeneralResultsTable($obj_rst, $modal)
 		if ($estatus == "BAJA DEL SERVICIO (SAC)") {
 			$section_icon = 'cancel';
 			$color = 'red-text';
+		} elseif ($estatus == "RECHAZO DE CALIDAD") {
+			$section_icon = 'cancel';
+			$color = 'red-text';
 		} elseif ($estatus == "BAJA DEL SERVICIO (SPONSOR)") {
 			$section_icon = 'cancel';
 			$color = 'red-text';
@@ -174,6 +177,7 @@ function rowsGeneralResultsTable($obj_rst, $modal)
 
 		if ($modal == True) {
 			$lead_detail = '<a href="' . GLOBALPATH . '/bin/sections/lead_info_alt.php?id=' . $id . '" target="new">' . $lead_id . '</a>';
+			$lead_detail_alt = '<a href="' . GLOBALPATH . '/bin/sections/lead_info.php?id=' . $id . '" target="new">' . $identificador . '</a>';
 		} else {
 			$lead_detail = $lead_id;
 		}
@@ -183,7 +187,7 @@ function rowsGeneralResultsTable($obj_rst, $modal)
 							<td>' . $asistencia . '&nbsp;</td>
 							<td>' . $fecha . '&nbsp;</td>
 							<td>' . $lead_detail . '&nbsp;</td>
-							<td>' . $identificador . '&nbsp;</td>
+							<td>' . $lead_detail_alt . '&nbsp;</td>
 							<td>' . $afiliado . '&nbsp;</td>
 							<td>' . $dni . '&nbsp;</td>
 							<td><span class="' . $color . ' ">' . $estatus . '</span></td>

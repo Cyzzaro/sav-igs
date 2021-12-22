@@ -78,6 +78,10 @@
 						$section_icon = 'cancel';
 						$section_icon_color = 'deep orange';
 						break;
+					case 'RECHAZO DE CALIDAD';
+						$section_icon = 'cancel';
+						$section_icon_color = 'deep orange';
+						break;
 					case 'BAJA DEL SERVICIO (SPONSOR)';
 						$section_icon = 'cancel';
 						$section_icon_color = 'red';
