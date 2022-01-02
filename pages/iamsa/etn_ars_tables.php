@@ -40,7 +40,7 @@
 			while ($rst = sqlsrv_fetch_array($obj_rst, SQLSRV_FETCH_ASSOC)) { 
 
 				$Anio = $rst['Anio'];
-				$Cliente = $rst['Cliente'];
+				$Cliente = $rst['cliente'];
  				$Ene = number_format($rst['Ene']);
  				$Feb = number_format($rst['Feb']);
  				$Mar = number_format($rst['Mar']);

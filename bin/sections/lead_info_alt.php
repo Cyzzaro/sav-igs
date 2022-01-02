@@ -24,6 +24,7 @@
 				$query = "SELECT TOP(1) cliente, asistencia, clafiltmk, identificador, cast(fecha_venta as varchar(12)) fecha_venta, nombre_afiliado, 
 					cast(fecha_nacimiento as varchar(12)) fecha_nacimiento, tipo_tarjeta, dia_corte, dni, 
 					CONCAT(SUBSTRING(tarjeta, 1, 4),' - ',SUBSTRING(tarjeta, 5, 4),' - ',SUBSTRING(tarjeta, 9, 4),' - ',SUBSTRING(tarjeta, 13, 4)) as tarjeta, 
+					CONCAT(SUBSTRING(cuenta, 1, 4),' - ',SUBSTRING(cuenta, 5, 4),' - ',SUBSTRING(cuenta, 9, 4),' - ',SUBSTRING(cuenta, 13, 4)) as cuenta, 
 					cast(fecha_vto as varchar(12)) fecha_vto, estatus, cast(fecha_estatus as varchar(12)) fecha_estatus, ultimo_procesado, 
 					cast(fecha_ultimo_procesado as varchar(12)) fecha_ultimo_procesado, cast(fecha_ultimo_exitoso as varchar(12)) fecha_ultimo_exitoso, 
 					reus, reus_arco, acumulado_exitosos, acumulado_rechazos, origen, nombre_agente
@@ -34,6 +35,7 @@
 				$query = "SELECT TOP(1) cliente, asistencia, clafiltmk, identificador, cast(fecha_venta as varchar(12)) fecha_venta, nombre_afiliado, 
 					cast(fecha_nacimiento as varchar(12)) fecha_nacimiento, tipo_tarjeta, dia_corte, dni, 
 					CONCAT(REPLICATE('#### - ',3),SUBSTRING(tarjeta, 13, 4)) as tarjeta, 
+					CONCAT(REPLICATE('#### - ',3),SUBSTRING(cuenta, 13, 4)) as cuenta, 
 					cast(fecha_vto as varchar(12)) fecha_vto, estatus, cast(fecha_estatus as varchar(12)) fecha_estatus, ultimo_procesado, 
 					cast(fecha_ultimo_procesado as varchar(12)) fecha_ultimo_procesado, cast(fecha_ultimo_exitoso as varchar(12)) fecha_ultimo_exitoso, 
 					reus, reus_arco, acumulado_exitosos, acumulado_rechazos, origen, nombre_agente
@@ -72,6 +74,7 @@
 				$dia_corte = $individual_rst['dia_corte'];
 				$dni = $individual_rst['dni'];
 				$tarjeta = $individual_rst['tarjeta'];
+				$cuenta = $individual_rst['cuenta'];
 				$fecha_vto = $individual_rst['fecha_vto'];
 				$estatus = $individual_rst['estatus'];
 				switch ($estatus) {
@@ -130,7 +133,25 @@
 				$fecha_ultimo_procesado = $individual_rst['fecha_ultimo_procesado'];
 				$fecha_ultimo_exitoso = $individual_rst['fecha_ultimo_exitoso'];
 				$reus = $individual_rst['reus'];
+					switch ($reus) {
+						case '1':
+							$reus = '<i class="material-icons prefix red-text">mail</i>';
+							break;
+
+						default:
+							$reus = '<i class="material-icons prefix green-text">mail</i>';
+							break;
+					}
 				$reus_arco = $individual_rst['reus_arco'];
+					switch ($reus_arco) {
+						case '1':
+							$reus_arco = '<i class="material-icons prefix red-text">mood_bad</i>';
+							break;
+
+						default:
+							$reus_arco = '<i class="material-icons prefix green-text">mood</i>';
+							break;
+					}
 				$acumulado_exitosos = $individual_rst['acumulado_exitosos'];
 				$acumulado_rechazos = $individual_rst['acumulado_rechazos'];
 				$origen = $individual_rst['origen'];
@@ -195,24 +216,25 @@
 					}
 				}
 				sqlsrv_free_stmt($obj_rst_2);
-				
-				echo '
+
+							echo '
 				<div class="">
 					<div class="row section">
 						<h4 class="truncate show-on-medium-and-down">' . $nombre_afiliado . '</h4>
 						<div class="col l12 m12 s12">
-							<div class="col l6 m6 s12">
+							<div class="col l5 m5 s12">
 								<h6>Asistencia:</h6>
 								<div class="collection">
 									<a href="#!" class="collection-item black-text">Cliente<span class="badge">' . $client_name . '</span></a>
 									<a href="#!" class="collection-item black-text">Asistencia<span class="badge">' . $asistencia . '</span></a>
-									<a href="#!" class="collection-item black-text">' . $tarjeta . '
+									<a href="#!" class="collection-item black-text">Tarjeta
 										<span class="badge">
-											<img class="prefix" src="' . GLOBALPATH . '/res/images/tdc/' . $client_name . ' ' . $tipo_tarjeta . '.png" alt="' . $tipo_tarjeta . '" width="38px" height="auto">
+											' . $tarjeta . '
 										</span>
 									</a>
-									<a href="#!" class="collection-item black-text">Producto<span class="badge">' . $tipo_tarjeta . '</span></a>
+									<a href="#!" class="collection-item black-text">Producto<span class="badge"><img class="" src="' . GLOBALPATH . '/res/images/tdc/' . $client_name . ' ' . $tipo_tarjeta . '.png" alt="' . $tipo_tarjeta . '" width="36px" height="auto"></span></a>
 									<a href="#!" class="collection-item black-text">Día de corte<span class="badge">' . $dia_corte . '</span></a>
+									<a href="#!" class="collection-item black-text">Cuenta<span class="badge">' . $cuenta . '</span></a>
 								</div>
 								<h6>Afiliado:</h6>
 								<div class="collection">
@@ -225,8 +247,13 @@
 									<a href="#!" class="collection-item black-text">Agente<span class="badge">' . $nombre_agente . '</span></a>
 									<a href="#!" class="collection-item black-text">Origen<span class="badge">' . $origen . '</span></a>
 								</div>
+								<h6>REUS / ARCO:</h6>
+								<div class="collection">
+									<a href="#!" class="collection-item black-text">REUS<span class="badge">' . $reus . '</span></a>
+									<a href="#!" class="collection-item black-text">ARCO<span class="badge">' . $reus_arco . '</span></a>
+								</div>
 							</div>
-							<div class="col l6 m6 s12">
+							<div class="col l7 m7 s12">
 								<h6>Estadistico:</h6>
 								<div class="collection">
 									<a href="#!" class="collection-item black-text">Cobros efectivos<span class="badge">' . $acumulado_exitosos . '</span></a>

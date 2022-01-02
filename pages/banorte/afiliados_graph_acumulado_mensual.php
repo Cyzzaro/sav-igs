@@ -4,20 +4,20 @@
 	$query = "
 		SELECT
 			FORMAT(fecha_venta, 'yyyy-MM') AS [Fecha]
-		   ,COUNT(CASE
-				WHEN origen = '192.168.12.18' or origen = '192.168.12.19' THEN 1
+		  ,COUNT(CASE
+				WHEN (origen LIKE '%192.168.%') THEN 1
 				ELSE NULL
 			END)						   AS [Prevalidaciones]
 		   ,COUNT(CASE
-				WHEN origen = 'OTROS CANALES' THEN 1
+				WHEN origen LIKE 'OTROS%CANALES%' THEN 1
 				ELSE NULL
 			END)						   AS [Otros canales]
 		   ,COUNT(CASE
-				WHEN origen = 'INBOUND' THEN 1
+				WHEN origen LIKE '%INBOUND%' THEN 1
 				ELSE NULL
 			END)						   AS [Inbound]
 		   ,COUNT(CASE
-				WHEN origen = 'REACTIVACION' THEN 1
+				WHEN origen LIKE '%REACTIVACION%' THEN 1
 				ELSE NULL
 			END)						   AS [Reactivacion]
 		   ,COUNT(id)					   AS [Total]

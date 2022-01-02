@@ -375,6 +375,12 @@ SELECT
 FROM iamsa.dbo.viaje 
 ";
 
+$count_viva_aerobus_acumulado = "
+SELECT 
+	count(id) AS [Cuantos] 
+FROM iamsa.dbo.viva_reserva 
+";
+
 $count_iamsa_anterior = "
 SELECT 
 	count(id) AS [Cuantos] 
@@ -386,11 +392,33 @@ WHERE fecha_salida
 		DATEADD(ms,-3,DATEADD(mm,0,DATEADD(mm,DATEDIFF(mm,0,GETDATE()),0)))
 ";
 
+$count_viva_aerobus_anterior = "
+SELECT 
+	count(id) AS [Cuantos] 
+FROM iamsa.dbo.viva_reserva 
+WHERE FeeDate 
+	BETWEEN 
+		DATEADD(mm,-1,DATEADD(mm,DATEDIFF(mm,0,GETDATE()),0)) 
+	AND 
+		DATEADD(ms,-3,DATEADD(mm,0,DATEADD(mm,DATEDIFF(mm,0,GETDATE()),0)))
+";
+
 $count_iamsa_actual = "
 SELECT 
 	count(id) AS [Cuantos] 
 FROM iamsa.dbo.viaje 
 WHERE fecha_salida 
+	BETWEEN 
+		DATEADD(mm,DATEDIFF(mm,0,GETDATE()),0) 
+	AND 
+		GETDATE()
+";
+
+$count_viva_aerobus_actual = "
+SELECT 
+	count(id) AS [Cuantos] 
+FROM iamsa.dbo.viva_reserva 
+WHERE FeeDate 
 	BETWEEN 
 		DATEADD(mm,DATEDIFF(mm,0,GETDATE()),0) 
 	AND 
@@ -471,6 +499,13 @@ FROM iamsa.dbo.viaje
 WHERE fecha_salida >= DATEADD(DAY, -5, GETDATE())
 ";
 
+$count_vigente_viva_aerobus = "
+SELECT
+	COUNT(id) AS Cuantos
+FROM iamsa.dbo.viva_reserva
+WHERE DepartureDate >= DATEADD(DAY, -5, GETDATE())
+";
+
 $count_vigente_etn = "
 SELECT
 	COUNT(CASE
@@ -504,10 +539,40 @@ SELECT
 	END) AS [AERS]
    ,COUNT(id) AS [Total]
 FROM iamsa.dbo.viaje 
-WHERE fecha_salida 
-	BETWEEN 
-		CONVERT(DATE, DATEADD(d, -( DAY(DATEADD(m, -1, GETDATE() -1)) ), DATEADD(m, -1, GETDATE()))) AND GETDATE()
+WHERE fecha_salida BETWEEN 
+		DATEADD(mm,-2,DATEADD(mm,DATEDIFF(mm,0,GETDATE()),0))  and GETDATE()
 GROUP BY FORMAT(fecha_salida, 'yyyy-MM-dd')
+ORDER BY [Fecha]
+";
+
+$graph_viva_aerobus_diario = "
+SELECT
+	FORMAT(FeeDate, 'yyyy-MM-dd') AS [Fecha]
+   ,COUNT(CASE
+		WHEN FeeCode = 'VBABEX' THEN 1
+		ELSE NULL
+	END) AS [VBABEX]
+	,COUNT(CASE
+		WHEN FeeCode = 'VBABEZ' THEN 1
+		ELSE NULL
+	END) AS [VBABEZ]
+	,COUNT(CASE
+		WHEN FeeCode = 'VBABEW' THEN 1
+		ELSE NULL
+	END) AS [VBABEW]
+	,COUNT(CASE
+		WHEN FeeCode = 'VBABEY' THEN 1
+		ELSE NULL
+	END) AS [VBABEY]
+	,COUNT(CASE
+		WHEN FeeCode = 'VBABEV' THEN 1
+		ELSE NULL
+	END) AS [VBABEV]
+   ,COUNT(id) AS [Total]
+FROM iamsa.dbo.viva_reserva 
+WHERE FeeDate BETWEEN 
+		DATEADD(mm,-2,DATEADD(mm,DATEDIFF(mm,0,GETDATE()),0))  and GETDATE()
+GROUP BY FORMAT(FeeDate, 'yyyy-MM-dd')
 ORDER BY [Fecha]
 ";
 
@@ -525,8 +590,8 @@ ORDER BY [Fecha] DESC
 $table_iamsa_acumulado = "
 SELECT
  'Viajes' Concepto
+ ,cliente
  ,YEAR(fecha_salida) AS Anio
- ,cliente as Cliente
  ,COUNT(CASE WHEN DATEPART(m, fecha_salida)= 1 THEN 1 ELSE NULL END) Ene
  ,COUNT(CASE WHEN DATEPART(m, fecha_salida)= 2 THEN 1 ELSE NULL END) Feb
  ,COUNT(CASE WHEN DATEPART(m, fecha_salida)= 3 THEN 1 ELSE NULL END) Mar
@@ -541,10 +606,31 @@ SELECT
  ,COUNT(CASE WHEN DATEPART(m, fecha_salida)=12 THEN 1 ELSE NULL END) Dic
  ,COUNT(Id) Total
 FROM iamsa.dbo.viaje
-GROUP BY YEAR(fecha_salida), Cliente
-ORDER BY YEAR(fecha_salida) DESC, Cliente ASC
+GROUP BY YEAR(fecha_salida), cliente 
+ORDER BY YEAR(fecha_salida) DESC, cliente ASC
 ";
 
+$table_viva_aerobus_acumulado = "
+SELECT
+ 'Viajes' Concepto
+ ,FeeName
+ ,YEAR(FeeDate) AS Anio
+ ,COUNT(CASE WHEN DATEPART(m, FeeDate)= 1 THEN 1 ELSE NULL END) Ene
+ ,COUNT(CASE WHEN DATEPART(m, FeeDate)= 2 THEN 1 ELSE NULL END) Feb
+ ,COUNT(CASE WHEN DATEPART(m, FeeDate)= 3 THEN 1 ELSE NULL END) Mar
+ ,COUNT(CASE WHEN DATEPART(m, FeeDate)= 4 THEN 1 ELSE NULL END) Abr
+ ,COUNT(CASE WHEN DATEPART(m, FeeDate)= 5 THEN 1 ELSE NULL END) May
+ ,COUNT(CASE WHEN DATEPART(m, FeeDate)= 6 THEN 1 ELSE NULL END) Jun
+ ,COUNT(CASE WHEN DATEPART(m, FeeDate)= 7 THEN 1 ELSE NULL END) Jul
+ ,COUNT(CASE WHEN DATEPART(m, FeeDate)= 8 THEN 1 ELSE NULL END) Ago
+ ,COUNT(CASE WHEN DATEPART(m, FeeDate)= 9 THEN 1 ELSE NULL END) Sep
+ ,COUNT(CASE WHEN DATEPART(m, FeeDate)=10 THEN 1 ELSE NULL END) Oct
+ ,COUNT(CASE WHEN DATEPART(m, FeeDate)=11 THEN 1 ELSE NULL END) Nov
+ ,COUNT(CASE WHEN DATEPART(m, FeeDate)=12 THEN 1 ELSE NULL END) Dic
+ ,COUNT(Id) Total
+FROM iamsa.dbo.viva_reserva
+GROUP BY YEAR(FeeDate), FeeName
+";
 
 /**
 *	Para la DB de Apolo

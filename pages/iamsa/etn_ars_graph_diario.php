@@ -33,22 +33,22 @@
                         </div>
                         <script type="text/javascript">
                             new Chart(document.getElementById("graph_acumulado_diario"), {
-                                type: 'line',
+                                type: 'bar',
                                 data: {
                                     labels: [<?php echo $graph_field_name; ?>],
                                     datasets: [
                                         {
-                                            label: "ETN",
+                                            label: "ETN Turistar",
                                             fill: true,
                                             data: [<?php echo $datasets_etn; ?>],
                                             borderColor: <?php echo "'".$white_rgb_1."'"; ?>,
-                                            backgroundColor: <?php echo "'".$blue_rgb_5."'"; ?>,
+                                            backgroundColor: <?php echo "'".$indigo_rgb_3."'"; ?>,
                                         },{
-                                            label: "AERS",
+                                            label: "Estrella Roja",
                                             fill: true,
                                             data: [<?php echo $datasets_aers; ?>],
                                             borderColor: <?php echo "'".$white_rgb_1."'"; ?>,
-                                            backgroundColor: <?php echo "'".$red_rgb_5."'"; ?>,
+                                            backgroundColor: <?php echo "'".$red_rgb_3."'"; ?>,
                                         },
                                         ]
                                 },

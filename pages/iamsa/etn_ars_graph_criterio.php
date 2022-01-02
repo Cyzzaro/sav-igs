@@ -62,9 +62,9 @@
                                         display: false,
                                         
                                     },
-                                    //rotation: -Math.PI,
-                                    //cutoutPercentage: 30,
-                                    //circumference: Math.PI,	
+                                    rotation: -Math.PI,
+                                    cutoutPercentage: 30,
+                                    circumference: Math.PI,	
                                     scales: {
                                         xAxes: [{
                                             display: false,

@@ -107,7 +107,7 @@ function rowsGeneralResultsTable($obj_rst, $modal)
 		$afiliado = $individual_rst['nombre_afiliado'];
 		$dni = $individual_rst['dni'];
 		if ($individual_rst['fecha_venta']) {
-			$fecha = $individual_rst['fecha_venta']->format('Y/m/d');
+			$fecha = $individual_rst['fecha_venta']->format('d/m/Y');
 		} else {
 			$fecha = '';
 		}
@@ -118,23 +118,23 @@ function rowsGeneralResultsTable($obj_rst, $modal)
 		$identificador = $individual_rst['identificador'];
 		$estatus = $individual_rst['estatus'];
 		if ($individual_rst['fecha_estatus']) {
-			$fecha_estatus = $individual_rst['fecha_estatus']->format('Y/m/d');
+			$fecha_estatus = $individual_rst['fecha_estatus']->format('d/m/Y');
 		} else {
 			$fecha_estatus = '';
 		}
 		$ultimo_procesado = $individual_rst['ultimo_procesado'];
 		if ($individual_rst['fecha_ultimo_procesado']) {
-			$fecha_ultimo_procesado = $individual_rst['fecha_ultimo_procesado']->format('Y/m/d');
+			$fecha_ultimo_procesado = $individual_rst['fecha_ultimo_procesado']->format('d/m/Y');
 		} else {
 			$fecha_ultimo_procesado = '';
 		}
 		if ($individual_rst['fecha_ultimo_exitoso']) {
-			$fecha_ultimo_exitoso = $individual_rst['fecha_ultimo_exitoso']->format('Y/m/d');
+			$fecha_ultimo_exitoso = $individual_rst['fecha_ultimo_exitoso']->format('d/m/Y');
 		} else {
 			$fecha_ultimo_exitoso = '';
 		}
 		$acumulado_exitosos = $individual_rst['acumulado_exitosos'];
-		$nombre_agente = $individual_rst['nombre_agente'];
+		$id_agente = $individual_rst['id_agente'];
 		//		$ultimo_procesado = substr($ultimo_procesado,3);
 		if ($estatus == "BAJA DEL SERVICIO (SAC)") {
 			$section_icon = 'cancel';
@@ -183,20 +183,20 @@ function rowsGeneralResultsTable($obj_rst, $modal)
 		}
 		echo '
 						<tr>
-							<td>' . $cliente . '&nbsp;</td>
-							<td>' . $asistencia . '&nbsp;</td>
-							<td>' . $fecha . '&nbsp;</td>
-							<td>' . $lead_detail . '&nbsp;</td>
-							<td>' . $lead_detail_alt . '&nbsp;</td>
-							<td>' . $afiliado . '&nbsp;</td>
-							<td>' . $dni . '&nbsp;</td>
+							<td>' . $cliente . '</td>
+							<td>' . $asistencia . '</td>
+							<td>' . $fecha . '</td>
+							<td>' . $lead_detail . '</td>
+							<td>' . $lead_detail_alt . '</td>
+							<td>' . $afiliado . '</td>
+							<td>' . $dni . '</td>
 							<td><span class="' . $color . ' ">' . $estatus . '</span></td>
-							<td>' . $fecha_estatus . '&nbsp;</td>
-							<td>' . $ultimo_procesado . '&nbsp;</td>
-							<td>' . $fecha_ultimo_procesado . '&nbsp;</td>
-							<td>' . $acumulado_exitosos . '&nbsp;</td>
-							<td>' . $fecha_ultimo_exitoso . '&nbsp;</td>
-							<td>' . $nombre_agente . '&nbsp;</td>
+							<td>' . $fecha_estatus . '</td>
+							<td>' . $ultimo_procesado . '</td>
+							<td>' . $fecha_ultimo_procesado . '</td>
+							<td>' . $acumulado_exitosos . '</td>
+							<td>' . $fecha_ultimo_exitoso . '</td>
+							<td>' . $id_agente . '</td>
 						</tr>
 		';
 	}
