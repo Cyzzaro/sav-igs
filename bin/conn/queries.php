@@ -392,6 +392,17 @@ WHERE fecha_salida
 		DATEADD(ms,-3,DATEADD(mm,0,DATEADD(mm,DATEDIFF(mm,0,GETDATE()),0)))
 ";
 
+$count_viva_aerobus_actual = "
+SELECT 
+	count(id) AS [Cuantos] 
+FROM iamsa.dbo.viva_reserva 
+WHERE FeeDate 
+	BETWEEN 
+		DATEADD(mm,DATEDIFF(mm,0,GETDATE()),0) 
+	AND 
+		GETDATE()
+";
+
 $count_viva_aerobus_anterior = "
 SELECT 
 	count(id) AS [Cuantos] 
@@ -425,13 +436,22 @@ WHERE FeeDate
 		GETDATE()
 ";
 
-$graph_iamsa_acumulado = "
-SELECT 
-	[Fecha],
-	[Total] 
-FROM iamsa.dbo.vw_afiliados_etn  
-WHERE [Fecha] <> 'Total' 
-ORDER BY [Fecha] ASC
+$graph_etn_aers_acumulado = "
+SELECT
+  FORMAT(fecha_salida, 'yyyy-MM') AS Fecha
+ ,COUNT(id) AS Total
+FROM iamsa.dbo.viaje
+GROUP BY FORMAT(fecha_salida, 'yyyy-MM')
+ORDER BY FORMAT(fecha_salida, 'yyyy-MM')
+";
+
+$graph_viva_aerobus_acumulado = "
+SELECT
+  FORMAT(FeeDate, 'yyyy-MM') AS Fecha
+ ,COUNT(id) AS Total
+FROM iamsa.dbo.viva_reserva
+GROUP BY FORMAT(FeeDate, 'yyyy-MM')
+ORDER BY FORMAT(FeeDate, 'yyyy-MM')
 ";
 
 $count_iamsa_etn_acumulado = "

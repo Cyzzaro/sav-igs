@@ -44,7 +44,7 @@
 			fecha_ultimo_procesado,
 			fecha_ultimo_exitoso,
 			acumulado_exitosos,
-			nombre_agente
+			id_agente
 		FROM 
 			tmk.dbo.afiliados 
 		WHERE 

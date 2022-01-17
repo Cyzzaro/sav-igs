@@ -711,7 +711,7 @@ function getUniqueCountValueFromDB($query, $field_name)
 		return number_format($obj_rst[$field_name],0,'.',',');
 	}
 	sqlsrv_free_stmt($obj_rst);
-		sqlsrv_close($obj_conn_SQLSERVER);
+	sqlsrv_close($obj_conn_SQLSERVER);
 }
 
 
@@ -772,13 +772,13 @@ function generalCardCounter($class_definition, $color, $description, $descriptiv
 		$aditional_counters = '
 							<div class="row white-text">
 								<div class="col l6 m6 s6 center-align">
-									<span class="tooltipped truncate" data-position="top" data-delay="50" data-tooltip="Valor del mes anterior">
-										<i class="material-icons prefix tiny">today</i> '.$prev_value.'
+									<span class="tooltipped truncate" data-position="top" data-delay="50" data-tooltip="Valor del mes en curso">
+										<i class="material-icons prefix tiny">today</i> Mes en curso: '.$prev_value. '
 									</span>
 								</div>
 								<div class="col l6 m6 s6 center-align">
-									<span class="tooltipped truncate" data-position="top" data-delay="50" data-tooltip="Acumulado al día de hoy">
-										<i class="material-icons prefix tiny">flip_to_back</i> '.$acum_value.'
+									<span class="tooltipped truncate" data-position="top" data-delay="50" data-tooltip="Valor del mes anterior">
+										<i class="material-icons prefix tiny">flip_to_back</i> Mes anterior: '.$acum_value.'
 									</span>
 								</div>
 							</div>
@@ -863,6 +863,7 @@ function generalMiniGraph($query, $descriptive_field, $descriptive_value, $color
 													data: ['.$graph_field_value.'],
 													backgroundColor: "'.$color_graph. '",
 													borderColor: "rgba(255, 255, 255,0.5)",
+													borderRadius: 5,
 												},
 												]
 										},
@@ -897,7 +898,8 @@ function generalMiniGraph($query, $descriptive_field, $descriptive_value, $color
 												yAxes: [{
 													display: false,
 													stacked: true,
-													gridLines: { display: false }
+													gridLines: { display: false },
+													type: "logarithmic"
 												}],
 											}						
 										}

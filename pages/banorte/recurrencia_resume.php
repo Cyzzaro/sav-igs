@@ -1,5 +1,5 @@
 <?php
-//	include_once '../../bin/head.php'; 
+	include_once '../../bin/head.php'; 
 
 $query = "
 		SELECT
@@ -24,6 +24,7 @@ $query = "
 
 			,COUNT(CASE WHEN evento = '0  DENEGADO' THEN 1 ELSE NULL END) AS '0-DEN'
 			,COUNT(CASE WHEN evento = '14 NUMERO DE TARJETA INVALIDO' THEN 1 ELSE NULL END) AS '14-T.INV'
+			,COUNT(CASE WHEN evento = '33 TARJETA VENCIDA' THEN 1 ELSE NULL END) AS '33-T.VENC'
 			,COUNT(CASE WHEN evento = '41 TARJETA EXTRAVIADA' THEN 1 ELSE NULL END) AS '41-T.EXT'
 			,COUNT(CASE WHEN evento = '56 TARJETA SIN REGISTRO' THEN 1 ELSE NULL END) AS '56-T.SREG'
 			,COUNT(CASE WHEN evento = '83 RECHAZADA' THEN 1 ELSE NULL END) AS '83-RZDA'
@@ -55,6 +56,7 @@ $query = "
 
 			,COUNT(CASE WHEN evento = '0  DENEGADO' THEN 1 ELSE NULL END) AS '0-DEN'
 			,COUNT(CASE WHEN evento = '14 NUMERO DE TARJETA INVALIDO' THEN 1 ELSE NULL END) AS '14-T.INV'
+			,COUNT(CASE WHEN evento = '33 TARJETA VENCIDA' THEN 1 ELSE NULL END) AS '33-T.VENC'
 			,COUNT(CASE WHEN evento = '41 TARJETA EXTRAVIADA' THEN 1 ELSE NULL END) AS '41-T.EXT'
 			,COUNT(CASE WHEN evento = '56 TARJETA SIN REGISTRO' THEN 1 ELSE NULL END) AS '56-T.SREG'
 			,COUNT(CASE WHEN evento = '83 RECHAZADA' THEN 1 ELSE NULL END) AS '83-RZDA'
@@ -125,6 +127,7 @@ function priv_filas_tabla_para_resultados_obtenidos_recurrencia($client_name, $o
 									
 									<td><a href='" . GLOBALPATH . "/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=0-DEN_" . $fecha . "' target='new'>" . number_format($rst['0-DEN']) . "</a></td>
 									<td><a href='" . GLOBALPATH . "/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=14-T.INV_" . $fecha . "' target='new'>" . number_format($rst['14-T.INV']) . "</a></td>
+									<td><a href='" . GLOBALPATH . "/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=33-T.VENC_" . $fecha . "' target='new'>" . number_format($rst['33-T.VENC']) . "</a></td>
 									<td><a href='" . GLOBALPATH . "/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=41-T.EXT_" . $fecha . "' target='new'>" . number_format($rst['41-T.EXT']) . "</a></td>
 									<td><a href='" . GLOBALPATH . "/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=56-T.SREG_" . $fecha . "' target='new'>" . number_format($rst['56-T.SREG']) . "</a></td>
 									<td><a href='" . GLOBALPATH . "/pages/detalle/detalle_recurrencia.php?client=BANORTE&dato=83-RZDA_" . $fecha . "' target='new'>" . number_format($rst['83-RZDA']) . "</a></td>
@@ -169,6 +172,7 @@ if ($total_num_rst == 0) {
 									
 									<th class="red">0-DEN</th>
 									<th class="red">14-T.INV</th>
+									<th class="red">33-T.VENC</th>
 									<th class="red">41-T.EXT</th>
 									<th class="red">56-T.SREG</th>
 									<th class="red">83-RZDA</th>
@@ -189,4 +193,4 @@ if ($total_num_rst == 0) {
 	}
 }
 
-//	include_once '../../bin/jquery.php';
+	include_once '../../bin/jquery.php';

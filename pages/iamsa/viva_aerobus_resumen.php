@@ -26,10 +26,10 @@ include_once '../../bin/head.php';
 					'blue-grey',
 					'Total viajes acumulados',
 					'airplanemode_active',
-					'',
-					'',
+					getUniqueCountValueFromDB($count_viva_aerobus_actual, "Cuantos"),
+					getUniqueCountValueFromDB($count_viva_aerobus_anterior, "Cuantos"),
 					getUniqueCountValueFromDB($count_viva_aerobus_acumulado, "Cuantos"),
-					'',/*$graph_iamsa_acumulado,*/
+					$graph_viva_aerobus_acumulado,
 					'Fecha',
 					'Total'
 				)
@@ -50,7 +50,7 @@ include_once '../../bin/head.php';
 
 			</div>
 			<div class="section row">
-				<h5>Registro diario y proporción</h5>
+				<h5>Registro en los ultimos 60 dias</h5>
 				<div class="col l12 m12 s12"><?php include_once 'viva_aerobus_graph_diario.php'; ?></div>
 			</div>
 			<div class="section row">

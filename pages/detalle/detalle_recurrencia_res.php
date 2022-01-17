@@ -48,7 +48,7 @@
 			" ORDER BY p.fecha_procesado, p.afiliado
 		";
 	
-		echo $query;
+		// echo $query;
 
 	$obj_conn_params_SQLSERVER = array('Database' => COBRANZABD, 'Uid' => COBRANZAUSER, 'PWD' => COBRANZAPWD);
 	$obj_conn_SQLSERVER = sqlsrv_connect(COBRANZASRVR, $obj_conn_params_SQLSERVER);
@@ -113,7 +113,7 @@
 									<td>'.$asistencia.'</td>
 									<td>'.$fecha. '</td>
 									<td><a href="' . GLOBALPATH . '/bin/sections/lead_info_alt.php?id=' . $id . '" target="new">' . $lead_id . '</a></td>  
-									<td>' . $identificador . '</td>
+									<td><a href="' . GLOBALPATH . '/bin/sections/lead_info.php?id=' . $id . '" target="new">' . $identificador . '</td>
 									<td>'.$nombre_afiliado.'</td>
 									<td>'.$codigo_rechazo.'</td>
 									<td>'.$importe.'</td>
