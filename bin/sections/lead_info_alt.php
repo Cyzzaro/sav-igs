@@ -19,7 +19,7 @@
 			
 			$string_to_search = strip_tags($id, ENT_QUOTES);
 			$string_to_search_higienized_for_query = higienizeString($string_to_search);
-			if ($_SERVER['REMOTE_ADDR'] == '::1' or $_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
+			if ($_SERVER['REMOTE_ADDR'] == '::1' or $_SERVER['REMOTE_ADDR'] == '127.0.0.1' or $_SERVER['REMOTE_ADDR'] == '192.168.14.60') {
 				// Devuelve el numero de TDC completo - Vista especial para quien administra cobranza de la cuenta.
 				$query = "SELECT TOP(1) cliente, asistencia, clafiltmk, identificador, cast(fecha_venta as varchar(12)) fecha_venta, nombre_afiliado, 
 					cast(fecha_nacimiento as varchar(12)) fecha_nacimiento, tipo_tarjeta, dia_corte, dni, 
@@ -234,7 +234,6 @@
 									</a>
 									<a href="#!" class="collection-item black-text">Producto<span class="badge"><img class="" src="' . GLOBALPATH . '/res/images/tdc/' . $client_name . ' ' . $tipo_tarjeta . '.png" alt="' . $tipo_tarjeta . '" width="36px" height="auto"></span></a>
 									<a href="#!" class="collection-item black-text">Día de corte<span class="badge">' . $dia_corte . '</span></a>
-									<a href="#!" class="collection-item black-text">Cuenta<span class="badge">' . $cuenta . '</span></a>
 								</div>
 								<h6>Afiliado:</h6>
 								<div class="collection">
