@@ -138,7 +138,7 @@ function formToSearchByLeadId($string_to_search)
 				<div class="container row center">
 					<p class="caption">
 						Ingresa el Lead ID asignado al afiliado en registro de Venta de ViciDial.<br>
-						En caso de consultas multiples puedes ingresar Leads separados por coma (,).
+						En caso de consultas multiples puedes ingresar Leads separados por espacio.
 					</p>
 					<div class="row valign-wrapper">
 						<form class="col l6 offset-l3 m8 offset-m2 s12" action="'.$_SERVER['PHP_SELF'].'" method="GET">
@@ -155,6 +155,9 @@ function formToSearchByLeadId($string_to_search)
 	if (isset($_GET['lead_id']))
 	{
 		$string_to_search = strip_tags($_GET['lead_id'],ENT_QUOTES);
+		$string_to_search = explode(' ', $string_to_search);
+		$string_to_search = implode(',', $string_to_search);
+		$string_to_search = substr($string_to_search, 0, -1);
 		$string_to_search_higienized_for_query = $string_to_search;
 		$query = "
 			SELECT 
@@ -219,7 +222,7 @@ function formToSearchByIdentificador($string_to_search)
 				<div class="container row center">
 					<p class="caption">
 						Ingresa el identificador asignado por el cliente al afiliado.<br>
-						En caso de consultas multiples puedes ingresar identificadores separados por coma (,).
+						En caso de consultas multiples puedes ingresar identificadores separados por espacio.
 					</p>
 					<div class="row valign-wrapper">
 						<form class="col l6 offset-l3 m8 offset-m2 s12" action="'.$_SERVER['PHP_SELF'].'" method="GET">
@@ -236,39 +239,41 @@ function formToSearchByIdentificador($string_to_search)
 	if (isset($_GET['identificador']))
 	{
 		$string_to_search = strip_tags($_GET['identificador'],ENT_QUOTES);
+		$string_to_search = explode(' ',$string_to_search);
+		$string_to_search = implode(',',$string_to_search);
+		$string_to_search = substr($string_to_search,0,-1);
 		$string_to_search_higienized_for_query = $string_to_search;
 		$query = "
 			SELECT 
 				id, cliente, asistencia, clafiltmk, nombre_afiliado, fecha_venta, dni, identificador, estatus, fecha_estatus, ultimo_procesado, fecha_ultimo_procesado, fecha_ultimo_exitoso, acumulado_exitosos, id_agente  
 			FROM tmk.dbo.afiliados 
-			WHERE identificador IN (".$string_to_search_higienized_for_query.")";
+			WHERE identificador IN (" . $string_to_search_higienized_for_query . ")";
 		$obj_conn_params_SQLSERVER = array('Database' => COBRANZABD, 'Uid' => COBRANZAUSER, 'PWD' => COBRANZAPWD);
 		$obj_conn_SQLSERVER = sqlsrv_connect(COBRANZASRVR, $obj_conn_params_SQLSERVER);
 		$obj_rst_aditional_params_SQLSERVER = array();
-		$obj_rst_optionals_SQLSERVER = array('Scrollable'=>SQLSRV_CURSOR_KEYSET);	
+		$obj_rst_optionals_SQLSERVER = array('Scrollable' => SQLSRV_CURSOR_KEYSET);
 		$obj_rst = sqlsrv_query($obj_conn_SQLSERVER, $query, $obj_rst_aditional_params_SQLSERVER, $obj_rst_optionals_SQLSERVER);
-		if ($obj_rst == FALSE)
-		{die(errorConnSQLSRVR(sqlsrv_errors()));}
+		if ($obj_rst == FALSE) {
+			die(errorConnSQLSRVR(sqlsrv_errors()));
+		}
 		$total_num_rst = sqlsrv_num_rows($obj_rst);
-		if ($total_num_rst == 0)
-		{
-			withNoResultsSQLSERVER(); 
-		} elseif ($total_num_rst > 0)
-		{
-			if ($total_num_rst < 10000)
-			{
-				$table_results_name = str_replace(",","",str_replace(" ","_","VARIOS_".$total_num_rst));
-				$table_results_name_download_plugin = "'".$table_results_name."'";
+		if ($total_num_rst == 0) {
+			withNoResultsSQLSERVER();
+		} elseif ($total_num_rst > 0) {
+			if ($total_num_rst < 10000) {
+				$table_results_name = str_replace(",", "", str_replace(" ", "_", "VARIOS_" . $total_num_rst));
+				$table_results_name_download_plugin = "'" . $table_results_name . "'";
 				infoGeneralResultsTable($total_num_rst, '', $table_results_name_download_plugin);
 				headRowGeneralResultsTable($table_results_name);
-				rowsGeneralResultsTable($obj_rst,true);
+				rowsGeneralResultsTable($obj_rst, true);
 				endGeneralResultsTable($table_results_name, 'true');
 			} else {
 				withToMuchResultsSQLSERVER($total_num_rst);
 			}
 		}
 		sqlsrv_free_stmt($obj_rst);
-		sqlsrv_close($obj_conn_SQLSERVER);
+		sqlsrv_close($obj_conn_SQLSERVER);		
+	
 	}
 }
 
@@ -1051,5 +1056,3 @@ function higienizeString($string)
 	);
 	return strtr($string, $replacement_list);
 }
-
-?>
