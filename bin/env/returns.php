@@ -778,12 +778,12 @@ function generalCardCounter($class_definition, $color, $description, $descriptiv
 							<div class="row white-text">
 								<div class="col l6 m6 s6 center-align">
 									<span class="tooltipped truncate" data-position="top" data-delay="50" data-tooltip="Valor del mes en curso">
-										<i class="material-icons prefix tiny">today</i> Mes en curso: '.$prev_value. '
+										<i class="material-icons prefix tiny">today</i> '.$prev_value. '
 									</span>
 								</div>
 								<div class="col l6 m6 s6 center-align">
 									<span class="tooltipped truncate" data-position="top" data-delay="50" data-tooltip="Valor del mes anterior">
-										<i class="material-icons prefix tiny">flip_to_back</i> Mes anterior: '.$acum_value.'
+										<i class="material-icons prefix tiny">flip_to_back</i> '.$acum_value.'
 									</span>
 								</div>
 							</div>
