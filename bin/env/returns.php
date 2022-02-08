@@ -156,7 +156,7 @@ function formToSearchByLeadId($string_to_search)
 	{
 		$string_to_search = strip_tags($_GET['lead_id'],ENT_QUOTES);
 		$string_to_search = explode(' ', $string_to_search);
-		$string_to_search = implode(',', $string_to_search);
+		$string_to_search = implode(',', $string_to_search).' ';
 		$string_to_search = substr($string_to_search, 0, -1);
 		$string_to_search_higienized_for_query = $string_to_search;
 		$query = "
@@ -240,7 +240,7 @@ function formToSearchByIdentificador($string_to_search)
 	{
 		$string_to_search = strip_tags($_GET['identificador'],ENT_QUOTES);
 		$string_to_search = explode(' ',$string_to_search);
-		$string_to_search = implode(',',$string_to_search);
+		$string_to_search = implode(',',$string_to_search).' ';
 		$string_to_search = substr($string_to_search,0,-1);
 		$string_to_search_higienized_for_query = $string_to_search;
 		$query = "
